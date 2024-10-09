@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Magyar Madarak</string>
+
+    <string name="login">Bejelentkezés</string>
+    <string name="register">Regisztráció</string>
+
+    <string name="loginBtn">Bejelentkezés</string>
+    <string name="registerBtn">Regisztráció</string>
+
+    <string name="email_address">E-mail cím</string>
+    <string name="password">Jelszó</string>
+    <string name="repassword">Jelszó megerősítése</string>
+    <string name="login_google">Bejelentkezés Google-val</string>
+
+    <string name="home">Főoldal</string>
+    <string name="search">Keresés</string>
+    <string name="profile">Profil</string>
+</resources>

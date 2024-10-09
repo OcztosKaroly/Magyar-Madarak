@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "507912255641",
+    "project_id": "magyar-madarak-mobil-app",
+    "storage_bucket": "magyar-madarak-mobil-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:507912255641:android:ecb92fe647c3b17f646008",
+        "android_client_info": {
+          "package_name": "com.example.magyar_madarak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "507912255641-03ac0fa5dtlsafl8etu1nt78882lhgec.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.magyar_madarak",
+            "certificate_hash": "cdeb42b52e15e5e33d24afe6c83c767b2a9a7765"
+          }
+        },
+        {
+          "client_id": "507912255641-cnueh6tjthsis0438drvie6lhdbn9bvv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDV_wsOft3h4KgwQWWHOPmfH3ws-xqkCT0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "507912255641-6sf990qd8rr2s2c5ibofdc8blnbd9e9v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
