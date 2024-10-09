@@ -1,5 +1,6 @@
 package com.example.magyar_madarak;
 
+import static com.example.magyar_madarak.utils.NavigationUtils.navigationBarRedirection;
 import static com.example.magyar_madarak.utils.NavigationUtils.redirect;
 
 import android.content.Intent;
@@ -24,11 +25,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-public class RegisterActivity extends MainActivity {
+public class RegisterActivity extends AppCompatActivity {
     private static final String LOG_TAG = RegisterActivity.class.getName();
 
     private EditText emailET, passwordET, rePasswordET;
@@ -40,13 +42,14 @@ public class RegisterActivity extends MainActivity {
     private GoogleSignInClient mGoogleSignInClient;
 
     private View mView;
+    private BottomNavigationView mBottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_register);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.contentRegister), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -56,7 +59,9 @@ public class RegisterActivity extends MainActivity {
     }
 
     private void initializeData() {
-        mView = findViewById(R.id.main);
+        mView = findViewById(R.id.contentRegister);
+        mBottomNavigationView = findViewById(R.id.bottomNavigationView);
+        mBottomNavigationView.getMenu().getItem(2).setChecked(true);
 
         emailET = findViewById(R.id.etRegisterEmailAddress);
         passwordET = findViewById(R.id.etRegisterPassword);
@@ -83,6 +88,8 @@ public class RegisterActivity extends MainActivity {
         registerBTN.setOnClickListener(v -> performRegister());
         registerWithGoogleBTN.setOnClickListener(v -> AuthUtils.performAuthWithGoogle(mGoogleSignInClient, this));
         redirectToLoginBTN.setOnClickListener(v -> redirect(this, LoginActivity.class));
+
+        navigationBarRedirection(mBottomNavigationView, this);
     }
 
     private void performRegister() {

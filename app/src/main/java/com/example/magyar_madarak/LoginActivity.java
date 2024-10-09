@@ -1,5 +1,6 @@
 package com.example.magyar_madarak;
 
+import static com.example.magyar_madarak.utils.NavigationUtils.navigationBarRedirection;
 import static com.example.magyar_madarak.utils.NavigationUtils.redirect;
 
 import android.content.Intent;
@@ -21,10 +22,10 @@ import com.example.magyar_madarak.utils.AuthUtils;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class LoginActivity extends MainActivity {
-
+public class LoginActivity extends AppCompatActivity {
     private static final String LOG_TAG = LoginActivity.class.getName();
 
     EditText emailET, passwordET;
@@ -34,13 +35,14 @@ public class LoginActivity extends MainActivity {
     private GoogleSignInClient mGoogleSignInClient;
 
     private View mView;
+    private BottomNavigationView mBottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.contentLogin), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -50,7 +52,9 @@ public class LoginActivity extends MainActivity {
     }
 
     private void initializeData() {
-        mView = findViewById(R.id.main);
+        mView = findViewById(R.id.contentLogin);
+        mBottomNavigationView = findViewById(R.id.bottomNavigationView);
+        mBottomNavigationView.getMenu().getItem(1).setChecked(true);
 
         emailET = findViewById(R.id.etLoginEmailAddress);
         passwordET = findViewById(R.id.etLoginPassword);
@@ -73,8 +77,9 @@ public class LoginActivity extends MainActivity {
     private void initializeListeners() {
         loginBTN.setOnClickListener(v -> performLogin());
         loginWithGoogleBTN.setOnClickListener(v -> AuthUtils.performAuthWithGoogle(mGoogleSignInClient, this));
-//        redirectToRegisterBTN.setOnClickListener(v -> redirectToRegister());
         redirectToRegisterBTN.setOnClickListener(v -> redirect(this, RegisterActivity.class));
+
+        navigationBarRedirection(mBottomNavigationView, this);
     }
 
     private void performLogin() {
