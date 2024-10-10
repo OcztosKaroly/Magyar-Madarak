@@ -15,4 +15,8 @@
     <string name="home">Főoldal</string>
     <string name="search">Keresés</string>
     <string name="profile">Profil</string>
+
+    <string name="placeholder_item_name">Item Name</string>
+    <string name="bird_description">Madár leírása</string>
+    <string name="bird_image">Madár képe</string>
 </resources>

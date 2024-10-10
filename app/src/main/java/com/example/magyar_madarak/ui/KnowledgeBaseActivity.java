@@ -1,12 +1,10 @@
-package com.example.magyar_madarak;
+package com.example.magyar_madarak.ui;
 
 import static com.example.magyar_madarak.utils.NavigationUtils.navigationBarRedirection;
-import static com.example.magyar_madarak.utils.NavigationUtils.redirect;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -17,6 +15,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.magyar_madarak.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -54,23 +53,7 @@ public class KnowledgeBaseActivity extends AppCompatActivity {
         mListView = findViewById(R.id.listViewKnowledgeBase);
         mSearchBar = findViewById(R.id.searchViewKnowledgeBase);
         mList = new ArrayList<>();
-        mList.add("C");
-        mList.add("C++");
-        mList.add("C#");
-        mList.add("Java");
-        mList.add("Advanced java");
-        mList.add("Interview prep with c++");
-        mList.add("Interview prep with java");
-        mList.add("data structures with c");
-        mList.add("data structures with java");
-        mList.add("data structures with jadfgva");
-        mList.add("data structures with jxdffava");
-        mList.add("data stghjhructures with java");
-        mList.add("data structureghjkgs with java");
-        mList.add("data structjhjkjures with java");
-        mList.add("data structughjres with java");
-        mList.add("data structurjghkes with java");
-        mList.add("data structudfghres with java");
+        loadData();
         mListViewAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mList);
         mListView.setAdapter(mListViewAdapter);
 
@@ -97,5 +80,25 @@ public class KnowledgeBaseActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    private void loadData() {
+        mList.add("C");
+        mList.add("C++");
+        mList.add("C#");
+        mList.add("Java");
+        mList.add("Advanced java");
+        mList.add("Interview prep with c++");
+        mList.add("Interview prep with java");
+        mList.add("data structures with c");
+        mList.add("data structures with java");
+        mList.add("data structures with jadfgva");
+        mList.add("data structures with jxdffava");
+        mList.add("data stghjhructures with java");
+        mList.add("data structureghjkgs with java");
+        mList.add("data structjhjkjures with java");
+        mList.add("data structughjres with java");
+        mList.add("data structurjghkes with java");
+        mList.add("data structudfghres with java");
     }
 }

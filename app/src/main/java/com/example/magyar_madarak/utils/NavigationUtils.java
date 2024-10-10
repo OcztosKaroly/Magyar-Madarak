@@ -1,19 +1,13 @@
 package com.example.magyar_madarak.utils;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 
-import com.example.magyar_madarak.KnowledgeBaseActivity;
-import com.example.magyar_madarak.LoginActivity;
-import com.example.magyar_madarak.MainActivity;
+import com.example.magyar_madarak.ui.KnowledgeBaseActivity;
+import com.example.magyar_madarak.ui.LoginActivity;
 import com.example.magyar_madarak.R;
-import com.example.magyar_madarak.RegisterActivity;
+import com.example.magyar_madarak.ui.RegisterActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class NavigationUtils {

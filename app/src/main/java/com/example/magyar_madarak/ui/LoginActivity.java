@@ -1,4 +1,4 @@
-package com.example.magyar_madarak;
+package com.example.magyar_madarak.ui;
 
 import static com.example.magyar_madarak.utils.NavigationUtils.navigationBarRedirection;
 import static com.example.magyar_madarak.utils.NavigationUtils.redirect;
@@ -18,6 +18,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.magyar_madarak.R;
 import com.example.magyar_madarak.utils.AuthUtils;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
