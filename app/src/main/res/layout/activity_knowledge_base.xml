@@ -23,8 +23,8 @@
             app:itemTextColor="@color/orange"
             app:itemIconTint="@color/orange" />
 
-        <ListView
-            android:id="@+id/listViewKnowledgeBase"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewKnowledgeBase"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

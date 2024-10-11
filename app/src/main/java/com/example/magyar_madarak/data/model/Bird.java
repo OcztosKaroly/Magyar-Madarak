@@ -3,7 +3,6 @@ package com.example.magyar_madarak.data.model;
 import android.graphics.drawable.Icon;
 
 import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -13,32 +12,41 @@ import java.util.ArrayList;
 public class Bird {
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "name")
-    private String name;
+    private String id;
 
+    private String name;
     private String latinName;
-    private int size;
-    private ArrayList<String> bodyShapes; // testalkat, vannak pl varjú-galamb testalkatú madarak
+    private String size;
+    private String wingSpan;
+    private ArrayList<String> shapes;
     private ArrayList<String> colors;
     private boolean migratory;
     private int conservationValue;
 
-    public String description;
-    public String facts;
+    private String description;
+    private ArrayList<String> facts;
 
-    public Bird(@NonNull String name,
+    public Bird() {
+        id = "";
+    }
+
+    public Bird(@NonNull String id,
+                String name,
                 String latinName,
-                int size,
-                ArrayList<String> bodyShapes,
+                String size,
+                String wingSpan,
+                ArrayList<String> shapes,
                 ArrayList<String> colors,
                 boolean migratory,
                 int conservationValue,
                 String description,
-                String facts) {
+                ArrayList<String> facts) {
+        this.id = id;
         this.name = name;
         this.latinName = latinName;
         this.size = size;
-        this.bodyShapes = bodyShapes;
+        this.wingSpan = wingSpan;
+        this.shapes = shapes;
         this.colors = colors;
         this.migratory = migratory;
         this.conservationValue = conservationValue;
@@ -50,23 +58,108 @@ public class Bird {
 //        return; // TODO: a madárról egy kicsi kép visszaadása. Legjobb az lenne, ha a nagy képeket le tudnánk kicsinyíteni ikon méretre
 //    }
 
+    public String getId() {
+        return id;
+    }
 
-    @NonNull
-    public String getName() { return name; }
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    public String getLatinName() { return latinName; }
+    public String getName() {
+        return name;
+    }
 
-    public int getSize() { return size; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public ArrayList<String> getBodyShapes() { return bodyShapes; }
+    public String getLatinName() {
+        return latinName;
+    }
 
-    public ArrayList<String> getColors() { return colors; }
+    public void setLatinName(String latinName) {
+        this.latinName = latinName;
+    }
 
-    public boolean isMigratory() { return migratory; }
+    public String getSize() {
+        return size;
+    }
 
-    public int getConservationValue() { return conservationValue; }
+    public void setSize(String size) {
+        this.size = size;
+    }
 
-    public String getDescription() { return description; }
+    public String getWingSpan() {
+        return wingSpan;
+    }
 
-    public String getFacts() { return facts; }
+    public void setWingSpan(String wingSpan) {
+        this.wingSpan = wingSpan;
+    }
+
+    public ArrayList<String> getShapes() {
+        return shapes;
+    }
+
+    public void setShapes(ArrayList<String> shapes) {
+        this.shapes = shapes;
+    }
+
+    public ArrayList<String> getColors() {
+        return colors;
+    }
+
+    public void setColors(ArrayList<String> colors) {
+        this.colors = colors;
+    }
+
+    public boolean isMigratory() {
+        return migratory;
+    }
+
+    public void setMigratory(boolean migratory) {
+        this.migratory = migratory;
+    }
+
+    public int getConservationValue() {
+        return conservationValue;
+    }
+
+    public void setConservationValue(int conservationValue) {
+        this.conservationValue = conservationValue;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public ArrayList<String> getFacts() {
+        return facts;
+    }
+
+    public void setFacts(ArrayList<String> facts) {
+        this.facts = facts;
+    }
+
+    @Override
+    public String toString() {
+        return "Bird{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", latinName='" + latinName + '\'' +
+                ", size=" + size +
+                ", wingSpan=" + wingSpan +
+                ", shapes=" + shapes +
+                ", colors=" + colors +
+                ", migratory=" + migratory +
+                ", conservationValue=" + conservationValue +
+                ", description='" + description + '\'' +
+                ", facts=" + facts +
+                '}';
+    }
 }

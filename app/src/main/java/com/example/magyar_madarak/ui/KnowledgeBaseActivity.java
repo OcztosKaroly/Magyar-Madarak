@@ -4,29 +4,38 @@ import static com.example.magyar_madarak.utils.NavigationUtils.navigationBarRedi
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.magyar_madarak.R;
+import com.example.magyar_madarak.data.model.Bird;
+import com.example.magyar_madarak.data.viewModel.BirdViewModel;
+import com.example.magyar_madarak.utils.BirdKBAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class KnowledgeBaseActivity extends AppCompatActivity {
     private static final String LOG_TAG = KnowledgeBaseActivity.class.getName();
 
-    SearchView mSearchBar;
-    ListView mListView;
-    ArrayAdapter<String> mListViewAdapter;
-    ArrayList<String> mList;
+    private SearchView mSearchBar;
+    private RecyclerView mRecyclerView;
+//    private ArrayAdapter<String> mListViewAdapter;
+//    private ArrayList<String> mList;
+    private BirdKBAdapter mBirdAdapter;
+    private LiveData<List<Bird>> mBirds;
+
+
+    private BirdViewModel mBirdViewModel;
 
     private View mView;
     private BottomNavigationView mBottomNavigationView;
@@ -50,12 +59,12 @@ public class KnowledgeBaseActivity extends AppCompatActivity {
         mBottomNavigationView = findViewById(R.id.bottomNavigationView);
         mBottomNavigationView.getMenu().getItem(0).setChecked(true);
 
-        mListView = findViewById(R.id.listViewKnowledgeBase);
+        mBirdViewModel = new ViewModelProvider(this).get(BirdViewModel.class);
+
         mSearchBar = findViewById(R.id.searchViewKnowledgeBase);
-        mList = new ArrayList<>();
-        loadData();
-        mListViewAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mList);
-        mListView.setAdapter(mListViewAdapter);
+        mRecyclerView = findViewById(R.id.recyclerViewKnowledgeBase);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        loadBirdData();
 
         initializeListeners();
     }
@@ -63,42 +72,27 @@ public class KnowledgeBaseActivity extends AppCompatActivity {
     private void initializeListeners() {
         navigationBarRedirection(mBottomNavigationView, this);
 
+        mBirds.observe(this, birds -> {
+            mBirdAdapter = new BirdKBAdapter(this, birds);
+            mRecyclerView.setAdapter(mBirdAdapter);
+        });
+
         mSearchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                if (mList.contains(query)) {
-                    mListViewAdapter.getFilter().filter(query);
-                } else {
-                    Toast.makeText(KnowledgeBaseActivity.this, "Nincs találat!", Toast.LENGTH_LONG).show();
-                }
+                mBirdAdapter.getFilter().filter(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                mListViewAdapter.getFilter().filter(newText);
+                mBirdAdapter.getFilter().filter(newText);
                 return false;
             }
         });
     }
 
-    private void loadData() {
-        mList.add("C");
-        mList.add("C++");
-        mList.add("C#");
-        mList.add("Java");
-        mList.add("Advanced java");
-        mList.add("Interview prep with c++");
-        mList.add("Interview prep with java");
-        mList.add("data structures with c");
-        mList.add("data structures with java");
-        mList.add("data structures with jadfgva");
-        mList.add("data structures with jxdffava");
-        mList.add("data stghjhructures with java");
-        mList.add("data structureghjkgs with java");
-        mList.add("data structjhjkjures with java");
-        mList.add("data structughjres with java");
-        mList.add("data structurjghkes with java");
-        mList.add("data structudfghres with java");
+    private void loadBirdData() {
+        mBirds = mBirdViewModel.getAllBirds();
     }
 }

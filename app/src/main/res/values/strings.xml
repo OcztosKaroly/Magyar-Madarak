@@ -19,4 +19,5 @@
     <string name="placeholder_item_name">Item Name</string>
     <string name="bird_description">Madár leírása</string>
     <string name="bird_image">Madár képe</string>
+    <string name="title_activity_bird_page">BirdPageActivity</string>
 </resources>

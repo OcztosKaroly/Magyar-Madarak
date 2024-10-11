@@ -1,15 +1,24 @@
 package com.example.magyar_madarak.data.database;
 
 import android.content.Context;
+import android.os.AsyncTask;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.magyar_madarak.data.dao.BirdDAO;
 import com.example.magyar_madarak.data.model.Bird;
+import com.example.magyar_madarak.utils.ConverterUtils;
+
+import java.util.Arrays;
 
 @Database(entities = {Bird.class}, version = 1, exportSchema = false)
+@TypeConverters({ConverterUtils.class})
 public abstract class BirdRoomDatabase extends RoomDatabase {
     public abstract BirdDAO birdDao();
 
@@ -24,8 +33,7 @@ public abstract class BirdRoomDatabase extends RoomDatabase {
                                     BirdRoomDatabase.class,
                                     "bird_database")
                             .fallbackToDestructiveMigration()
-//                            .addCallback(populationCallback)
-//                            .createFromAsset("databases/bird_database.db") // Második megoldás, az előre gyártott asset
+                            .addCallback(populationCallback)
                             .build();
                 }
             }
@@ -33,34 +41,32 @@ public abstract class BirdRoomDatabase extends RoomDatabase {
         return instance;
     }
 
-// Másik megoldás az előre legyártott asset db (birds.db), amit beteszünk az assets mappába
-
 //    Ehhez a megvalósításhoz meg kell valósítani az insert műveletet.
 //    Talán ez lehet a jobb megoldás, mert ilyenkor lehetne olyat csinálni, amikor van internethozzáférés,
 //          akkor ha módosult a firebase adatbázis, akkor itt is módosítjuk a RoomDatabase-t.
 //          Ezzel naprakészen tartva a lokális adatbázist.
-//          Ezzel szemben a másik megoldás az előre legyártott db asset, amit betölt magának a RoomDatabase.
-//    private static RoomDatabase.Callback populationCallback = new RoomDatabase.Callback() {
-//        public void onOpen(@NonNull SupportSQLiteDatabase db) {
-//            super.onCreate(db);
-//            new InitDB(instance).execute();
-//        }
-//    };
-//
-//    private static class InitDB extends AsyncTask<Void, Void, Void> {
-//        private BirdDAO birdDAO;
-//
-//        InitDB(BirdRoomDatabase db) {
-//            birdDAO = db.birdDao();
-//        }
-//
-//        @Override
-//        protected Void doInBackground(Void... voids) {
+    private static RoomDatabase.Callback populationCallback = new RoomDatabase.Callback() {
+        public void onOpen(@NonNull SupportSQLiteDatabase db) {
+            super.onCreate(db);
+            new InitDB(instance).execute();
+        }
+    };
+
+    private static class InitDB extends AsyncTask<Void, Void, Void> {
+        private BirdDAO birdDAO;
+
+        InitDB(@NonNull BirdRoomDatabase db) {
+            birdDAO = db.birdDao();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            Log.d("DATABASE", "--Insert into database???: " + Arrays.toString(voids));
 //            birdDAO.insert(new Bird("...", "0."));
 //            birdDAO.insert(new Bird("...", "1."));
 //            birdDAO.insert(new Bird("...", "2."));
-//
-//            return null;
-//        }
-//    }
+
+            return null;
+        }
+    }
 }

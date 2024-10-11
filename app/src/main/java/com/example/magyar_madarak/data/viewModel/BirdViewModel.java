@@ -22,7 +22,11 @@ public class BirdViewModel extends AndroidViewModel {
         birds = birdRepository.getAllBirds();
     }
 
-    public LiveData<List<Bird>> getBirds() {
+    public LiveData<List<Bird>> getAllBirds() {
         return birds;
+    }
+
+    public void insertBird(Bird bird) {
+        this.birdRepository.insertBird(bird);
     }
 }
