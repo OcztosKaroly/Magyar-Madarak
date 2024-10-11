@@ -22,6 +22,7 @@ import com.example.magyar_madarak.data.viewModel.BirdViewModel;
 import com.example.magyar_madarak.utils.BirdKBAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class KnowledgeBaseActivity extends AppCompatActivity {
@@ -29,8 +30,6 @@ public class KnowledgeBaseActivity extends AppCompatActivity {
 
     private SearchView mSearchBar;
     private RecyclerView mRecyclerView;
-//    private ArrayAdapter<String> mListViewAdapter;
-//    private ArrayList<String> mList;
     private BirdKBAdapter mBirdAdapter;
     private LiveData<List<Bird>> mBirds;
 
@@ -64,7 +63,9 @@ public class KnowledgeBaseActivity extends AppCompatActivity {
         mSearchBar = findViewById(R.id.searchViewKnowledgeBase);
         mRecyclerView = findViewById(R.id.recyclerViewKnowledgeBase);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        loadBirdData();
+        mBirdAdapter = new BirdKBAdapter(this, new ArrayList<>());
+        mRecyclerView.setAdapter(mBirdAdapter);
+        mBirds = loadBirds();
 
         initializeListeners();
     }
@@ -73,8 +74,7 @@ public class KnowledgeBaseActivity extends AppCompatActivity {
         navigationBarRedirection(mBottomNavigationView, this);
 
         mBirds.observe(this, birds -> {
-            mBirdAdapter = new BirdKBAdapter(this, birds);
-            mRecyclerView.setAdapter(mBirdAdapter);
+            mBirdAdapter.setBirds(birds);
         });
 
         mSearchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -92,7 +92,7 @@ public class KnowledgeBaseActivity extends AppCompatActivity {
         });
     }
 
-    private void loadBirdData() {
-        mBirds = mBirdViewModel.getAllBirds();
+    private LiveData<List<Bird>> loadBirds() {
+        return mBirdViewModel.getAllBirds();
     }
 }
