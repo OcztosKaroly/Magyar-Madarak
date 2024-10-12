@@ -86,7 +86,7 @@
                 android:id="@+id/btnLoginWithGoogle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/login_google"
+                android:text="@string/loginGoogleBtn"
                 android:textSize="24sp"
                 android:textColor="@color/black"
                 android:backgroundTint="@color/red"

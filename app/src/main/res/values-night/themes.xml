@@ -5,5 +5,6 @@
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
         <item name="colorPrimary">@color/darkgrey</item>
         <item name="colorSecondary">@color/orange</item>
+        <item name="android:textSize">22sp</item>
     </style>
 </resources>

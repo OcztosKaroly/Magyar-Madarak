@@ -18,10 +18,12 @@ public class Bird {
     private String latinName;
     private String size;
     private String wingSpan;
-    private ArrayList<String> shapes;
-    private ArrayList<String> colors;
     private boolean migratory;
     private int conservationValue;
+    private ArrayList<String> shapes;
+    private ArrayList<String> colors;
+    private ArrayList<String> diets;
+    private ArrayList<String> habitats;
 
     private String description;
     private ArrayList<String> facts;
@@ -40,7 +42,9 @@ public class Bird {
                 boolean migratory,
                 int conservationValue,
                 String description,
-                ArrayList<String> facts) {
+                ArrayList<String> facts,
+                ArrayList<String> diets,
+                ArrayList<String> habitats) {
         this.id = id;
         this.name = name;
         this.latinName = latinName;
@@ -52,17 +56,20 @@ public class Bird {
         this.conservationValue = conservationValue;
         this.description = description;
         this.facts = facts;
+        this.diets = diets;
+        this.habitats = habitats;
     }
 
 //    public Icon getImage() {
 //        return; // TODO: a madárról egy kicsi kép visszaadása. Legjobb az lenne, ha a nagy képeket le tudnánk kicsinyíteni ikon méretre
 //    }
 
+    @NonNull
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(@NonNull String id) {
         this.id = id;
     }
 
@@ -126,8 +133,28 @@ public class Bird {
         return conservationValue;
     }
 
+    public String getConservation() {
+        return conservationValue == 0 ? "Nem védett" : conservationValue + " Ft";
+    }
+
     public void setConservationValue(int conservationValue) {
         this.conservationValue = conservationValue;
+    }
+
+    public ArrayList<String> getDiets() {
+        return diets;
+    }
+
+    public void setDiets(ArrayList<String> diets) {
+        this.diets = diets;
+    }
+
+    public ArrayList<String> getHabitats() {
+        return habitats;
+    }
+
+    public void setHabitats(ArrayList<String> habitats) {
+        this.habitats = habitats;
     }
 
     public String getDescription() {
@@ -146,6 +173,7 @@ public class Bird {
         this.facts = facts;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Bird{" +

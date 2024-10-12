@@ -1,7 +1,7 @@
 package com.example.magyar_madarak.utils;
 
-import static com.example.magyar_madarak.utils.NavigationUtils.redirect;
 import static com.example.magyar_madarak.utils.NavigationUtils.startActivity;
+import static com.example.magyar_madarak.utils.CommonUtils.capitalizeFirstLetter;
 
 import android.content.Context;
 import android.util.Log;
@@ -119,20 +119,17 @@ public class BirdKBAdapter extends RecyclerView.Adapter<BirdKBAdapter.BirdViewHo
     static class BirdViewHolder extends RecyclerView.ViewHolder {
         private ImageView birdPicture;
         private TextView birdName;
-        private ImageView ic_arrow_right;
 
         public BirdViewHolder(@NonNull View itemView) {
             super(itemView);
 
             birdPicture = itemView.findViewById(R.id.item_image);
             birdName = itemView.findViewById(R.id.item_text);
-            ic_arrow_right = itemView.findViewById(R.id.item_arrow);
         }
 
         public void bindTo(Bird bird) {
 //            birdPicture;
-            birdName.setText(bird.getName());
-            ic_arrow_right.setImageResource(R.drawable.ic_arrow_right);
+            birdName.setText(capitalizeFirstLetter(bird.getName()));
         }
     }
 }

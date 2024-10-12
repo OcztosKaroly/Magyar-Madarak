@@ -1,4 +1,5 @@
 [versions]
+# basics
 agp = "8.6.0"
 junit = "4.13.2"
 junitVersion = "1.1.5"
@@ -11,21 +12,25 @@ lifecycleRuntimeKtx = "2.8.5"
 activityCompose = "1.9.2"
 composeBom = "2024.04.01"
 
-gson = "2.10.1"
+# custom external libs
 
+# Firebase and FireStore
 firebaseAuth = "23.0.0"
 firebaseBom = "33.4.0"
 firebaseFirestore = "25.1.0"
 multidex = "1.0.3"
 playServicesAuth = "21.2.0"
 
+# RoomDatabase
 roomVersion = "2.6.1"
 lifecycleVersion = "2.8.6"
+gson = "2.10.1"
 
 [libraries]
 
-gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+# custom external libs
 
+# Firebase and FireStore
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-auth = { module = "com.google.firebase:firebase-auth", version.ref = "firebaseAuth" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
@@ -33,6 +38,7 @@ firebase-firestore = { module = "com.google.firebase:firebase-firestore", versio
 multidex = { module = "com.android.support:multidex", version.ref = "multidex" }
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
 
+# RoomDatabase
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomVersion" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomVersion" }
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycleVersion" }
@@ -41,7 +47,9 @@ lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime", version.r
 lifecycle-viewmodel-savedstate = { module = "androidx.lifecycle:lifecycle-viewmodel-savedstate", version.ref = "lifecycleVersion" }
 lifecycle-compiler = { module = "androidx.lifecycle:lifecycle-compiler", version.ref = "lifecycleVersion" }
 lifecycle-common-java8 = { module = "androidx.lifecycle:lifecycle-common-java8", version.ref = "lifecycleVersion" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 
+# basics
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }

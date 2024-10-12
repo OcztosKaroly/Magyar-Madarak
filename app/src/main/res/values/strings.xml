@@ -1,22 +1,46 @@
 <resources>
     <string name="app_name">Magyar Madarak</string>
 
+    <!-- For texts -->
     <string name="login">Bejelentkezés</string>
     <string name="register">Regisztráció</string>
 
+    <!-- For buttons -->
     <string name="loginBtn">Bejelentkezés</string>
     <string name="registerBtn">Regisztráció</string>
+    <string name="loginGoogleBtn">Bejelentkezés Google-val</string>
 
+    <!-- for auth -->
     <string name="email_address">E-mail cím</string>
     <string name="password">Jelszó</string>
     <string name="repassword">Jelszó megerősítése</string>
-    <string name="login_google">Bejelentkezés Google-val</string>
 
+    <!-- bor navigation -->
     <string name="home">Főoldal</string>
     <string name="search">Keresés</string>
     <string name="profile">Profil</string>
+    <string name="back">Vissza</string>
 
-    <string name="placeholder_item_name">Item Name</string>
-    <string name="bird_description">Madár leírása</string>
+    <!-- for bird data and description -->
     <string name="bird_image">Madár képe</string>
+    <string name="bird_name">Madár neve: </string>
+    <string name="bird_latin_name">Latin név: </string>
+    <string name="bird_diet">Táplálkozás: </string>
+    <string name="bird_migratory">Költöző-e: </string>
+    <string name="bird_size">Méret: </string>
+    <string name="bird_wing_span">Szárnyfesztávolság: </string>
+    <string name="bird_conversation_value">Természetvédelmi érték: </string>
+    <string name="bird_description">Leírás: </string>
+    <string name="bird_colors">Tollazat színei: </string>
+    <string name="bird_shapes">Kinézete: </string>
+    <string name="bird_habitats">Élőhelye: </string>
+    <string name="bird_facts">Érdekességek: </string>
+
+    <!-- for placeholders -->
+    <string name="placeholder_item_name">Item Name</string>
 </resources>
+
+
+
+
+

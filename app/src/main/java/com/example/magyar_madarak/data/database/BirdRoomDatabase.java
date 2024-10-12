@@ -17,7 +17,7 @@ import com.example.magyar_madarak.utils.ConverterUtils;
 
 import java.util.Arrays;
 
-@Database(entities = {Bird.class}, version = 1, exportSchema = false)
+@Database(entities = {Bird.class}, version = 2, exportSchema = false)
 @TypeConverters({ConverterUtils.class})
 public abstract class BirdRoomDatabase extends RoomDatabase {
     public abstract BirdDAO birdDao();
@@ -61,6 +61,7 @@ public abstract class BirdRoomDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
+            // TODO: Ezt megnézni, hogy mi a voids VVVV
             Log.d("DATABASE", "--Insert into database???: " + Arrays.toString(voids));
 //            birdDAO.insert(new Bird("...", "0."));
 //            birdDAO.insert(new Bird("...", "1."));
