@@ -4,12 +4,17 @@
         android:id="@+id/nav_home"
         android:title="@string/home"
         android:icon="@drawable/ic_home"/>
-    <item
-        android:id="@+id/nav_search"
-        android:title="@string/search"
-        android:icon="@drawable/ic_search" />
+<!--    <item-->
+<!--        android:id="@+id/nav_search"-->
+<!--        android:title="@string/search"-->
+<!--        android:icon="@drawable/ic_search" />-->
     <item
         android:id="@+id/nav_profile"
         android:title="@string/profile"
         android:icon="@drawable/ic_profile" />
+
+    <item
+        android:id="@+id/nav_bird_identification"
+        android:title="Madárhatározó"
+        android:icon="@drawable/ic_bird_identification" />
 </menu>

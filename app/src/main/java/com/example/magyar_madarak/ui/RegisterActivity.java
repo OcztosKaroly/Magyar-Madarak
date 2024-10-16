@@ -57,7 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void initializeData() {
         mView = findViewById(R.id.contentRegister);
         mBottomNavigationView = findViewById(R.id.bottomNavigationView);
-        mBottomNavigationView.getMenu().getItem(2).setChecked(true);
+        mBottomNavigationView.getMenu().findItem(R.id.nav_profile).setChecked(true);
 
         emailET = findViewById(R.id.etRegisterEmailAddress);
         passwordET = findViewById(R.id.etRegisterPassword);

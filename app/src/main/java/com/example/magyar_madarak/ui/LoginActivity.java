@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
     private void initializeData() {
         mView = findViewById(R.id.contentLogin);
         mBottomNavigationView = findViewById(R.id.bottomNavigationView);
-        mBottomNavigationView.getMenu().getItem(1).setChecked(true);
+        mBottomNavigationView.getMenu().findItem(R.id.nav_profile).setChecked(true);
 
         emailET = findViewById(R.id.etLoginEmailAddress);
         passwordET = findViewById(R.id.etLoginPassword);

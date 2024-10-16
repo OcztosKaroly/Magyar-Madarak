@@ -1,4 +1,4 @@
-package com.example.magyar_madarak.utils;
+package com.example.magyar_madarak.ui.Adapters;
 
 import static com.example.magyar_madarak.utils.NavigationUtils.startActivity;
 import static com.example.magyar_madarak.utils.CommonUtils.capitalizeFirstLetter;
@@ -23,7 +23,7 @@ import com.example.magyar_madarak.ui.BirdPageActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BirdKBAdapter extends RecyclerView.Adapter<BirdKBAdapter.BirdViewHolder> implements View.OnClickListener, Filterable {
+public class KnowledgeBaseAdapter extends RecyclerView.Adapter<KnowledgeBaseAdapter.BirdViewHolder> implements View.OnClickListener, Filterable {
     Context mContext;
 
     List<Bird> mBirdsAll;
@@ -33,7 +33,7 @@ public class BirdKBAdapter extends RecyclerView.Adapter<BirdKBAdapter.BirdViewHo
 
     public static Bird selectedBird = null;
 
-    public BirdKBAdapter(Context context, List<Bird> birds) {
+    public KnowledgeBaseAdapter(Context context, List<Bird> birds) {
         this.mContext = context;
 
         this.mBirdsAll = birds;

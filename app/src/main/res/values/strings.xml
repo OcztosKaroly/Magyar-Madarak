@@ -9,6 +9,8 @@
     <string name="loginBtn">Bejelentkezés</string>
     <string name="registerBtn">Regisztráció</string>
     <string name="loginGoogleBtn">Bejelentkezés Google-val</string>
+    <string name="previousBtn">Előző</string>
+    <string name="NextBtn">Következő</string>
 
     <!-- for auth -->
     <string name="email_address">E-mail cím</string>

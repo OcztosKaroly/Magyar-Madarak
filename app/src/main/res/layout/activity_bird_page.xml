@@ -75,26 +75,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/llBirdDiet"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginVertical="5dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/bird_diet"
-                    android:layout_marginEnd="10dp"/>
-
-                <TextView
-                    android:id="@+id/tBirdDiet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-            <LinearLayout
                 android:id="@+id/llBirdMigratory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -196,6 +176,27 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/llBirdDiet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginVertical="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bird_diet" />
+
+                <LinearLayout
+                    android:id="@+id/listBirdDiets"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginHorizontal="10dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/llBirdColors"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -207,10 +208,11 @@
                     android:layout_height="wrap_content"
                     android:text="@string/bird_colors"/>
 
-                <TextView
-                    android:id="@+id/tBirdColors"
+                <LinearLayout
+                    android:id="@+id/listBirdColors"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:orientation="vertical"
                     android:layout_marginHorizontal="10dp" />
 
             </LinearLayout>
@@ -227,10 +229,11 @@
                     android:layout_height="wrap_content"
                     android:text="@string/bird_shapes"/>
 
-                <TextView
-                    android:id="@+id/tBirdShapes"
+                <LinearLayout
+                    android:id="@+id/listBirdShapes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:orientation="vertical"
                     android:layout_marginHorizontal="10dp" />
 
             </LinearLayout>
@@ -247,10 +250,11 @@
                     android:layout_height="wrap_content"
                     android:text="@string/bird_habitats"/>
 
-                <TextView
-                    android:id="@+id/tBirdHabitats"
+                <LinearLayout
+                    android:id="@+id/listBirdHabitats"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:orientation="vertical"
                     android:layout_marginHorizontal="10dp" />
 
             </LinearLayout>
@@ -267,12 +271,12 @@
                     android:layout_height="wrap_content"
                     android:text="@string/bird_facts"/>
 
-                <TextView
-                    android:id="@+id/tBirdFacts"
+                <LinearLayout
+                    android:id="@+id/listBirdFacts"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:justificationMode="inter_word" />
+                    android:orientation="vertical"
+                    android:layout_marginHorizontal="10dp" />
 
             </LinearLayout>
 

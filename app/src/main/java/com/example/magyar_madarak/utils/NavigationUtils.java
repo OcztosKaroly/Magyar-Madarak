@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.example.magyar_madarak.ui.BirdIdentificationActivity;
 import com.example.magyar_madarak.ui.KnowledgeBaseActivity;
 import com.example.magyar_madarak.ui.LoginActivity;
 import com.example.magyar_madarak.R;
@@ -36,18 +37,21 @@ public class NavigationUtils {
     public static void navigationBarRedirection(BottomNavigationView bottomNavigationView, Context from) {
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             int itemId = item.getItemId();
-            item.setChecked(true);
 
             if (itemId == R.id.nav_home && !from.getClass().equals(KnowledgeBaseActivity.class)) {
                 redirect(from, KnowledgeBaseActivity.class);
                 return true;
             }
-            if (itemId == R.id.nav_search && !from.getClass().equals(LoginActivity.class)) {
+//            if (itemId == R.id.nav_search && !from.getClass().equals(RegisterActivity.class)) {
+//                redirect(from, RegisterActivity.class);
+//                return true;
+//            }
+            if (itemId == R.id.nav_profile && !from.getClass().equals(LoginActivity.class)) {
                 redirect(from, LoginActivity.class);
                 return true;
             }
-            if (itemId == R.id.nav_profile && !from.getClass().equals(RegisterActivity.class)) {
-                redirect(from, RegisterActivity.class);
+            if (itemId == R.id.nav_bird_identification && !from.getClass().equals(BirdIdentificationActivity.class)) {
+                redirect(from, BirdIdentificationActivity.class);
                 return true;
             }
 

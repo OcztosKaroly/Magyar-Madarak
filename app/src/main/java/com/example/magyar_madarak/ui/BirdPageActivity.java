@@ -1,11 +1,15 @@
 package com.example.magyar_madarak.ui;
 
-import static com.example.magyar_madarak.utils.BirdKBAdapter.selectedBird;
+import static com.example.magyar_madarak.ui.Adapters.KnowledgeBaseAdapter.selectedBird;
 import static com.example.magyar_madarak.utils.CommonUtils.capitalizeFirstLetter;
 
+import android.graphics.text.LineBreaker;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -18,15 +22,15 @@ import com.example.magyar_madarak.R;
 import com.example.magyar_madarak.data.model.Bird;
 import com.google.android.material.appbar.MaterialToolbar;
 
+import java.util.ArrayList;
+
 public class BirdPageActivity extends AppCompatActivity {
     private static final String LOG_TAG = BirdPageActivity.class.getName();
 
     private MaterialToolbar toolbar;
 
-    private TextView tBirdName, tBirdLatinName, tBirdDiet, tBirdMigratory, tBirdSize, tBirdWingSpan, tBirdConservationValue,
-                    tBirdDescription,
-                    tBirdColors, tBirdShapes, tBirdHabitats,
-                    tBirdFacts;
+    private TextView tBirdName, tBirdLatinName, tBirdMigratory, tBirdSize, tBirdWingSpan, tBirdConservationValue, tBirdDescription;
+    private LinearLayout listBirdDiets, listBirdColors, listBirdShapes, listBirdHabitats, listBirdFacts;
     private ImageView imageBird;
 
     private Bird mBird;
@@ -59,17 +63,19 @@ public class BirdPageActivity extends AppCompatActivity {
         imageBird = findViewById(R.id.imageBird);
         tBirdName = findViewById(R.id.tBirdName);
         tBirdLatinName = findViewById(R.id.tBirdLatinName);
-        tBirdDiet = findViewById(R.id.tBirdDiet);
         tBirdMigratory = findViewById(R.id.tBirdMigratory);
         tBirdSize = findViewById(R.id.tBirdSize);
         tBirdWingSpan = findViewById(R.id.tBirdWingSpan);
         tBirdConservationValue = findViewById(R.id.tBirdConservationValue);
         tBirdDescription = findViewById(R.id.tBirdDescription);
-        tBirdColors = findViewById(R.id.tBirdColors);
-        tBirdShapes = findViewById(R.id.tBirdShapes);
-        tBirdHabitats = findViewById(R.id.tBirdHabitats);
-        tBirdFacts = findViewById(R.id.tBirdFacts);
-        setTexts();
+
+        listBirdDiets = findViewById(R.id.listBirdDiets);
+        listBirdColors = findViewById(R.id.listBirdColors);
+        listBirdShapes = findViewById(R.id.listBirdShapes);
+        listBirdHabitats = findViewById(R.id.listBirdHabitats);
+        listBirdFacts = findViewById(R.id.listBirdFacts);
+
+        setBirdTexts();
 
         initializeListeners();
     }
@@ -90,20 +96,44 @@ public class BirdPageActivity extends AppCompatActivity {
         }
     }
 
-    private void setTexts() {
+    private void setBirdTexts() {
         tBirdName.setText(capitalizeFirstLetter(mBird.getName()));
         tBirdLatinName.setText(mBird.getLatinName());
-//        tBirdDiet.setText(mbird.getD);
         tBirdMigratory.setText(mBird.isMigratory() ? "Költöző" : "Itthon telelő");
         tBirdSize.setText(mBird.getSize());
         tBirdWingSpan.setText(mBird.getWingSpan());
-
         tBirdConservationValue.setText(mBird.getConservation());
+
         tBirdDescription.setText(mBird.getDescription());
-//        tBirdColors.setText(mBird.get);
-//        tBirdShapes.setText(mBird.get);
-//        tBirdHabitats.setText(mBird.get);
-//        tBirdFacts.setText(mBird.get);
+
+        createListForLayout(mBird.getDiets(), listBirdDiets);
+        createListForLayout(mBird.getColors(), listBirdColors);
+        createListForLayout(mBird.getShapes(), listBirdShapes);
+        createListForLayout(mBird.getHabitats(), listBirdHabitats);
+        createListForLayout(mBird.getFacts(), listBirdFacts);
+    }
+
+    private void createListForLayout(ArrayList<String> list, LinearLayout layout) {
+        if (list.isEmpty() || list.get(0).isEmpty()) {
+            try {
+                LinearLayout parent = (LinearLayout) layout.getParent();
+                parent.setVisibility(View.INVISIBLE);
+            } catch (Error e) {
+                Log.e(LOG_TAG, "--List parent is not LinearLayout! ", e);
+            }
+            return;
+        }
+
+        for (String item : list) {
+            TextView textView = new TextView(this);
+            item = "- " + item;
+            textView.setText(item);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                textView.setJustificationMode(LineBreaker.JUSTIFICATION_MODE_INTER_WORD);
+            }
+            layout.addView(textView);
+        }
     }
 
     @Override

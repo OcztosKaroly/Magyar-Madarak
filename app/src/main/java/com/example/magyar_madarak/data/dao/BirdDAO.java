@@ -21,6 +21,15 @@ public interface BirdDAO {
     @Query("SELECT * FROM birds WHERE name = :birdName")
     LiveData<Bird> getBirdByName(String birdName);
 
+    @Query("SELECT colors FROM birds")
+    LiveData<List<String>> getAllColors();
+
+    @Query("SELECT shapes FROM birds")
+    LiveData<List<String>> getAllShapes();
+
+    @Query("SELECT habitats FROM birds")
+    LiveData<List<String>> getAllHabitats();
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Bird bird);
 }

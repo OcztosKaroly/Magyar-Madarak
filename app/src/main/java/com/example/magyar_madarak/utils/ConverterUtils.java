@@ -6,15 +6,19 @@ import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ConverterUtils {
     @TypeConverter
-    public String fromArrayListToString(ArrayList<String> list) {
+    public static String fromArrayListToString(ArrayList<String> list) {
         return new Gson().toJson(list);
     }
 
     @TypeConverter
-    public ArrayList<String> fromStringToArrayList(String s) {
+    public static ArrayList<String> fromStringToArrayList(String s) {
+        if (s == null) {
+            return null;
+        }
         return new Gson().fromJson(s, new TypeToken<ArrayList<String>>() {}.getType());
     }
 }

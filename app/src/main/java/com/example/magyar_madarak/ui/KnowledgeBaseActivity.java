@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.magyar_madarak.R;
 import com.example.magyar_madarak.data.model.Bird;
 import com.example.magyar_madarak.data.viewModel.BirdViewModel;
-import com.example.magyar_madarak.utils.BirdKBAdapter;
+import com.example.magyar_madarak.ui.Adapters.KnowledgeBaseAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -30,9 +30,8 @@ public class KnowledgeBaseActivity extends AppCompatActivity {
 
     private SearchView mSearchBar;
     private RecyclerView mRecyclerView;
-    private BirdKBAdapter mBirdAdapter;
+    private KnowledgeBaseAdapter mBirdAdapter;
     private LiveData<List<Bird>> mBirds;
-
 
     private BirdViewModel mBirdViewModel;
 
@@ -56,14 +55,14 @@ public class KnowledgeBaseActivity extends AppCompatActivity {
     private void initializeData() {
         mView = findViewById(R.id.contentKnowledgeBase);
         mBottomNavigationView = findViewById(R.id.bottomNavigationView);
-        mBottomNavigationView.getMenu().getItem(0).setChecked(true);
+        mBottomNavigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
 
         mBirdViewModel = new ViewModelProvider(this).get(BirdViewModel.class);
 
         mSearchBar = findViewById(R.id.searchViewKnowledgeBase);
+        mBirdAdapter = new KnowledgeBaseAdapter(this, new ArrayList<>());
         mRecyclerView = findViewById(R.id.recyclerViewKnowledgeBase);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mBirdAdapter = new BirdKBAdapter(this, new ArrayList<>());
         mRecyclerView.setAdapter(mBirdAdapter);
         mBirds = loadBirds();
 
