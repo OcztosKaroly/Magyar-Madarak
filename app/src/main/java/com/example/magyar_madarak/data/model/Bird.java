@@ -134,7 +134,7 @@ public class Bird {
     }
 
     public String getConservation() {
-        return conservationValue == 0 ? "Nem védett" : conservationValue + " Ft";
+        return conservationValue == 0 ? "nem védett" : conservationValue + " Ft";
     }
 
     public void setConservationValue(int conservationValue) {

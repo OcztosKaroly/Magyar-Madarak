@@ -99,7 +99,7 @@ public class BirdPageActivity extends AppCompatActivity {
     private void setBirdTexts() {
         tBirdName.setText(capitalizeFirstLetter(mBird.getName()));
         tBirdLatinName.setText(mBird.getLatinName());
-        tBirdMigratory.setText(mBird.isMigratory() ? "Költöző" : "Itthon telelő");
+        tBirdMigratory.setText(mBird.isMigratory() ? "költöző" : "itthon telelő");
         tBirdSize.setText(mBird.getSize());
         tBirdWingSpan.setText(mBird.getWingSpan());
         tBirdConservationValue.setText(mBird.getConservation());
