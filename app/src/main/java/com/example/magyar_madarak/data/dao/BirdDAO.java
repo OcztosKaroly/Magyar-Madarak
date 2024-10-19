@@ -12,14 +12,14 @@ import java.util.List;
 
 @Dao
 public interface BirdDAO {
-    @Query("SELECT * FROM birds")
-    LiveData<List<Bird>> getAllBirds();
-
     @Query("SELECT * FROM birds WHERE id = :birdId")
     LiveData<Bird> getBirdById(String birdId);
 
     @Query("SELECT * FROM birds WHERE name = :birdName")
     LiveData<Bird> getBirdByName(String birdName);
+
+    @Query("SELECT * FROM birds")
+    LiveData<List<Bird>> getAllBirds();
 
     @Query("SELECT colors FROM birds")
     LiveData<List<String>> getAllColors();

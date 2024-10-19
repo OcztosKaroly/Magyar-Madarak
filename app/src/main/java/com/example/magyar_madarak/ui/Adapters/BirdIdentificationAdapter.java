@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.magyar_madarak.R;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 

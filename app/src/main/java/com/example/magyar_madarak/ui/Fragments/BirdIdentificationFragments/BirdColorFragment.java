@@ -47,14 +47,14 @@ public class BirdColorFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mSharedPreferences = getActivity().getSharedPreferences("birdIdentification", Context.MODE_PRIVATE);
-
         initializeData();
     }
 
     private void initializeData() {
         mBirdViewModel = new ViewModelProvider(this).get(BirdViewModel.class);
         birdColors = mBirdViewModel.getAllColors();
+
+        mSharedPreferences = getActivity().getSharedPreferences("birdIdentification", Context.MODE_PRIVATE);
 
         mAdapter = new BirdIdentificationAdapter(getActivity());
 

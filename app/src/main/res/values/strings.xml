@@ -17,10 +17,12 @@
     <string name="password">Jelszó</string>
     <string name="repassword">Jelszó megerősítése</string>
 
-    <!-- bor navigation -->
-    <string name="home">Főoldal</string>
+    <!-- for navigation -->
+    <string name="knowledge_base">Tudásbázis</string>
+    <string name="observations">Megfigyelések</string>
+    <string name="profile">Fiók</string>
+    <string name="bird_identification">Madárhatározó</string>
     <string name="search">Keresés</string>
-    <string name="profile">Profil</string>
     <string name="back">Vissza</string>
 
     <!-- for bird data and description -->

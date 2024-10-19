@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.Transformations;
 
 import com.example.magyar_madarak.data.dao.BirdDAO;
@@ -46,6 +47,22 @@ public class BirdRepository {
 
     public LiveData<Bird> getBirdByName(String birdName) {
         return birdDAO.getBirdByName(birdName);
+    }
+
+    public LiveData<List<Bird>> getBirdsByNames(List<String> birdsNames) {
+        MediatorLiveData<List<Bird>> filteredBirds = new MediatorLiveData<>();
+
+        filteredBirds.addSource(birds, allBirds -> {
+            List<Bird> matchingBirds = new ArrayList<>();
+            for (Bird bird: allBirds) {
+                if (birdsNames.contains(bird.getName())) {
+                    matchingBirds.add(bird);
+                }
+            }
+            filteredBirds.setValue(matchingBirds);
+        });
+
+        return filteredBirds;
     }
 
     public LiveData<List<String>> getAllUniqueBirdColors() {

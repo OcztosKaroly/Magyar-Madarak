@@ -42,16 +42,17 @@ public class NavigationUtils {
                 redirect(from, KnowledgeBaseActivity.class);
                 return true;
             }
-//            if (itemId == R.id.nav_search && !from.getClass().equals(RegisterActivity.class)) {
-//                redirect(from, RegisterActivity.class);
-//                return true;
-//            }
-            if (itemId == R.id.nav_profile && !from.getClass().equals(LoginActivity.class)) {
+            if (itemId == R.id.nav_bird_identification && !from.getClass().equals(BirdIdentificationActivity.class)) {
+                redirect(from, BirdIdentificationActivity.class);
+                return true;
+            }
+//            if (itemId == R.id.nav_observations && !from.getClass().equals(Observations.class)) {
+            if (itemId == R.id.nav_observations) {
                 redirect(from, LoginActivity.class);
                 return true;
             }
-            if (itemId == R.id.nav_bird_identification && !from.getClass().equals(BirdIdentificationActivity.class)) {
-                redirect(from, BirdIdentificationActivity.class);
+            if (itemId == R.id.nav_profile && !from.getClass().equals(LoginActivity.class)) {
+                redirect(from, LoginActivity.class);
                 return true;
             }
 

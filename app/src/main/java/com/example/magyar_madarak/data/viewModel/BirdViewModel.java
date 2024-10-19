@@ -26,6 +26,10 @@ public class BirdViewModel extends AndroidViewModel {
         return birds;
     }
 
+    public LiveData<List<Bird>> getBirdsByNameList(List<String> birdsNames) {
+        return birdRepository.getBirdsByNames(birdsNames);
+    }
+
     public LiveData<List<String>> getAllColors() {
         return birdRepository.getAllUniqueBirdColors();
     }
