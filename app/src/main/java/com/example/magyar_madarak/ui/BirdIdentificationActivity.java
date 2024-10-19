@@ -2,8 +2,7 @@ package com.example.magyar_madarak.ui;
 
 import static com.example.magyar_madarak.utils.NavigationUtils.navigationBarRedirection;
 
-import static java.util.Collections.list;
-
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,19 +30,18 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
 
 public class BirdIdentificationActivity extends AppCompatActivity {
     private static final String LOG_TAG = BirdIdentificationActivity.class.getName();
+
+    private SharedPreferences mSharedPreferences;
 
     private Button nextBtn, previousBtn;
 
     private FragmentManager mFragmentManager;
     private Fragment colorFragment, shapeFragment, habitatFragment, resultFragment;
-//    private ArrayList<String> selectedColors, selectedShapes, selectedHabitats;
+    private String currentFragmentClassName;
     private Map<String, ArrayList<String>> selectedItems;
-    private Fragment currentFragment;
 
     private View mView;
     private FrameLayout mContent;
@@ -69,24 +67,23 @@ public class BirdIdentificationActivity extends AppCompatActivity {
         mBottomNavigationView = findViewById(R.id.bottomNavigationView);
         mBottomNavigationView.getMenu().findItem(R.id.nav_bird_identification).setChecked(true);
 
+        mSharedPreferences = this.getSharedPreferences("birdIdentification", MODE_PRIVATE);
+        mSharedPreferences.edit().clear().apply();
+
         nextBtn = findViewById(R.id.btnNextBirdIdentification);
         nextBtn.setVisibility(View.VISIBLE);
         previousBtn = findViewById(R.id.btnPreviousBirdIdentification);
         previousBtn.setVisibility(View.INVISIBLE);
 
-        colorFragment = BirdColorFragment.newInstance("colorFragment");
-        shapeFragment = BirdShapeFragment.newInstance("shapeFragment");
-        habitatFragment = BirdHabitatFragment.newInstance("habitatFragment");
+        selectedItems = new HashMap<>();
+
+        colorFragment = BirdColorFragment.newInstance();
+        shapeFragment = BirdShapeFragment.newInstance();
+        habitatFragment = BirdHabitatFragment.newInstance();
         resultFragment = BirdIdentificationResultsFragment.newInstance();
 
-        currentFragment = colorFragment;
         mFragmentManager = getSupportFragmentManager();
-        setFragment(colorFragment, "colorFragment");
-
-        selectedItems = new HashMap<>();
-//        selectedColors = new ArrayList<>();
-//        selectedShapes = new ArrayList<>();
-//        selectedHabitats = new ArrayList<>();
+        setFragment(colorFragment);
 
         initializeListeners();
     }
@@ -95,59 +92,51 @@ public class BirdIdentificationActivity extends AppCompatActivity {
         navigationBarRedirection(mBottomNavigationView, this);
 
         nextBtn.setOnClickListener(v -> {
-            if (currentFragment.getTag() != null) {
-                switch (Objects.requireNonNull(currentFragment.getTag())) {
-                    case "colorFragment":
-                        setFragment(shapeFragment, "shapeFragment");
+            if (currentFragmentClassName != null) {
+                switch (currentFragmentClassName) {
+                    case "BirdColorFragment":
+                        setFragment(shapeFragment);
                         previousBtn.setVisibility(View.VISIBLE);
                         break;
-                    case "shapeFragment":
-                        setFragment(habitatFragment, "habitatFragment");
+                    case "BirdShapeFragment":
+                        setFragment(habitatFragment);
                         break;
-                    case "habitatFragment":
-                        setFragment(resultFragment, "resultFragment");
+                    case "BirdHabitatFragment":
+                        setFragment(resultFragment);
                         nextBtn.setVisibility(View.INVISIBLE);
                         break;
-                    default:
-                        setFragment(colorFragment, "colorFragment");
-                        break;
                 }
+            } else {
+                Log.w(LOG_TAG, "--Current fragment is missing!--");
             }
         });
 
         previousBtn.setOnClickListener(v -> {
-            if (currentFragment.getTag() != null) {
-                switch (currentFragment.getTag()) {
-                    case "resultFragment":
-                        setFragment(habitatFragment, "habitatFragment");
+            if (currentFragmentClassName != null) {
+                switch (currentFragmentClassName) {
+                    case "BirdIdentificationResultsFragment":
+                        setFragment(habitatFragment);
                         nextBtn.setVisibility(View.VISIBLE);
                         break;
-                    case "habitatFragment":
-                        setFragment(shapeFragment, "shapeFragment");
+                    case "BirdHabitatFragment":
+                        setFragment(shapeFragment);
                         break;
-                    case "shapeFragment":
-                        setFragment(colorFragment, "colorFragment");
+                    case "BirdShapeFragment":
+                        setFragment(colorFragment);
                         previousBtn.setVisibility(View.INVISIBLE);
                         break;
                 }
             } else {
-                Log.e(LOG_TAG, "--Current fragment tag is missing!--");
+                Log.w(LOG_TAG, "--Current fragment is missing!--");
             }
-
         });
     }
 
-    private void setFragment(Fragment replaceFragment, String replaceFragmentTag) {
+    private void setFragment(Fragment replaceFragment) {
         mFragmentManager.beginTransaction()
-                .replace(mContent.getId(), replaceFragment, replaceFragmentTag)
+                .replace(mContent.getId(), replaceFragment)
                 .commit();
-        currentFragment = replaceFragment;
-    }
-
-    public void receiveSelectedListFromFragment(String fragmentTag, List<String> selectedList) {
-        if (Arrays.asList("colorFragment", "shapeFragment", "habitatFragment").contains(fragmentTag)) {
-            selectedItems.put(fragmentTag, (ArrayList<String>) selectedList);
-        }
+        currentFragmentClassName = replaceFragment.getClass().getSimpleName();
     }
 }
 

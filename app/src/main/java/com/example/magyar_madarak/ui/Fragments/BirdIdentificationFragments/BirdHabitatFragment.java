@@ -1,8 +1,9 @@
 package com.example.magyar_madarak.ui.Fragments.BirdIdentificationFragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
@@ -17,14 +18,14 @@ import android.view.ViewGroup;
 import com.example.magyar_madarak.R;
 import com.example.magyar_madarak.data.viewModel.BirdViewModel;
 import com.example.magyar_madarak.ui.Adapters.BirdIdentificationAdapter;
-import com.example.magyar_madarak.ui.BirdIdentificationActivity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class BirdHabitatFragment extends Fragment {
-    private static final String ARG_FRAGMENT_TAG = "mFragmentTag";
-    private String mFragmentTag;
+
+    private SharedPreferences mSharedPreferences;
 
     private RecyclerView mRecyclerView;
     private BirdIdentificationAdapter mAdapter;
@@ -35,10 +36,9 @@ public class BirdHabitatFragment extends Fragment {
 
     public BirdHabitatFragment() { }
 
-    public static BirdHabitatFragment newInstance(String fragmentTag) {
+    public static BirdHabitatFragment newInstance() {
         BirdHabitatFragment fragment = new BirdHabitatFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_FRAGMENT_TAG, fragmentTag);
         fragment.setArguments(args);
         return fragment;
     }
@@ -47,15 +47,7 @@ public class BirdHabitatFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() != null) {
-            mFragmentTag = getArguments().getString(ARG_FRAGMENT_TAG);
-        }
-
-        selectedBirdHabitats = new ArrayList<>();
-        if (savedInstanceState != null) {
-            Log.i("FRAGMENT", "Load instances.");
-            selectedBirdHabitats = savedInstanceState.getStringArrayList("selectedHabitats");
-        }
+        mSharedPreferences = getActivity().getSharedPreferences("birdIdentification", Context.MODE_PRIVATE);
 
         initializeData();
     }
@@ -64,11 +56,7 @@ public class BirdHabitatFragment extends Fragment {
         mBirdViewModel = new ViewModelProvider(this).get(BirdViewModel.class);
         birdHabitats = mBirdViewModel.getAllHabitats();
 
-        if (selectedBirdHabitats.isEmpty()) {
-            mAdapter = new BirdIdentificationAdapter(getActivity());
-        } else {
-            mAdapter = new BirdIdentificationAdapter(getActivity(), selectedBirdHabitats);
-        }
+        mAdapter = new BirdIdentificationAdapter(getActivity());
 
         initializeListeners();
     }
@@ -91,18 +79,24 @@ public class BirdHabitatFragment extends Fragment {
     }
 
     @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putStringArrayList("selectedHabitats", (ArrayList<String>) mAdapter.getSelectedItems());
+    public void onResume() {
+        super.onResume();
+
+        selectedBirdHabitats = new ArrayList<>(mSharedPreferences.getStringSet("selectedHabitats", new HashSet<>()));
+        Log.i("FRAGMENT", "--Get selected habitats from shared preferences. " + selectedBirdHabitats);
+        ArrayList<String> selectedItems = (ArrayList<String>) mAdapter.getSelectedItems();
+
+        if (selectedBirdHabitats.size() != selectedItems.size() ||
+                !(new HashSet<>(selectedBirdHabitats).containsAll(selectedItems))) {
+            mAdapter.setSelectedItems(selectedBirdHabitats);
+        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
         selectedBirdHabitats = (ArrayList<String>) mAdapter.getSelectedItems();
-        if (getActivity() instanceof BirdIdentificationActivity) {
-            ((BirdIdentificationActivity) getActivity()).receiveSelectedListFromFragment(mFragmentTag, selectedBirdHabitats);
-            Log.i("FRAGMENT", "--Selected habitats sent to activity. " + selectedBirdHabitats);
-        }
+        mSharedPreferences.edit().putStringSet("selectedHabitats", new HashSet<>(selectedBirdHabitats)).apply();
+        Log.i("FRAGMENT", "--Saving selected habitats to shared preferences. " + selectedBirdHabitats);
     }
 }

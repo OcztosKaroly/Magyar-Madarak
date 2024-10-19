@@ -1,7 +1,5 @@
 package com.example.magyar_madarak.ui.Adapters;
 
-import static com.example.magyar_madarak.utils.CommonUtils.capitalizeFirstLetter;
-
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,9 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.magyar_madarak.R;
-import com.example.magyar_madarak.data.model.Bird;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -26,32 +24,59 @@ public class BirdIdentificationAdapter extends RecyclerView.Adapter<BirdIdentifi
     List<String> checkedItems;
 
     public BirdIdentificationAdapter(Context context) {
-        this(context, new ArrayList<>());
-    }
-
-    public BirdIdentificationAdapter(Context context, List<String> selectedItems) {
         this.mContext = context;
 
         this.checkboxItems = new ArrayList<>();
-        this.checkedItems = selectedItems;
+        this.checkedItems = new ArrayList<>();
     }
 
     public void setItems(List<String> items) {
-        this.checkboxItems.clear();
-        this.checkboxItems = items;
-        notifyDataSetChanged();
+        for (String item: items) {
+            if (!checkboxItems.contains(item)) {
+                checkboxItems.add(item);
+                notifyItemInserted(getItemCount() - 1);
+            }
+        }
     }
 
     public List<String> getSelectedItems() {
         return this.checkedItems;
     }
 
+    public void setSelectedItems(List<String> selectedItems) {
+        for (String item: checkedItems) {
+            if (!selectedItems.contains(item)) {
+                checkedItems.remove(item);
+
+                notifyItemChanged(getItemPositionByName(item));
+            }
+        }
+
+        for (String item: selectedItems) {
+            if (!checkedItems.contains(item)) {
+                checkedItems.add(item);
+
+                notifyItemChanged(getItemPositionByName(item));
+            }
+        }
+    }
+
+    private int getItemPositionByName(String itemName) {
+        return checkboxItems.indexOf(itemName);
+    }
+
+    // onCreateViewHolder is called when a new view needs to be created.
+    // It's responsible for inflating the layout and creating a ViewHolder instance.
     @NonNull
     @Override
     public CheckBoxViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new CheckBoxViewHolder(LayoutInflater.from(mContext).inflate(R.layout.checkbox_bird_identification, parent, false));
     }
 
+
+    // onBindViewHolder is called when an existing view is reused for a new item.
+    // It binds the data to the view holder, allowing you to update the content of the view.
+    // Should not be used to bind click listeners and we should be mindful of what anonymous object or task we do within it.
     @Override
     public void onBindViewHolder(@NonNull CheckBoxViewHolder holder, int position) {
         String item = checkboxItems.get(position);
@@ -77,6 +102,8 @@ public class BirdIdentificationAdapter extends RecyclerView.Adapter<BirdIdentifi
 
         public CheckBoxViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            Log.d("VIEW_HOLDER", "--View el lett készítve.");
 
             mCheckBox = itemView.findViewById(R.id.checkBox);
         }

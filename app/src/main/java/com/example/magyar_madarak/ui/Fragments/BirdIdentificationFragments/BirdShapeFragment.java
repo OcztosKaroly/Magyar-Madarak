@@ -1,8 +1,9 @@
 package com.example.magyar_madarak.ui.Fragments.BirdIdentificationFragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
@@ -17,14 +18,14 @@ import android.view.ViewGroup;
 import com.example.magyar_madarak.R;
 import com.example.magyar_madarak.data.viewModel.BirdViewModel;
 import com.example.magyar_madarak.ui.Adapters.BirdIdentificationAdapter;
-import com.example.magyar_madarak.ui.BirdIdentificationActivity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class BirdShapeFragment extends Fragment {
-    private static final String ARG_FRAGMENT_TAG = "mFragmentTag";
-    private String mFragmentTag;
+
+    private SharedPreferences mSharedPreferences;
 
     private RecyclerView mRecyclerView;
     private BirdIdentificationAdapter mAdapter;
@@ -35,10 +36,9 @@ public class BirdShapeFragment extends Fragment {
 
     public BirdShapeFragment() { }
 
-    public static BirdShapeFragment newInstance(String fragmentTag) {
+    public static BirdShapeFragment newInstance() {
         BirdShapeFragment fragment = new BirdShapeFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_FRAGMENT_TAG, fragmentTag);
         fragment.setArguments(args);
         return fragment;
     }
@@ -47,15 +47,7 @@ public class BirdShapeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() != null) {
-            mFragmentTag = getArguments().getString(ARG_FRAGMENT_TAG);
-        }
-
-        selectedBirdShapes = new ArrayList<>();
-        if (savedInstanceState != null) {
-            Log.i("FRAGMENT", "Load instances.");
-            selectedBirdShapes = savedInstanceState.getStringArrayList("selectedShapes");
-        }
+        mSharedPreferences = getActivity().getSharedPreferences("birdIdentification", Context.MODE_PRIVATE);
 
         initializeData();
     }
@@ -64,11 +56,7 @@ public class BirdShapeFragment extends Fragment {
         mBirdViewModel = new ViewModelProvider(this).get(BirdViewModel.class);
         birdShapes = mBirdViewModel.getAllShapes();
 
-        if (selectedBirdShapes.isEmpty()) {
-            mAdapter = new BirdIdentificationAdapter(getActivity());
-        } else {
-            mAdapter = new BirdIdentificationAdapter(getActivity(), selectedBirdShapes);
-        }
+        mAdapter = new BirdIdentificationAdapter(getActivity());
 
         initializeListeners();
     }
@@ -91,19 +79,24 @@ public class BirdShapeFragment extends Fragment {
     }
 
     @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putStringArrayList("selectedShapes", (ArrayList<String>) mAdapter.getSelectedItems());
+    public void onResume() {
+        super.onResume();
+
+        selectedBirdShapes = new ArrayList<>(mSharedPreferences.getStringSet("selectedShapes", new HashSet<>()));
+        Log.i("FRAGMENT", "--Get selected shapes from shared preferences. " + selectedBirdShapes);
+        ArrayList<String> selectedItems = (ArrayList<String>) mAdapter.getSelectedItems();
+
+        if (selectedBirdShapes.size() != selectedItems.size() ||
+                !(new HashSet<>(selectedBirdShapes).containsAll(selectedItems))) {
+            mAdapter.setSelectedItems(selectedBirdShapes);
+        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
         selectedBirdShapes = (ArrayList<String>) mAdapter.getSelectedItems();
-        if (getActivity() instanceof BirdIdentificationActivity) {
-            ((BirdIdentificationActivity) getActivity()).receiveSelectedListFromFragment(mFragmentTag, selectedBirdShapes);
-            Log.i("FRAGMENT", "--Selected shapes sent to activity. " + selectedBirdShapes);
-        }
+        mSharedPreferences.edit().putStringSet("selectedShapes", new HashSet<>(selectedBirdShapes)).apply();
+        Log.i("FRAGMENT", "--Saving selected shapes to shared preferences. " + selectedBirdShapes);
     }
-
 }
