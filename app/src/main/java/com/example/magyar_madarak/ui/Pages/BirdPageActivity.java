@@ -1,4 +1,4 @@
-package com.example.magyar_madarak.ui;
+package com.example.magyar_madarak.ui.Pages;
 
 import static com.example.magyar_madarak.ui.Adapters.KnowledgeBaseAdapter.selectedBird;
 import static com.example.magyar_madarak.utils.CommonUtils.capitalizeFirstLetter;

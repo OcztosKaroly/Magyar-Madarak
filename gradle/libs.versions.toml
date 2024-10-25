@@ -25,6 +25,7 @@ playServicesAuth = "21.2.0"
 roomVersion = "2.6.1"
 lifecycleVersion = "2.8.6"
 gson = "2.10.1"
+workRuntime = "2.9.1"
 
 [libraries]
 
@@ -48,6 +49,7 @@ lifecycle-viewmodel-savedstate = { module = "androidx.lifecycle:lifecycle-viewmo
 lifecycle-compiler = { module = "androidx.lifecycle:lifecycle-compiler", version.ref = "lifecycleVersion" }
 lifecycle-common-java8 = { module = "androidx.lifecycle:lifecycle-common-java8", version.ref = "lifecycleVersion" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+work-runtime = { module = "androidx.work:work-runtime", version.ref = "workRuntime" }
 
 # basics
 junit = { group = "junit", name = "junit", version.ref = "junit" }

@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".35"
-            android:text="@string/NextBtn"
+            android:text="@string/nextBtn"
             android:backgroundTint="@color/orange"
             android:textColor="@color/black"
             style="?android:attr/buttonBarButtonStyle" />

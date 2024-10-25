@@ -78,7 +78,7 @@ dependencies {
     annotationProcessor libs.lifecycle.compiler
     implementation libs.lifecycle.common.java8
     implementation libs.gson
+    implementation libs.work.runtime
 
     // custom external libs
-
 }

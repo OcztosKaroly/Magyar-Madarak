@@ -12,11 +12,17 @@ import java.util.List;
 
 @Dao
 public interface BirdDAO {
-    @Query("SELECT * FROM birds WHERE id = :birdId")
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insert(Bird bird);
+
+    @Query("SELECT * FROM birds WHERE birdId = :birdId")
     LiveData<Bird> getBirdById(String birdId);
 
     @Query("SELECT * FROM birds WHERE name = :birdName")
     LiveData<Bird> getBirdByName(String birdName);
+
+    @Query("SELECT * FROM birds WHERE name IN (:names)")
+    LiveData<List<Bird>> getBirdsByNames(List<String> names);
 
     @Query("SELECT * FROM birds")
     LiveData<List<Bird>> getAllBirds();
@@ -29,7 +35,4 @@ public interface BirdDAO {
 
     @Query("SELECT habitats FROM birds")
     LiveData<List<String>> getAllHabitats();
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Bird bird);
 }

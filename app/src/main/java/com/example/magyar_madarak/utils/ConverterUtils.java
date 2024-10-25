@@ -6,7 +6,6 @@ import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ConverterUtils {
     @TypeConverter

@@ -2,6 +2,8 @@ package com.example.magyar_madarak.ui;
 
 import static com.example.magyar_madarak.utils.NavigationUtils.navigationBarRedirection;
 
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.SearchView;
@@ -19,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.magyar_madarak.R;
 import com.example.magyar_madarak.data.model.Bird;
 import com.example.magyar_madarak.data.viewModel.BirdViewModel;
+import com.example.magyar_madarak.receivers.WifiBroadcastReceiver;
 import com.example.magyar_madarak.ui.Adapters.KnowledgeBaseAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -48,6 +51,10 @@ public class KnowledgeBaseActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
             return insets;
         });
+
+        WifiBroadcastReceiver wifiReceiver = new WifiBroadcastReceiver();
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(wifiReceiver, filter);
 
         initializeData();
     }

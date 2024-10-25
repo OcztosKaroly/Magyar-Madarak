@@ -13,17 +13,27 @@ import java.util.List;
 public class BirdViewModel extends AndroidViewModel {
     private BirdRepository birdRepository;
 
-    private LiveData<List<Bird>> birds;
-
     public BirdViewModel(Application application) {
         super(application);
 
         birdRepository = new BirdRepository(application);
-        birds = birdRepository.getAllBirds();
+    }
+
+    // This function is unnecessary due to the user cannot create, modify or delete any birds.
+    // public void insertBird(Bird bird) {
+    //     birdRepository.insertBird(bird);
+    // }
+
+    public LiveData<Bird> getBirdById(String birdId) {
+        return birdRepository.getBirdById(birdId);
+    }
+
+    public LiveData<Bird> getBirdByName(String name) {
+        return birdRepository.getBirdByName(name);
     }
 
     public LiveData<List<Bird>> getAllBirds() {
-        return birds;
+        return birdRepository.getAllBirds();
     }
 
     public LiveData<List<Bird>> getBirdsByNameList(List<String> birdsNames) {
@@ -40,9 +50,5 @@ public class BirdViewModel extends AndroidViewModel {
 
     public LiveData<List<String>> getAllHabitats() {
         return birdRepository.getAllUniqueBirdHabitats();
-    }
-
-    public void insertBird(Bird bird) {
-        this.birdRepository.insertBird(bird);
     }
 }

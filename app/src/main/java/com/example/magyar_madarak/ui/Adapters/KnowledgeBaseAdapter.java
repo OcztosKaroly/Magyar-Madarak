@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.magyar_madarak.R;
 import com.example.magyar_madarak.data.model.Bird;
-import com.example.magyar_madarak.ui.BirdPageActivity;
+import com.example.magyar_madarak.ui.Pages.BirdPageActivity;
 
 import java.util.ArrayList;
 import java.util.List;

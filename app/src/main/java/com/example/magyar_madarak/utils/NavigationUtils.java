@@ -9,6 +9,7 @@ import com.example.magyar_madarak.ui.BirdIdentificationActivity;
 import com.example.magyar_madarak.ui.KnowledgeBaseActivity;
 import com.example.magyar_madarak.ui.LoginActivity;
 import com.example.magyar_madarak.R;
+import com.example.magyar_madarak.ui.ObservationsActivity;
 import com.example.magyar_madarak.ui.RegisterActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -46,9 +47,8 @@ public class NavigationUtils {
                 redirect(from, BirdIdentificationActivity.class);
                 return true;
             }
-//            if (itemId == R.id.nav_observations && !from.getClass().equals(Observations.class)) {
-            if (itemId == R.id.nav_observations) {
-                redirect(from, LoginActivity.class);
+            if (itemId == R.id.nav_observations && !from.getClass().equals(ObservationsActivity.class)) {
+                redirect(from, ObservationsActivity.class);
                 return true;
             }
             if (itemId == R.id.nav_profile && !from.getClass().equals(LoginActivity.class)) {

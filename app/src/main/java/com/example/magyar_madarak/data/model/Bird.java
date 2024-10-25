@@ -1,7 +1,5 @@
 package com.example.magyar_madarak.data.model;
 
-import android.graphics.drawable.Icon;
-
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -12,7 +10,7 @@ import java.util.ArrayList;
 public class Bird {
     @PrimaryKey
     @NonNull
-    private String id;
+    private String birdId;
 
     private String name;
     private String latinName;
@@ -29,7 +27,7 @@ public class Bird {
     private ArrayList<String> facts;
 
     public Bird() {
-        id = "";
+        birdId = "";
     }
 
     public Bird(@NonNull String id,
@@ -45,7 +43,7 @@ public class Bird {
                 ArrayList<String> facts,
                 ArrayList<String> diets,
                 ArrayList<String> habitats) {
-        this.id = id;
+        this.birdId = id;
         this.name = name;
         this.latinName = latinName;
         this.size = size;
@@ -65,12 +63,12 @@ public class Bird {
 //    }
 
     @NonNull
-    public String getId() {
-        return id;
+    public String getBirdId() {
+        return birdId;
     }
 
-    public void setId(@NonNull String id) {
-        this.id = id;
+    public void setBirdId(@NonNull String id) {
+        this.birdId = id;
     }
 
     public String getName() {
@@ -177,7 +175,7 @@ public class Bird {
     @Override
     public String toString() {
         return "Bird{" +
-                "id='" + id + '\'' +
+                "id='" + birdId + '\'' +
                 ", name='" + name + '\'' +
                 ", latinName='" + latinName + '\'' +
                 ", size=" + size +

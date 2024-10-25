@@ -10,7 +10,8 @@
     <string name="registerBtn">Regisztráció</string>
     <string name="loginGoogleBtn">Bejelentkezés Google-val</string>
     <string name="previousBtn">Előző</string>
-    <string name="NextBtn">Következő</string>
+    <string name="nextBtn">Következő</string>
+    <string name="addBtn">Hozzáadás</string>
 
     <!-- for auth -->
     <string name="email_address">E-mail cím</string>
@@ -42,6 +43,7 @@
 
     <!-- for placeholders -->
     <string name="placeholder_item_name">Item Name</string>
+    <string name="placeholder_item_date">Item Date</string>
 </resources>
 
 
