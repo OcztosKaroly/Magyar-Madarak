@@ -7,7 +7,6 @@ import androidx.lifecycle.LiveData;
 import com.example.magyar_madarak.data.dao.ObservationDAO;
 import com.example.magyar_madarak.data.database.HunBirdsRoomDatabase;
 import com.example.magyar_madarak.data.model.Observation;
-import com.example.magyar_madarak.data.model.User;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
