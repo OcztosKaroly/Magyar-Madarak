@@ -28,4 +28,7 @@ public interface ObservationDAO {
 
     @Query("DELETE FROM observations WHERE observationId = :observationId")
     void deleteObservationById(String observationId);
+
+    @Query("DELETE FROM observations WHERE userId = :userId")
+    void deleteAllObservationsByUserId(String userId);
 }

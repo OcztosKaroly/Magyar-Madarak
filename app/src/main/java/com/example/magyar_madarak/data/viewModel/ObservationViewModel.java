@@ -42,4 +42,8 @@ public class ObservationViewModel extends AndroidViewModel {
     public void deleteObservation(Observation observation) {
         observationRepository.deleteObservation(observation);
     }
+
+    public void deleteAllObservationsByUserId(String userId) {
+        observationRepository.deleteAllObservationsByUserId(userId);
+    }
 }

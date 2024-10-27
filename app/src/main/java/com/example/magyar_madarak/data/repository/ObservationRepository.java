@@ -1,6 +1,7 @@
 package com.example.magyar_madarak.data.repository;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -8,7 +9,9 @@ import com.example.magyar_madarak.data.dao.ObservationDAO;
 import com.example.magyar_madarak.data.database.HunBirdsRoomDatabase;
 import com.example.magyar_madarak.data.model.Observation;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.Filter;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -64,5 +67,23 @@ public class ObservationRepository {
 
     public void deleteObservation(Observation observation) {
         this.deleteObservationById(observation.getObservationId());
+    }
+
+    public void deleteAllObservationsByUserId(String userId) {
+        executorService.execute(() -> {
+            observationDAO.deleteAllObservationsByUserId(userId);
+            mObservationsCollection
+                    .whereEqualTo("userId", userId)
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot observation: task.getResult()) {
+                                mObservationsCollection.document(observation.getId()).delete();
+                            }
+                        } else {
+                            Log.e("DATA", "FireBase query (delete all observations of user) failed.", task.getException());
+                        }
+                    });
+        });
     }
 }
