@@ -8,20 +8,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.magyar_madarak.R;
+import com.example.magyar_madarak.data.model.constants.Color;
 import com.example.magyar_madarak.data.viewModel.BirdViewModel;
 import com.example.magyar_madarak.ui.Adapters.BirdIdentificationAdapter;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BirdColorFragment extends Fragment {
 
@@ -31,8 +33,8 @@ public class BirdColorFragment extends Fragment {
     private BirdIdentificationAdapter mAdapter;
 
     private BirdViewModel mBirdViewModel;
-    private LiveData<List<String>> birdColors;
-    private ArrayList<String> selectedBirdColors;
+    private LiveData<List<String>> birdColorsNames;
+    private List<String> selectedBirdColors;
 
     public BirdColorFragment() { }
 
@@ -52,9 +54,11 @@ public class BirdColorFragment extends Fragment {
 
     private void initializeData() {
         mBirdViewModel = new ViewModelProvider(this).get(BirdViewModel.class);
-        birdColors = mBirdViewModel.getAllColors();
+        birdColorsNames = Transformations.map(mBirdViewModel.getAllColors(), colors ->
+                colors.stream().map(Color::getColorName).collect(Collectors.toList())
+        );
 
-        mSharedPreferences = getActivity().getSharedPreferences("birdIdentification", Context.MODE_PRIVATE);
+        mSharedPreferences = requireActivity().getSharedPreferences("birdIdentification", Context.MODE_PRIVATE);
 
         mAdapter = new BirdIdentificationAdapter(getActivity());
 
@@ -62,7 +66,7 @@ public class BirdColorFragment extends Fragment {
     }
 
     private void initializeListeners() {
-        birdColors.observe(this, colors -> {
+        birdColorsNames.observe(this, colors -> {
             mAdapter.setItems(colors);
         });
     }
@@ -91,7 +95,7 @@ public class BirdColorFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        selectedBirdColors = (ArrayList<String>) mAdapter.getSelectedItems();
+        selectedBirdColors = mAdapter.getSelectedItems();
         mSharedPreferences.edit().putStringSet("selectedColors", new HashSet<>(selectedBirdColors)).apply();
         Log.i("FRAGMENT", "--Saving selected colors to shared preferences. " + selectedBirdColors);
     }

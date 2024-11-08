@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,12 +17,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.magyar_madarak.R;
+import com.example.magyar_madarak.data.model.constants.Habitat;
 import com.example.magyar_madarak.data.viewModel.BirdViewModel;
 import com.example.magyar_madarak.ui.Adapters.BirdIdentificationAdapter;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BirdHabitatFragment extends Fragment {
 
@@ -31,8 +34,8 @@ public class BirdHabitatFragment extends Fragment {
     private BirdIdentificationAdapter mAdapter;
 
     private BirdViewModel mBirdViewModel;
-    private LiveData<List<String>> birdHabitats;
-    private ArrayList<String> selectedBirdHabitats;
+    private LiveData<List<String>> birdHabitatsNames;
+    private List<String> selectedBirdHabitats;
 
     public BirdHabitatFragment() { }
 
@@ -52,9 +55,11 @@ public class BirdHabitatFragment extends Fragment {
 
     private void initializeData() {
         mBirdViewModel = new ViewModelProvider(this).get(BirdViewModel.class);
-        birdHabitats = mBirdViewModel.getAllHabitats();
+        birdHabitatsNames = Transformations.map(mBirdViewModel.getAllHabitats(), habitats ->
+                habitats.stream().map(Habitat::getHabitatName).collect(Collectors.toList())
+        );
 
-        mSharedPreferences = getActivity().getSharedPreferences("birdIdentification", Context.MODE_PRIVATE);
+        mSharedPreferences = requireActivity().getSharedPreferences("birdIdentification", Context.MODE_PRIVATE);
 
         mAdapter = new BirdIdentificationAdapter(getActivity());
 
@@ -62,7 +67,7 @@ public class BirdHabitatFragment extends Fragment {
     }
 
     private void initializeListeners() {
-        birdHabitats.observe(this, habitats -> {
+        birdHabitatsNames.observe(this, habitats -> {
             mAdapter.setItems(habitats);
         });
     }
@@ -95,7 +100,7 @@ public class BirdHabitatFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        selectedBirdHabitats = (ArrayList<String>) mAdapter.getSelectedItems();
+        selectedBirdHabitats = mAdapter.getSelectedItems();
         mSharedPreferences.edit().putStringSet("selectedHabitats", new HashSet<>(selectedBirdHabitats)).apply();
         Log.i("FRAGMENT", "--Saving selected habitats to shared preferences. " + selectedBirdHabitats);
     }

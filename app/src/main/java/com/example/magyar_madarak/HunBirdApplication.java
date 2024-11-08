@@ -7,6 +7,7 @@ import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 
+import com.example.magyar_madarak.data.database.HunBirdsRoomDatabase;
 import com.example.magyar_madarak.workers.NotificationWorker;
 import com.google.common.util.concurrent.ListenableFuture;
 
@@ -18,6 +19,10 @@ public class HunBirdApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        // TODO: !!!!!!!!!! Törölni az adatbázistörlőt későbbiekben !!!!!!!!!!
+        this.deleteDatabase("hun_birds_database");
+        HunBirdsRoomDatabase db = HunBirdsRoomDatabase.getInstance(this);
 
 //        WorkManager.getInstance(this).cancelAllWork();
 

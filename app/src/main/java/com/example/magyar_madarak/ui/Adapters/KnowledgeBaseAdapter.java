@@ -17,7 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.magyar_madarak.R;
-import com.example.magyar_madarak.data.model.Bird;
+import com.example.magyar_madarak.data.model.bird.Bird;
 import com.example.magyar_madarak.ui.Pages.BirdPageActivity;
 
 import java.util.ArrayList;
@@ -98,7 +98,7 @@ public class KnowledgeBaseAdapter extends RecyclerView.Adapter<KnowledgeBaseAdap
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
                 for (Bird bird : mBirdsAll) {
-                    if (bird.getName().toLowerCase().contains(filterPattern)) {
+                    if (bird.getBirdName().toLowerCase().contains(filterPattern)) {
                         filteredBirds.add(bird);
                     }
                 }
@@ -116,7 +116,7 @@ public class KnowledgeBaseAdapter extends RecyclerView.Adapter<KnowledgeBaseAdap
         }
     };
 
-    static class BirdViewHolder extends RecyclerView.ViewHolder {
+    public static class BirdViewHolder extends RecyclerView.ViewHolder {
         private ImageView birdPicture;
         private TextView birdName;
 
@@ -129,7 +129,7 @@ public class KnowledgeBaseAdapter extends RecyclerView.Adapter<KnowledgeBaseAdap
 
         public void bindTo(Bird bird) {
 //            birdPicture;
-            birdName.setText(capitalizeFirstLetter(bird.getName()));
+            birdName.setText(capitalizeFirstLetter(bird.getBirdName()));
         }
     }
 }

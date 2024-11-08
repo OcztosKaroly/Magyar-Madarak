@@ -43,10 +43,10 @@
 
         <EditText
             android:id="@+id/etRegisterEmailAddress"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints="emailAddress"
-            android:ems="12"
+            android:layout_marginHorizontal="30dp"
             android:hint="@string/email_address"
             android:inputType="textEmailAddress"
             android:textSize="24sp"
@@ -59,10 +59,10 @@
 
         <EditText
         android:id="@+id/etRegisterPassword"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints="emailAddress"
-        android:ems="12"
+        android:layout_marginHorizontal="30dp"
         android:hint="@string/password"
         android:inputType="textPassword"
         android:textSize="24sp"
@@ -75,10 +75,10 @@
 
         <EditText
         android:id="@+id/etRegisterRePassword"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints="emailAddress"
-        android:ems="12"
+        android:layout_marginHorizontal="30dp"
         android:hint="@string/repassword"
         android:inputType="textPassword"
         android:textSize="24sp"

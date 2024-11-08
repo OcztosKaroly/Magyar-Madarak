@@ -12,17 +12,13 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.magyar_madarak.R;
-import com.example.magyar_madarak.data.model.Bird;
 import com.example.magyar_madarak.data.model.Observation;
-import com.example.magyar_madarak.data.viewModel.BirdViewModel;
-import com.example.magyar_madarak.ui.Adapters.KnowledgeBaseAdapter;
 import com.example.magyar_madarak.ui.Adapters.ObservationsAdapter;
-import com.example.magyar_madarak.ui.Pages.CreateObservationPageActivity;
+import com.example.magyar_madarak.ui.Pages.ObservationPageActivity;
 import com.example.magyar_madarak.utils.NavigationUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -80,7 +76,8 @@ public class ObservationsActivity extends AppCompatActivity {
         navigationBarRedirection(mBottomNavigationView, this);
 
         createObservationBtn.setOnClickListener(l -> {
-            NavigationUtils.startActivity(this, CreateObservationPageActivity.class);
+//            NavigationUtils.startActivity(this, CreateObservationPageActivity.class);
+            NavigationUtils.startActivity(this, ObservationPageActivity.class);
         });
 
         mObservations.observe(this, observations -> {

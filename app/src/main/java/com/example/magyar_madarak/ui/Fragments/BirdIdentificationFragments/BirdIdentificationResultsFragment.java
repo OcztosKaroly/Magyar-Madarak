@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.magyar_madarak.R;
-import com.example.magyar_madarak.data.model.Bird;
+import com.example.magyar_madarak.data.model.bird.Bird;
 import com.example.magyar_madarak.data.viewModel.BirdViewModel;
 import com.example.magyar_madarak.ui.Adapters.BirdIdentificationAdapter;
 
@@ -58,7 +58,7 @@ public class BirdIdentificationResultsFragment extends Fragment {
         List<String> todoList = new ArrayList<>();
         birdIdentificationResults = mBirdViewModel.getBirdsByNameList(todoList);
 
-        mSharedPreferences = getActivity().getSharedPreferences("birdIdentification", Context.MODE_PRIVATE);
+        mSharedPreferences = requireActivity().getSharedPreferences("birdIdentification", Context.MODE_PRIVATE);
 
         selectedColors = new ArrayList<>(mSharedPreferences.getStringSet("selectedColors", new HashSet<>()));
         selectedShapes = new ArrayList<>(mSharedPreferences.getStringSet("selectedShapes", new HashSet<>()));

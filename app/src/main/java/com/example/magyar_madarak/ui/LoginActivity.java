@@ -97,7 +97,7 @@ public class LoginActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 Log.i(LOG_TAG, "--Login successful.--");
                 Toast.makeText(LoginActivity.this, "Sikeres bejelentkezés.", Toast.LENGTH_LONG).show();
-                // TODO: átirányítás a login oldalról bejelentkezés után
+                redirect(this, KnowledgeBaseActivity.class); // TODO: Jobban átgondolt átirányítás, esetleg csak a logint egy új activityként elindítani, és jelen helyzetben csak bezárni azt
             } else {
                 Log.e(LOG_TAG, "--Login error.--");
                 Toast.makeText(LoginActivity.this, "Hibás felhasználónév vagy jelszó!", Toast.LENGTH_LONG).show();
@@ -106,6 +106,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean isLoginDataValid(String email, String password) {
+        // TODO: Ezek többségét kezeli a FireStore, nem feltétlen szükséges leellenőrizni
         if (email == null || email.isEmpty()) {
             Log.e(LOG_TAG, "--Email address is null.--");
             Toast.makeText(LoginActivity.this, "Email cím kitöltése kötelező!", Toast.LENGTH_LONG).show();
@@ -126,12 +127,6 @@ public class LoginActivity extends AppCompatActivity {
 
         return true;
     }
-
-//    private void performLoginWithGoogle() {
-//        // TODO: Bejelentkezés a Google beépített szolgáltatásával
-//        Log.i(LOG_TAG, "Initiate login with Google.");
-//        // TODO: Záró log a Google-s bejelentkezési folyamat lezárulásáról: i- siker, e- hiba
-//    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

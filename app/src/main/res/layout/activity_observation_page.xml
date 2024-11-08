@@ -7,4 +7,173 @@
     android:layout_height="match_parent"
     tools:context=".ui.Pages.ObservationPageActivity">
 
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbarObservationPage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:navigationIcon="@drawable/ic_arrow_left"
+        app:navigationIconTint="@color/orange"
+        app:title="@string/back"
+        app:titleTextColor="@color/orange"
+        app:titleTextAppearance="@style/ToolbarStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarObservationPage"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:id="@+id/contentObservationPage"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+<!--            <TextView-->
+<!--                android:id="@+id/tObservationName"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textSize="36sp"-->
+<!--                android:layout_marginVertical="5dp" />-->
+
+            <EditText
+                android:id="@+id/etObservationName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginBottom="30dp"
+                android:hint="Megfigyelés neve"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textSize="36sp"/>
+
+            <LinearLayout
+                android:id="@+id/llObservationDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginVertical="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Megfigyelés időpontja: "
+                    android:layout_marginEnd="10dp"/>
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tObservationDate"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginHorizontal="75dp"/>-->
+
+                <EditText
+                    android:id="@+id/etObservationDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="50dp"
+                    android:hint="Megfigyelés időpontja"
+                    android:inputType="date"
+                    android:textSize="24sp"/>
+<!--                TODO: Valamilyen datePicker megvalósítása-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llObservationLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginVertical="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Megfigyelés helye:"
+                    android:layout_marginEnd="10dp"/>
+
+                <EditText
+                    android:id="@+id/etObservationLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="50dp"
+                    android:hint="Megfigyelés helye"
+                    android:inputType="text"
+                    android:textSize="24sp"/>
+<!--                TODO: Valamilyen locationPicker megvalósítása-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llObservationDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginVertical="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Leírás:"
+                    android:layout_marginEnd="10dp"/>
+
+                <EditText
+                    android:id="@+id/etObservationDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="50dp"
+                    android:hint="Megfigyelés leírása"
+                    android:inputType="textMultiLine"
+                    android:textSize="24sp"/>
+                <!--                TODO: Valamilyen locationPicker megvalósítása-->
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp">
+
+                <Button
+                    android:id="@+id/btnDeleteObservation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/red"
+                    android:text="Törlés"/>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:id="@+id/btnSaveObservation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/orange"
+                    android:textColor="@color/black"
+                    android:text="Mentés" />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,10 +19,16 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.magyar_madarak.R;
-import com.example.magyar_madarak.data.model.Bird;
+import com.example.magyar_madarak.data.model.bird.Bird;
+import com.example.magyar_madarak.data.model.constants.Color;
+import com.example.magyar_madarak.data.model.constants.Diet;
+import com.example.magyar_madarak.data.model.constants.Habitat;
+import com.example.magyar_madarak.data.model.constants.Shape;
 import com.google.android.material.appbar.MaterialToolbar;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class BirdPageActivity extends AppCompatActivity {
     private static final String LOG_TAG = BirdPageActivity.class.getName();
@@ -46,7 +52,7 @@ public class BirdPageActivity extends AppCompatActivity {
             return insets;
         });
 
-        if (!(selectedBird instanceof Bird)) {
+        if (selectedBird == null) {
             Log.w(LOG_TAG, "--No bird selected!--");
             finish();
             return;
@@ -82,6 +88,7 @@ public class BirdPageActivity extends AppCompatActivity {
 
     private void initializeListeners() {
         toolbar.setNavigationOnClickListener(v -> {
+            Log.i(LOG_TAG, "--Navigate back.--");
             finish();
         });
 
@@ -89,15 +96,15 @@ public class BirdPageActivity extends AppCompatActivity {
             TextView title = (TextView) toolbar.getChildAt(0);
             title.setOnClickListener(v -> {
                 finish();
+                Log.i(LOG_TAG, "--Navigate back.--");
             });
-
         } catch (Exception e) {
-            Log.e(LOG_TAG, "--Error in set onclick listener on toolbar title: ", e);
+            Log.e(LOG_TAG, "--Error in set onclick listener on toolbar title.--", e);
         }
     }
 
     private void setBirdTexts() {
-        tBirdName.setText(capitalizeFirstLetter(mBird.getName()));
+        tBirdName.setText(capitalizeFirstLetter(mBird.getBirdName()));
         tBirdLatinName.setText(mBird.getLatinName());
         tBirdMigratory.setText(mBird.isMigratory() ? "költöző" : "itthon telelő");
         tBirdSize.setText(mBird.getSize());
@@ -106,11 +113,16 @@ public class BirdPageActivity extends AppCompatActivity {
 
         tBirdDescription.setText(mBird.getDescription());
 
-        createListForLayout(mBird.getDiets(), listBirdDiets);
-        createListForLayout(mBird.getColors(), listBirdColors);
-        createListForLayout(mBird.getShapes(), listBirdShapes);
-        createListForLayout(mBird.getHabitats(), listBirdHabitats);
-        createListForLayout(mBird.getFacts(), listBirdFacts);
+        List<String> diets = mBird.getDiets().stream().map(Diet::getDietName).collect(Collectors.toList());
+        List<String> colors = mBird.getColors().stream().map(Color::getColorName).collect(Collectors.toList());
+        List<String> shapes = mBird.getShapes().stream().map(Shape::getShapeName).collect(Collectors.toList());
+        List<String> habitats = mBird.getHabitats().stream().map(Habitat::getHabitatName).collect(Collectors.toList());
+        List<String> facts = mBird.getFacts();
+        createListForLayout((ArrayList<String>) diets, listBirdDiets);
+        createListForLayout((ArrayList<String>) colors, listBirdColors);
+        createListForLayout((ArrayList<String>) shapes, listBirdShapes);
+        createListForLayout((ArrayList<String>) habitats, listBirdHabitats);
+        createListForLayout((ArrayList<String>) facts, listBirdFacts);
     }
 
     private void createListForLayout(ArrayList<String> list, LinearLayout layout) {
@@ -119,7 +131,7 @@ public class BirdPageActivity extends AppCompatActivity {
                 LinearLayout parent = (LinearLayout) layout.getParent();
                 parent.setVisibility(View.INVISIBLE);
             } catch (Error e) {
-                Log.e(LOG_TAG, "--List parent is not LinearLayout! ", e);
+                Log.e(LOG_TAG, "--List parent is not LinearLayout!--", e);
             }
             return;
         }

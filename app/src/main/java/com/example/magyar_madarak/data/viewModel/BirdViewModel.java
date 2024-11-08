@@ -5,7 +5,10 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.magyar_madarak.data.model.Bird;
+import com.example.magyar_madarak.data.model.bird.Bird;
+import com.example.magyar_madarak.data.model.constants.Color;
+import com.example.magyar_madarak.data.model.constants.Habitat;
+import com.example.magyar_madarak.data.model.constants.Shape;
 import com.example.magyar_madarak.data.repository.BirdRepository;
 
 import java.util.List;
@@ -19,17 +22,12 @@ public class BirdViewModel extends AndroidViewModel {
         birdRepository = new BirdRepository(application);
     }
 
-    // This function is unnecessary due to the user cannot create, modify or delete any birds.
-    // public void insertBird(Bird bird) {
-    //     birdRepository.insertBird(bird);
-    // }
-
     public LiveData<Bird> getBirdById(String birdId) {
         return birdRepository.getBirdById(birdId);
     }
 
-    public LiveData<Bird> getBirdByName(String name) {
-        return birdRepository.getBirdByName(name);
+    public LiveData<List<Bird>> getBirdByName(String name) {
+        return birdRepository.getBirdsByName(name);
     }
 
     public LiveData<List<Bird>> getAllBirds() {
@@ -40,15 +38,15 @@ public class BirdViewModel extends AndroidViewModel {
         return birdRepository.getBirdsByNames(birdsNames);
     }
 
-    public LiveData<List<String>> getAllColors() {
-        return birdRepository.getAllUniqueBirdColors();
+    public LiveData<List<Color>> getAllColors() {
+        return birdRepository.getAllBirdColors();
     }
 
-    public LiveData<List<String>> getAllShapes() {
-        return birdRepository.getAllUniqueBirdShapes();
+    public LiveData<List<Shape>> getAllShapes() {
+        return birdRepository.getAllBirdShapes();
     }
 
-    public LiveData<List<String>> getAllHabitats() {
-        return birdRepository.getAllUniqueBirdHabitats();
+    public LiveData<List<Habitat>> getAllHabitats() {
+        return birdRepository.getAllBirdHabitats();
     }
 }

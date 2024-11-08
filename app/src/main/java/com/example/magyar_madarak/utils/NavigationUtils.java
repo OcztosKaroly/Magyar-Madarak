@@ -10,7 +10,6 @@ import com.example.magyar_madarak.ui.KnowledgeBaseActivity;
 import com.example.magyar_madarak.ui.LoginActivity;
 import com.example.magyar_madarak.R;
 import com.example.magyar_madarak.ui.ObservationsActivity;
-import com.example.magyar_madarak.ui.RegisterActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class NavigationUtils {

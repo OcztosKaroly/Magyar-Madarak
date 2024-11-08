@@ -105,6 +105,13 @@ public class RegisterActivity extends AppCompatActivity {
                         Log.i(LOG_TAG, "--Registration successful.--");
                         // TODO: Átirányítás a regisztrációról.
                         Toast.makeText(RegisterActivity.this, "Sikeres regisztráció.", Toast.LENGTH_LONG).show();
+                        mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(this, emailSenderTask -> {
+                            if (emailSenderTask.isSuccessful()) {
+                                Toast.makeText(RegisterActivity.this, "Megerősítő email elküldve a " + mAuth.getCurrentUser().getEmail() + " címre.", Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(RegisterActivity.this, "Hiba lépett fel a megerősítő email elküldésekor!", Toast.LENGTH_LONG).show();
+                            }
+                        });
                     } else {
                         Log.e(LOG_TAG, "--Registration error.--");
                         Toast.makeText(RegisterActivity.this, "Hiba a regisztráció során!", Toast.LENGTH_LONG).show();
@@ -113,7 +120,8 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean isRegistrationDataValid(String email, String password, String rePassword) {
-        //TODO: Foglalt-e már az email-cím az adatbázisban.
+        // TODO: Foglalt-e már az email-cím az adatbázisban.
+        //  Erre és a többire is lehet nincs szükség a FireStore Auth beépített beállításai miatt.
         //if (email cím már foglalt) {
         //    Log.e(LOG_TAG, "This email address already registered.");
         //    Toast.makeText(RegisterActivity.this, "Ez az email cím már foglalt!", Toast.LENGTH_LONG).show();

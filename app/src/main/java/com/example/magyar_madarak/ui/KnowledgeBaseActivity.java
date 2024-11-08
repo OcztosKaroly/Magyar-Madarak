@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.magyar_madarak.R;
-import com.example.magyar_madarak.data.model.Bird;
+import com.example.magyar_madarak.data.model.bird.Bird;
 import com.example.magyar_madarak.data.viewModel.BirdViewModel;
 import com.example.magyar_madarak.ui.Adapters.KnowledgeBaseAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -72,9 +72,7 @@ public class KnowledgeBaseActivity extends AppCompatActivity {
     private void initializeListeners() {
         navigationBarRedirection(mBottomNavigationView, this);
 
-        mBirds.observe(this, birds -> {
-            mBirdAdapter.setBirds(birds);
-        });
+        mBirds.observe(this, birds -> mBirdAdapter.setBirds(birds));
 
         mSearchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

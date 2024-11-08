@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,12 +17,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.magyar_madarak.R;
+import com.example.magyar_madarak.data.model.constants.Shape;
 import com.example.magyar_madarak.data.viewModel.BirdViewModel;
 import com.example.magyar_madarak.ui.Adapters.BirdIdentificationAdapter;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BirdShapeFragment extends Fragment {
 
@@ -31,8 +34,8 @@ public class BirdShapeFragment extends Fragment {
     private BirdIdentificationAdapter mAdapter;
 
     private BirdViewModel mBirdViewModel;
-    private LiveData<List<String>> birdShapes;
-    private ArrayList<String> selectedBirdShapes;
+    private LiveData<List<String>> birdShapesNames;
+    private List<String> selectedBirdShapes;
 
     public BirdShapeFragment() { }
 
@@ -52,9 +55,11 @@ public class BirdShapeFragment extends Fragment {
 
     private void initializeData() {
         mBirdViewModel = new ViewModelProvider(this).get(BirdViewModel.class);
-        birdShapes = mBirdViewModel.getAllShapes();
+        birdShapesNames = Transformations.map(mBirdViewModel.getAllShapes(), shapes ->
+                shapes.stream().map(Shape::getShapeName).collect(Collectors.toList())
+        );
 
-        mSharedPreferences = getActivity().getSharedPreferences("birdIdentification", Context.MODE_PRIVATE);
+        mSharedPreferences = requireActivity().getSharedPreferences("birdIdentification", Context.MODE_PRIVATE);
 
         mAdapter = new BirdIdentificationAdapter(getActivity());
 
@@ -62,7 +67,7 @@ public class BirdShapeFragment extends Fragment {
     }
 
     private void initializeListeners() {
-        birdShapes.observe(this, shapes -> {
+        birdShapesNames.observe(this, shapes -> {
             mAdapter.setItems(shapes);
         });
     }
@@ -95,7 +100,7 @@ public class BirdShapeFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        selectedBirdShapes = (ArrayList<String>) mAdapter.getSelectedItems();
+        selectedBirdShapes = mAdapter.getSelectedItems();
         mSharedPreferences.edit().putStringSet("selectedShapes", new HashSet<>(selectedBirdShapes)).apply();
         Log.i("FRAGMENT", "--Saving selected shapes to shared preferences. " + selectedBirdShapes);
     }
