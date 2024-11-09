@@ -20,6 +20,7 @@ import com.example.magyar_madarak.data.model.CrossRefTables.HabitatCrossRef;
 import com.example.magyar_madarak.data.model.CrossRefTables.ShapeCrossRef;
 import com.example.magyar_madarak.data.model.Observation;
 import com.example.magyar_madarak.data.model.User;
+import com.example.magyar_madarak.data.model.bird.Bird;
 import com.example.magyar_madarak.data.model.bird.BirdEntity;
 import com.example.magyar_madarak.data.model.constants.Color;
 import com.example.magyar_madarak.data.model.constants.ConservationValue;
@@ -37,6 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 @Database(
         entities = {
@@ -103,9 +105,9 @@ public abstract class HunBirdsRoomDatabase extends RoomDatabase {
                 syncFirestoreHabitats();
             });
 
-//            Executors.newSingleThreadExecutor().execute(() -> {
-//                syncFirestoreBirds();
-//            });
+            Executors.newSingleThreadExecutor().execute(() -> {
+                syncFirestoreBirds();
+            });
 
             Executors.newSingleThreadExecutor().execute(() -> {
                 syncFirestoreUsers(); // Recently this means only one user
@@ -139,7 +141,6 @@ public abstract class HunBirdsRoomDatabase extends RoomDatabase {
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for (DocumentSnapshot document: queryDocumentSnapshots) {
-                        Log.d("DATA", "--Lekérdezés eredménye: " + document);
                         ConservationValue conservationValue = new ConservationValue(document.getId(), Objects.requireNonNull(document.get("conservationValue", Integer.class)));
                         Executors.newSingleThreadExecutor().execute(() -> {
                             instance.conservationValueDAO().insert(conservationValue);
@@ -205,135 +206,102 @@ public abstract class HunBirdsRoomDatabase extends RoomDatabase {
                 });
     }
 
-//    private static void syncFirestoreBirds() {
-//        // TODO: Firestoreban a birds collectionban a name mezőt átalakítani birdName-ra a konzisztencia miatt.
-//        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-//
-////        firestore.collection("birds")
-////                .get()
-////                .addOnSuccessListener(queryDocumentSnapshots -> {
-////                    for (DocumentSnapshot document: queryDocumentSnapshots) {
-////
-////                        BirdBase birdBase = new BirdBase(
-////                                document.getId(),
-////                                Objects.requireNonNull(document.getString("birdName")),
-////                                Objects.requireNonNull(document.getString("mainPictureId"))
-////                        );
-////
-////                        BirdDetail birdDetail = new BirdDetail(
-////                                document.getId(),
-////                                document.getString("latinName"),
-////                                Boolean.TRUE.equals(document.getBoolean("migratory")),
-////                                document.getString("size"),
-////                                document.getString("wingSpan"),
-////                                Integer.parseInt(getFireStoreReference(document.getDocumentReference("conservationValue"))),
-////                                ((List<DocumentReference>) Objects.requireNonNull(document.get("diets")))
-////                                        .stream()
-////                                        .map(HunBirdsRoomDatabase::getFireStoreReference)
-////                                        .filter(Objects::nonNull)
-////                                        .collect(Collectors.toList()),
-////                                ((List<DocumentReference>) Objects.requireNonNull(document.get("colors")))
-////                                        .stream()
-////                                        .map(HunBirdsRoomDatabase::getFireStoreReference)
-////                                        .filter(Objects::nonNull)
-////                                        .collect(Collectors.toList()),
-////                                ((List<DocumentReference>) Objects.requireNonNull(document.get("shapes")))
-////                                        .stream()
-////                                        .map(HunBirdsRoomDatabase::getFireStoreReference)
-////                                        .filter(Objects::nonNull)
-////                                        .collect(Collectors.toList()),
-////                                ((List<DocumentReference>) Objects.requireNonNull(document.get("habitats")))
-////                                        .stream()
-////                                        .map(HunBirdsRoomDatabase::getFireStoreReference)
-////                                        .filter(Objects::nonNull)
-////                                        .collect(Collectors.toList()),
-////                                document.getString("description"),
-////                                (List<String>) document.get("facts"),
-////                                (List<String>) document.get("pictureIds")
-////                        );
-////
-////                        Log.d("DATA", "--Firestore bird got: " + birdBase.getBirdName() + ". " +
-////                                "The bird's details: " + birdDetail + ".--");
-////                    }
-////                }).addOnFailureListener(e -> {
-////                    Log.e("DATA", "--Failed to load birds from FireBase.--", e);
-////                });
-//        firestore.collection("birds")
-//                .get()
-//                .addOnSuccessListener(queryDocumentSnapshots -> {
-//                    for (DocumentSnapshot document: queryDocumentSnapshots) {
-//                        Task<DocumentSnapshot> conservationValueTask = getFirestoreReference(Objects.requireNonNull(document.getDocumentReference("conservationValue")));
-//                        Task<List<DocumentSnapshot>> dietsTask = getFirestoreReferences((List<DocumentReference>) document.get("diets"));
-//                        Task<List<DocumentSnapshot>> colorsTask = getFirestoreReferences((List<DocumentReference>) document.get("colors"));
-//                        Task<List<DocumentSnapshot>> shapesTask = getFirestoreReferences((List<DocumentReference>) document.get("shapes"));
-//                        Task<List<DocumentSnapshot>> habitatsTask = getFirestoreReferences((List<DocumentReference>) document.get("habitats"));
-//
-//                        Tasks.whenAllSuccess(conservationValueTask, dietsTask, colorsTask, shapesTask, habitatsTask)
-//                                .addOnSuccessListener(aVoid -> {
-//                                    DocumentSnapshot conservationValue = conservationValueTask.getResult();
-//                                    List<DocumentSnapshot> diets = dietsTask.getResult();
-//                                    List<DocumentSnapshot> colors = colorsTask.getResult();
-//                                    List<DocumentSnapshot> shapes = shapesTask.getResult();
-//                                    List<DocumentSnapshot> habitats = habitatsTask.getResult();
-//
-//                                    BirdBase birdBase = new BirdBase(
-//                                            document.getId(),
-//                                            Objects.requireNonNull(document.getString("birdName")),
-//                                            Objects.requireNonNull(document.getString("mainPictureId"))
-//                                    );
-//
-//                                    BirdDetail birdDetail = new BirdDetail(
-//                                            document.getId(),
-//                                            document.getString("latinName"),
-//                                            Boolean.TRUE.equals(document.getBoolean("migratory")),
-//                                            document.getString("size"),
-//                                            document.getString("wingSpan"),
-//                                            conservationValue,
-//                                            diets,
-//                                            colors,
-//                                            shapes,
-//                                            habitats,
-//                                            document.getString("description"),
-//                                            (List<String>) document.get("facts"),
-//                                            (List<String>) document.get("pictureIds")
-//                                    );
-//
-//                                    Log.d("DATA", "--Firestore bird got: " + birdBase.getBirdName() + ". " +
-//                                            "The bird's details: " + birdDetail + ".--");
-//                                })
-//                                .addOnFailureListener(e -> {
-//                                    Log.e("DATA", "--Failed to load references.--", e);
-//                                });
-//
-//                    }
-//                }).addOnFailureListener(e -> {
-//                    Log.e("DATA", "--Failed to load birds from FireBase.--", e);
-//                });
-//    }
+    private static void syncFirestoreBirds() {
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
-    private static Task<DocumentSnapshot> getFirestoreReference(DocumentReference reference) {
-        return reference.get();
-    }
+        firestore.collection("birds")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (DocumentSnapshot document: queryDocumentSnapshots) {
+                        String conservationReferencePath = document.getDocumentReference("conservationValue").getPath();
+                        String conservationId = conservationReferencePath.substring(conservationReferencePath.lastIndexOf('/') + 1);
 
-    private static Task<List<DocumentSnapshot>> getFirestoreReferences(List<DocumentReference> references) {
-        List<Task<DocumentSnapshot>> tasks = new ArrayList<>();
+                        List<String> dietIds = getFirestoreReferences((List<DocumentReference>) document.get("diets"));
+                        List<String> colorIds = getFirestoreReferences((List<DocumentReference>) document.get("colors"));
+                        List<String> shapeIds = getFirestoreReferences((List<DocumentReference>) document.get("shapes"));
+                        List<String> habitatIds = getFirestoreReferences((List<DocumentReference>) document.get("habitats"));
 
-        for (DocumentReference reference : references) {
-            tasks.add(reference.get());
-        }
+                        if (conservationId != null && dietIds != null && colorIds != null && shapeIds != null && habitatIds != null) {
+                            List<Task<DocumentSnapshot>> dietTasks = new ArrayList<>();
+                            for (String dietId : dietIds) {
+                                dietTasks.add(firestore.collection("diets").document(dietId).get());
+                            }
 
-        return Tasks.whenAllSuccess(tasks)
-                .continueWith(task -> {
-                    List<DocumentSnapshot> snapshots = new ArrayList<>();
-                    for (Task<DocumentSnapshot> individualTask : tasks) {
-                        if (individualTask.isSuccessful()) {
-                            snapshots.add(individualTask.getResult());
-                        } else {
-                            snapshots.add(null);
+                            List<Task<DocumentSnapshot>> colorTasks = new ArrayList<>();
+                            for (String colorId : colorIds) {
+                                colorTasks.add(firestore.collection("colors").document(colorId).get());
+                            }
+
+                            List<Task<DocumentSnapshot>> shapeTasks = new ArrayList<>();
+                            for (String shapeId : shapeIds) {
+                                shapeTasks.add(firestore.collection("shapes").document(shapeId).get());
+                            }
+
+                            List<Task<DocumentSnapshot>> habitatTasks = new ArrayList<>();
+                            for (String habitatId : habitatIds) {
+                                habitatTasks.add(firestore.collection("habitats").document(habitatId).get());
+                            }
+
+                            Tasks.whenAllSuccess(dietTasks).addOnSuccessListener(dietDocs -> {
+                                List<Diet> diets = dietDocs.stream()
+                                        .map(dietDoc -> new Diet(((DocumentSnapshot) dietDoc).getId(), Objects.requireNonNull(((DocumentSnapshot) dietDoc).getString("dietName"))))
+                                        .collect(Collectors.toList());
+
+                                Tasks.whenAllSuccess(colorTasks).addOnSuccessListener(colorDocs -> {
+                                    List<Color> colors = colorDocs.stream()
+                                            .map(colorDoc -> new Color(((DocumentSnapshot) colorDoc).getId(), Objects.requireNonNull(((DocumentSnapshot) colorDoc).getString("colorName"))))
+                                            .collect(Collectors.toList());
+
+                                    Tasks.whenAllSuccess(shapeTasks).addOnSuccessListener(shapeDocs -> {
+                                        List<Shape> shapes = shapeDocs.stream()
+                                                .map(shapeDoc -> new Shape(((DocumentSnapshot) shapeDoc).getId(), Objects.requireNonNull(((DocumentSnapshot) shapeDoc).getString("shapeName"))))
+                                                .collect(Collectors.toList());
+
+                                        Tasks.whenAllSuccess(habitatTasks).addOnSuccessListener(habitatDocs -> {
+                                            List<Habitat> habitats = habitatDocs.stream()
+                                                    .map(habitatDoc -> new Habitat(((DocumentSnapshot) habitatDoc).getId(), Objects.requireNonNull(((DocumentSnapshot) habitatDoc).getString("habitatName"))))
+                                                    .collect(Collectors.toList());
+
+                                            Bird bird = new Bird(new BirdEntity(
+                                                    document.getId(),
+                                                    Objects.requireNonNull(document.getString("birdName")),
+                                                    document.getString("mainPictureId"),
+                                                    document.getString("latinName"),
+                                                    Boolean.TRUE.equals(document.getBoolean("migratory")),
+                                                    document.getString("size"),
+                                                    document.getString("wingSpan"),
+                                                    conservationId,
+                                                    document.getString("description"),
+                                                    (List<String>) document.get("facts"),
+                                                    (List<String>) document.get("pictureIds"))
+                                            );
+                                            Log.d("List", "Firestore array data got: " + document.get("facts"));
+                                            bird.setDiets(diets);
+                                            bird.setColors(colors);
+                                            bird.setShapes(shapes);
+                                            bird.setHabitats(habitats);
+                                            Executors.newSingleThreadExecutor().execute(() -> {
+                                                instance.birdDAO().insert(bird);
+                                                Log.d("DATA", "--Firestore bird got: " + bird.getBirdName() + ".--");
+                                            });
+                                        });
+                                    });
+                                });
+                            });
                         }
                     }
-                    return snapshots;
                 });
+    }
+
+    private static List<String> getFirestoreReferences(List<DocumentReference> references) {
+        if (references != null) {
+            return references.stream()
+                    .filter(Objects::nonNull)
+                    .map(reference -> reference.getPath().substring(reference.getPath().lastIndexOf('/') + 1))
+                    .collect(Collectors.toList());
+        } else {
+            return null;
+        }
     }
 
     // TODO
