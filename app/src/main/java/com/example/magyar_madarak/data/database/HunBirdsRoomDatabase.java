@@ -30,6 +30,8 @@ import com.example.magyar_madarak.data.model.constants.Shape;
 import com.example.magyar_madarak.utils.ConverterUtils;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -109,10 +111,11 @@ public abstract class HunBirdsRoomDatabase extends RoomDatabase {
                 syncFirestoreBirds();
             });
 
-            Executors.newSingleThreadExecutor().execute(() -> {
-                syncFirestoreUsers(); // Recently this means only one user
-                syncFirestoreObservations(); // This means the (only one) user's observations
-            });
+            // Erre nincs szükség, mert az adatbázis létrehozásakor még fixen nincs bejelentkezve a felhasználó
+//            Executors.newSingleThreadExecutor().execute(() -> {
+//                syncFirestoreUsers(); // Recently this means only one user
+//                syncFirestoreObservations(); // This means the (only one) user's observations
+//            });
         }
     };
 
@@ -206,6 +209,8 @@ public abstract class HunBirdsRoomDatabase extends RoomDatabase {
                 });
     }
 
+
+
     private static void syncFirestoreBirds() {
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
@@ -221,71 +226,60 @@ public abstract class HunBirdsRoomDatabase extends RoomDatabase {
                         List<String> shapeIds = getFirestoreReferences((List<DocumentReference>) document.get("shapes"));
                         List<String> habitatIds = getFirestoreReferences((List<DocumentReference>) document.get("habitats"));
 
-                        if (conservationId != null && dietIds != null && colorIds != null && shapeIds != null && habitatIds != null) {
-                            List<Task<DocumentSnapshot>> dietTasks = new ArrayList<>();
-                            for (String dietId : dietIds) {
-                                dietTasks.add(firestore.collection("diets").document(dietId).get());
-                            }
+                        if (dietIds != null && colorIds != null && shapeIds != null && habitatIds != null) {
+                            List<Task<DocumentSnapshot>> dietTasks = createTasks(firestore, "diets", dietIds);
+                            List<Task<DocumentSnapshot>> colorTasks = createTasks(firestore, "colors", colorIds);
+                            List<Task<DocumentSnapshot>> shapeTasks = createTasks(firestore, "shapes", shapeIds);
+                            List<Task<DocumentSnapshot>> habitatTasks = createTasks(firestore, "habitats", habitatIds);
 
-                            List<Task<DocumentSnapshot>> colorTasks = new ArrayList<>();
-                            for (String colorId : colorIds) {
-                                colorTasks.add(firestore.collection("colors").document(colorId).get());
-                            }
+                            Task<List<Object>> allTasks = Tasks.whenAllSuccess(dietTasks)
+                                    .continueWithTask(task -> Tasks.whenAllSuccess(colorTasks))
+                                    .continueWithTask(task -> Tasks.whenAllSuccess(shapeTasks))
+                                    .continueWithTask(task -> Tasks.whenAllSuccess(habitatTasks));
 
-                            List<Task<DocumentSnapshot>> shapeTasks = new ArrayList<>();
-                            for (String shapeId : shapeIds) {
-                                shapeTasks.add(firestore.collection("shapes").document(shapeId).get());
-                            }
-
-                            List<Task<DocumentSnapshot>> habitatTasks = new ArrayList<>();
-                            for (String habitatId : habitatIds) {
-                                habitatTasks.add(firestore.collection("habitats").document(habitatId).get());
-                            }
-
-                            Tasks.whenAllSuccess(dietTasks).addOnSuccessListener(dietDocs -> {
-                                List<Diet> diets = dietDocs.stream()
-                                        .map(dietDoc -> new Diet(((DocumentSnapshot) dietDoc).getId(), Objects.requireNonNull(((DocumentSnapshot) dietDoc).getString("dietName"))))
+                            allTasks.addOnSuccessListener(result -> {
+                                List<Diet> diets = dietTasks.stream()
+                                        .map(dietDoc -> new Diet(dietDoc.getResult().getId(),
+                                                Objects.requireNonNull(dietDoc.getResult().getString("dietName"))))
                                         .collect(Collectors.toList());
 
-                                Tasks.whenAllSuccess(colorTasks).addOnSuccessListener(colorDocs -> {
-                                    List<Color> colors = colorDocs.stream()
-                                            .map(colorDoc -> new Color(((DocumentSnapshot) colorDoc).getId(), Objects.requireNonNull(((DocumentSnapshot) colorDoc).getString("colorName"))))
-                                            .collect(Collectors.toList());
+                                List<Color> colors = colorTasks.stream()
+                                        .map(colorDoc -> new Color(colorDoc.getResult().getId(),
+                                                Objects.requireNonNull(colorDoc.getResult().getString("colorName"))))
+                                        .collect(Collectors.toList());
 
-                                    Tasks.whenAllSuccess(shapeTasks).addOnSuccessListener(shapeDocs -> {
-                                        List<Shape> shapes = shapeDocs.stream()
-                                                .map(shapeDoc -> new Shape(((DocumentSnapshot) shapeDoc).getId(), Objects.requireNonNull(((DocumentSnapshot) shapeDoc).getString("shapeName"))))
-                                                .collect(Collectors.toList());
+                                List<Shape> shapes = shapeTasks.stream()
+                                        .map(shapeDoc -> new Shape(shapeDoc.getResult().getId(),
+                                                Objects.requireNonNull(shapeDoc.getResult().getString("shapeName"))))
+                                        .collect(Collectors.toList());
 
-                                        Tasks.whenAllSuccess(habitatTasks).addOnSuccessListener(habitatDocs -> {
-                                            List<Habitat> habitats = habitatDocs.stream()
-                                                    .map(habitatDoc -> new Habitat(((DocumentSnapshot) habitatDoc).getId(), Objects.requireNonNull(((DocumentSnapshot) habitatDoc).getString("habitatName"))))
-                                                    .collect(Collectors.toList());
+                                List<Habitat> habitats = habitatTasks.stream()
+                                        .map(habitatDoc -> new Habitat(habitatDoc.getResult().getId(),
+                                                Objects.requireNonNull(habitatDoc.getResult().getString("habitatName"))))
+                                        .collect(Collectors.toList());
 
-                                            Bird bird = new Bird(new BirdEntity(
-                                                    document.getId(),
-                                                    Objects.requireNonNull(document.getString("birdName")),
-                                                    document.getString("mainPictureId"),
-                                                    document.getString("latinName"),
-                                                    Boolean.TRUE.equals(document.getBoolean("migratory")),
-                                                    document.getString("size"),
-                                                    document.getString("wingSpan"),
-                                                    conservationId,
-                                                    document.getString("description"),
-                                                    (List<String>) document.get("facts"),
-                                                    (List<String>) document.get("pictureIds"))
-                                            );
-                                            Log.d("List", "Firestore array data got: " + document.get("facts"));
-                                            bird.setDiets(diets);
-                                            bird.setColors(colors);
-                                            bird.setShapes(shapes);
-                                            bird.setHabitats(habitats);
-                                            Executors.newSingleThreadExecutor().execute(() -> {
-                                                instance.birdDAO().insert(bird);
-                                                Log.d("DATA", "--Firestore bird got: " + bird.getBirdName() + ".--");
-                                            });
-                                        });
-                                    });
+                                Bird bird = new Bird(new BirdEntity(
+                                        document.getId(),
+                                        Objects.requireNonNull(document.getString("birdName")),
+                                        document.getString("mainPictureId"),
+                                        document.getString("latinName"),
+                                        Boolean.TRUE.equals(document.getBoolean("migratory")),
+                                        document.getString("size"),
+                                        document.getString("wingSpan"),
+                                        conservationId,
+                                        document.getString("description"),
+                                        (List<String>) document.get("facts"),
+                                        (List<String>) document.get("pictureIds"))
+                                );
+
+                                bird.setDiets(diets);
+                                bird.setColors(colors);
+                                bird.setShapes(shapes);
+                                bird.setHabitats(habitats);
+
+                                Executors.newSingleThreadExecutor().execute(() -> {
+                                    instance.birdDAO().insert(bird);
+                                    Log.d("DATA", "--Firestore bird got: " + bird.getBirdName() + ".--");
                                 });
                             });
                         }
@@ -304,8 +298,16 @@ public abstract class HunBirdsRoomDatabase extends RoomDatabase {
         }
     }
 
-    // TODO
-    private static void syncFirestoreUsers() {
+    private static List<Task<DocumentSnapshot>> createTasks(FirebaseFirestore firestore, String collectionName, List<String> ids) {
+        List<Task<DocumentSnapshot>> tasks = new ArrayList<>();
+        for (String id : ids) {
+            tasks.add(firestore.collection(collectionName).document(id).get());
+        }
+        return tasks;
+    }
+
+//    private static void syncFirestoreUsers() {
+//      // Félkész
 //        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 //        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 //
@@ -330,10 +332,10 @@ public abstract class HunBirdsRoomDatabase extends RoomDatabase {
 //        } else {
 //            Log.w("DATA", "--User data could not be loaded because no user is authenticated.--");
 //        }
-    }
+//    }
 
-    // TODO
-    private static void syncFirestoreObservations() {
+//    private static void syncFirestoreObservations() {
+//      // Félkész
 //        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 //        FirebaseAuth auth = FirebaseAuth.getInstance();
 //        FirebaseUser currentUser = auth.getCurrentUser();
@@ -371,5 +373,5 @@ public abstract class HunBirdsRoomDatabase extends RoomDatabase {
 //        } else {
 //            Log.w("DATA", "--Observation data could not be loaded because no user is authenticated.--");
 //        }
-    }
+//    }
 }
