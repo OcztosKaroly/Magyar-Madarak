@@ -21,7 +21,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.magyar_madarak.R;
 import com.example.magyar_madarak.data.viewModel.ObservationViewModel;
-import com.example.magyar_madarak.ui.LoginActivity;
 import com.example.magyar_madarak.ui.ObservationsActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 

@@ -33,10 +33,10 @@ public class ObservationsAdapter extends RecyclerView.Adapter<ObservationsAdapte
     }
 
     public void setObservations(List<Observation> observations) {
-        List<Observation> itemsToRemove = new ArrayList<>(mObservations);
-        itemsToRemove.removeAll(observations);
+        List<Observation> observationsToRemove = new ArrayList<>(mObservations);
+        observationsToRemove.removeAll(observations);
 
-        for (Observation observation : itemsToRemove) {
+        for (Observation observation: observationsToRemove) {
             int index = mObservations.indexOf(observation);
             if (index != -1) {
                 mObservations.remove(observation);
@@ -44,7 +44,7 @@ public class ObservationsAdapter extends RecyclerView.Adapter<ObservationsAdapte
             }
         }
 
-        for (Observation observation : observations) {
+        for (Observation observation: observations) {
             if (!mObservations.contains(observation)) {
                 mObservations.add(observation);
                 notifyItemInserted(mObservations.size() - 1);

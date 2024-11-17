@@ -1,7 +1,6 @@
 package com.example.magyar_madarak.ui.Adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -96,13 +95,11 @@ public class BirdIdentificationAdapter extends RecyclerView.Adapter<BirdIdentifi
         return checkboxItems.size();
     }
 
-    static class CheckBoxViewHolder extends RecyclerView.ViewHolder {
+    public static class CheckBoxViewHolder extends RecyclerView.ViewHolder {
          CheckBox mCheckBox;
 
         public CheckBoxViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            Log.d("VIEW_HOLDER", "--View el lett készítve.");
 
             mCheckBox = itemView.findViewById(R.id.checkBox);
         }

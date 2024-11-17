@@ -14,7 +14,6 @@ import com.example.magyar_madarak.data.model.constants.ConservationValue;
 import com.example.magyar_madarak.data.model.constants.Diet;
 import com.example.magyar_madarak.data.model.constants.Habitat;
 import com.example.magyar_madarak.data.model.constants.Shape;
-import com.example.magyar_madarak.data.model.observation.Observation;
 
 import java.util.List;
 import java.util.Objects;

@@ -26,8 +26,8 @@ import java.util.List;
 public class KnowledgeBaseAdapter extends RecyclerView.Adapter<KnowledgeBaseAdapter.BirdViewHolder> implements View.OnClickListener, Filterable {
     Context mContext;
 
-    List<Bird> mBirdsAll;
-    List<Bird> mBirds;
+    List<Bird> mBirdsAll = new ArrayList<>();
+    List<Bird> mBirds = new ArrayList<>();
 
     private int lastPosition;
 
@@ -36,16 +36,32 @@ public class KnowledgeBaseAdapter extends RecyclerView.Adapter<KnowledgeBaseAdap
     public KnowledgeBaseAdapter(Context context, List<Bird> birds) {
         this.mContext = context;
 
-        this.mBirdsAll = birds;
-        this.mBirds = birds;
+        setBirds(birds);
 
         this.lastPosition = -1;
     }
 
     public void setBirds(List<Bird> birds) {
-        this.mBirdsAll = birds;
-        this.mBirds = birds;
-        notifyDataSetChanged();
+        List<Bird> birdsToRemove = new ArrayList<>(mBirdsAll);
+        birdsToRemove.removeAll(birds);
+
+        for (Bird bird: birdsToRemove) {
+            int index = mBirdsAll.indexOf(bird);
+            if (index != -1) {
+                mBirdsAll.remove(index);
+                notifyItemRemoved(index);
+            }
+        }
+
+        for (Bird bird: birds) {
+            if (!mBirdsAll.contains(bird)) {
+                mBirdsAll.add(bird);
+                notifyItemInserted(mBirdsAll.size() - 1);
+            }
+        }
+
+        mBirdsAll.sort((b1, b2) -> b1.getBirdName().compareToIgnoreCase(b2.getBirdName()));
+        mBirds = new ArrayList<>(mBirdsAll);
     }
 
     @Override
@@ -111,7 +127,7 @@ public class KnowledgeBaseAdapter extends RecyclerView.Adapter<KnowledgeBaseAdap
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            mBirds = (ArrayList<Bird>) results.values;
+            mBirds = new ArrayList<>((List<Bird>) results.values);
             notifyDataSetChanged();
         }
     };
