@@ -12,11 +12,13 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.magyar_madarak.R;
-import com.example.magyar_madarak.data.model.Observation;
+import com.example.magyar_madarak.data.model.observation.Observation;
+import com.example.magyar_madarak.data.viewModel.ObservationViewModel;
 import com.example.magyar_madarak.ui.Adapters.ObservationsAdapter;
 import com.example.magyar_madarak.ui.Pages.ObservationPageActivity;
 import com.example.magyar_madarak.utils.NavigationUtils;
@@ -35,7 +37,7 @@ public class ObservationsActivity extends AppCompatActivity {
     private ObservationsAdapter mObservationsAdapter;
     private LiveData<List<Observation>> mObservations;
 
-//    private ObservationViewModel mObservationViewModel;
+    private ObservationViewModel mObservationViewModel;
 
     private View mView;
     private BottomNavigationView mBottomNavigationView;
@@ -59,7 +61,7 @@ public class ObservationsActivity extends AppCompatActivity {
         mBottomNavigationView = findViewById(R.id.bottomNavigationView);
         mBottomNavigationView.getMenu().findItem(R.id.nav_observations).setChecked(true);
 
-//        mObservationViewModel = new ViewModelProvider(this).get(ObservationViewModel.class);
+        mObservationViewModel = new ViewModelProvider(this).get(ObservationViewModel.class);
 
         mObservationsAdapter = new ObservationsAdapter(this, new ArrayList<>());
         mRecyclerView = findViewById(R.id.recyclerViewObservations);
@@ -76,7 +78,6 @@ public class ObservationsActivity extends AppCompatActivity {
         navigationBarRedirection(mBottomNavigationView, this);
 
         createObservationBtn.setOnClickListener(l -> {
-//            NavigationUtils.startActivity(this, CreateObservationPageActivity.class);
             NavigationUtils.startActivity(this, ObservationPageActivity.class);
         });
 
@@ -86,9 +87,6 @@ public class ObservationsActivity extends AppCompatActivity {
     }
 
     private LiveData<List<Observation>> loadObservations() {
-//        return mObservationViewModel.getAllObservations();
-        // TODO: Az összes observation csak a felhasználó összes observationjára vonatkozik.
-        //  Az adatokhoz való jogosultságot a ViewModel kezeli
-        return new MediatorLiveData<>();
+        return mObservationViewModel.getAllObservations();
     }
 }

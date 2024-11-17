@@ -12,6 +12,7 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 public class AuthUtils {
@@ -59,4 +60,18 @@ public class AuthUtils {
         });
     }
 
+    public static boolean isUserAuthenticated() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
+        if (currentUser != null) {
+            if (!currentUser.isEmailVerified()) {
+                Log.w(LOG_TAG, "--User email still not verified.--");
+                return false;
+            }
+            Log.i(LOG_TAG, "--User authenticated.--");
+            return true;
+        }
+        Log.w(LOG_TAG, "--No authenticated user detected.--");
+        return false;
+    }
 }

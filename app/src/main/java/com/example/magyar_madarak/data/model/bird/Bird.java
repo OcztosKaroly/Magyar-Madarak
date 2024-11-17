@@ -14,8 +14,10 @@ import com.example.magyar_madarak.data.model.constants.ConservationValue;
 import com.example.magyar_madarak.data.model.constants.Diet;
 import com.example.magyar_madarak.data.model.constants.Habitat;
 import com.example.magyar_madarak.data.model.constants.Shape;
+import com.example.magyar_madarak.data.model.observation.Observation;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Bird {
     @Embedded
@@ -170,6 +172,23 @@ public class Bird {
                 ", shapes=" + shapes +
                 ", habitats=" + habitats +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Bird other = (Bird) obj;
+        return this.getBirdId().equals(other.getBirdId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getBirdId());
     }
 }
 

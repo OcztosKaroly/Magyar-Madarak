@@ -9,6 +9,7 @@ import com.example.magyar_madarak.data.model.constants.Shape;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 
+import java.util.Date;
 import java.util.List;
 
 public class ConverterUtils {
@@ -75,6 +76,17 @@ public class ConverterUtils {
 
     @TypeConverter
     public static List<Habitat> toHabitatListFromString(String habitats) {
-        return new Gson().fromJson(habitats, new TypeToken<List<Habitat>>(){ }.getType());
+        return new Gson().fromJson(habitats, new TypeToken<List<Habitat>>() {}.getType());
+    }
+
+
+    @TypeConverter
+    public static Date fromTimestamp(Long value) {
+        return value == null ? null : new Date(value);
+    }
+
+    @TypeConverter
+    public static Long dateToTimestamp(Date date) {
+        return date == null ? null : date.getTime();
     }
 }

@@ -1,4 +1,4 @@
-package com.example.magyar_madarak.data.dao;
+package com.example.magyar_madarak.data.dao.user;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -8,7 +8,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.magyar_madarak.data.model.User;
+import com.example.magyar_madarak.data.model.user.User;
 
 @Dao
 public interface UserDAO {
@@ -16,14 +16,14 @@ public interface UserDAO {
     void insert(User user);
 
     @Query("SELECT * FROM Users WHERE userId = :userId")
-    LiveData<User> getUserById(String userId);
+    LiveData<User> getById(String userId);
 
     @Update
-    void updateUser(User user);
+    void update(User user);
 
     @Query("DELETE FROM users WHERE userId = :userId")
-    void deleteUserById(String userId);
+    void deleteById(String userId);
 
     @Delete
-    void deleteUser(User user);
+    void delete(User user);
 }

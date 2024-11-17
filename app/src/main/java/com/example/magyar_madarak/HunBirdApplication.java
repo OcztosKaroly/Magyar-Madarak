@@ -1,5 +1,7 @@
 package com.example.magyar_madarak;
 
+import static com.example.magyar_madarak.utils.CommonUtils.isRunningNotificationByTag;
+
 import android.app.Application;
 import android.util.Log;
 
@@ -26,27 +28,12 @@ public class HunBirdApplication extends Application {
 
 //        WorkManager.getInstance(this).cancelAllWork();
 
-        if (!isRunningNotificationByTag("daily_notification")) {
+        if (!isRunningNotificationByTag(this, "daily_notification")) {
             PeriodicWorkRequest dailyWorkRequest = new PeriodicWorkRequest.Builder(
                     NotificationWorker.class,
-                    24,
+                    23,
                     TimeUnit.HOURS).addTag("daily_notification").build();
             WorkManager.getInstance(this).enqueue(dailyWorkRequest);
         }
-    }
-
-    private boolean isRunningNotificationByTag(String tag) {
-        ListenableFuture<List<WorkInfo>> future = WorkManager.getInstance(this).getWorkInfosByTag(tag);
-        try {
-            List<WorkInfo> workInfos = future.get();
-            for (WorkInfo workInfo : workInfos) {
-                if (workInfo.getState() == WorkInfo.State.RUNNING || workInfo.getState() == WorkInfo.State.ENQUEUED) {
-                    return true;
-                }
-            }
-        } catch (Exception e) {
-            Log.e("NOTIFICATION", "--Error occurred when tried to get running notifications.--", e);
-        }
-        return false;
     }
 }

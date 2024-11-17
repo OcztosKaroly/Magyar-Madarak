@@ -5,7 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.magyar_madarak.data.model.User;
+import com.example.magyar_madarak.data.model.user.User;
 import com.example.magyar_madarak.data.repository.UserRepository;
 
 public class UserViewModel extends AndroidViewModel {

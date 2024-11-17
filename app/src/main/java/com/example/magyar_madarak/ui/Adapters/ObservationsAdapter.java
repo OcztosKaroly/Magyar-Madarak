@@ -13,9 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.magyar_madarak.R;
-import com.example.magyar_madarak.data.model.Observation;
+import com.example.magyar_madarak.data.model.observation.Observation;
 import com.example.magyar_madarak.ui.Pages.ObservationPageActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ObservationsAdapter extends RecyclerView.Adapter<ObservationsAdapter.ObservationsViewHolder> implements View.OnClickListener {
@@ -32,23 +33,30 @@ public class ObservationsAdapter extends RecyclerView.Adapter<ObservationsAdapte
     }
 
     public void setObservations(List<Observation> observations) {
-        for (Observation observation: observations) {
-            if (!mObservations.contains(observation)) {
-                mObservations.add(observation);
-                notifyItemInserted(getItemCount() - 1);
+        List<Observation> itemsToRemove = new ArrayList<>(mObservations);
+        itemsToRemove.removeAll(observations);
+
+        for (Observation observation : itemsToRemove) {
+            int index = mObservations.indexOf(observation);
+            if (index != -1) {
+                mObservations.remove(observation);
+                notifyItemRemoved(index);
             }
         }
-    }
 
-    public List<Observation> getObservations() {
-        return mObservations;
+        for (Observation observation : observations) {
+            if (!mObservations.contains(observation)) {
+                mObservations.add(observation);
+                notifyItemInserted(mObservations.size() - 1);
+            }
+        }
     }
 
     @Override
     public void onClick(View v) {
         int position = (Integer) v.getTag();
         Observation observation = mObservations.get(position);
-        Log.i("ADAPTER", "--Selected observation: " + observation + "--");
+        Log.i("ADAPTER", "--Selected observation: " + observation.getName() + "--");
         selectedObservation = observation;
 
         startActivity(mContext, ObservationPageActivity.class);
@@ -62,9 +70,12 @@ public class ObservationsAdapter extends RecyclerView.Adapter<ObservationsAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ObservationsViewHolder holder, int position) {
-        Observation observation = mObservations.get(position);
+        Observation currentObservation = mObservations.get(position);
 
-        holder.bindTo(observation);
+        holder.bindTo(currentObservation);
+
+        holder.itemView.setTag(position);
+        holder.itemView.setOnClickListener(this);
     }
 
     @Override
@@ -72,20 +83,20 @@ public class ObservationsAdapter extends RecyclerView.Adapter<ObservationsAdapte
         return mObservations.size();
     }
 
-    static class ObservationsViewHolder extends RecyclerView.ViewHolder {
-        private TextView date;
-        private TextView name;
+    public static class ObservationsViewHolder extends RecyclerView.ViewHolder {
+        private TextView lastModificationDate;
+        private TextView observationName;
 
         public ObservationsViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            date = itemView.findViewById(R.id.item_date);
-            name = itemView.findViewById(R.id.item_name);
+            lastModificationDate = itemView.findViewById(R.id.item_date);
+            observationName = itemView.findViewById(R.id.item_name);
         }
 
         public void bindTo(Observation observation) {
-            date.setText(observation.getLastModificationDate());
-            name.setText(observation.getName());
+            lastModificationDate.setText(String.valueOf(observation.getLastModificationDate().getTime()));
+            observationName.setText(observation.getName());
         }
     }
 }

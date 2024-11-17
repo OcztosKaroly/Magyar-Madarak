@@ -39,13 +39,6 @@
             android:orientation="vertical"
             android:padding="15dp">
 
-<!--            <TextView-->
-<!--                android:id="@+id/tObservationName"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:textSize="36sp"-->
-<!--                android:layout_marginVertical="5dp" />-->
-
             <EditText
                 android:id="@+id/etObservationName"
                 android:layout_width="match_parent"
@@ -70,46 +63,18 @@
                     android:text="Megfigyelés időpontja: "
                     android:layout_marginEnd="10dp"/>
 
-<!--                <TextView-->
-<!--                    android:id="@+id/tObservationDate"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginHorizontal="75dp"/>-->
-
-                <EditText
-                    android:id="@+id/etObservationDate"
+                <DatePicker
+                    android:id="@+id/datePickerObservationDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="50dp"
-                    android:hint="Megfigyelés időpontja"
-                    android:inputType="date"
-                    android:textSize="24sp"/>
-<!--                TODO: Valamilyen datePicker megvalósítása-->
+                    android:layout_marginTop="24dp" />
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/llObservationLocation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginVertical="5dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Megfigyelés helye:"
-                    android:layout_marginEnd="10dp"/>
-
-                <EditText
-                    android:id="@+id/etObservationLocation"
+                <!-- Időpont választó -->
+                <TimePicker
+                    android:id="@+id/timePickerObservationDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="50dp"
-                    android:hint="Megfigyelés helye"
-                    android:inputType="text"
-                    android:textSize="24sp"/>
-<!--                TODO: Valamilyen locationPicker megvalósítása-->
+                    android:layout_marginTop="24dp" />
 
             </LinearLayout>
 
@@ -130,17 +95,16 @@
                     android:id="@+id/etObservationDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="50dp"
+                    android:layout_marginHorizontal="20dp"
                     android:hint="Megfigyelés leírása"
                     android:inputType="textMultiLine"
                     android:textSize="24sp"/>
-                <!--                TODO: Valamilyen locationPicker megvalósítása-->
 
             </LinearLayout>
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="50dp"/>
+                android:layout_height="30dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

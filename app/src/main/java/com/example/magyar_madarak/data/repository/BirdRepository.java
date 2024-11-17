@@ -96,8 +96,5 @@ public class BirdRepository {
 //                        Log.e("DATA", "--Firestore birds query error: --", e);
 //                    });
 //        }
-//        //TODO: Legeslegelső alkalommal, amikor még nem szinkronizáltak az adatok,
-//        // és nincs wifi-re csatlakozva az ember, nem lesz semmilyen madár sem a lokális adatbázisban,
-//        // amivel kezdeni kellene valamit
 //    }
 }

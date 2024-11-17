@@ -1,4 +1,4 @@
-package com.example.magyar_madarak.data.model;
+package com.example.magyar_madarak.data.model.user;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
@@ -11,14 +11,11 @@ public class User {
     private String userId;
 
     private String email;
-    private boolean emailVerified;
 
     public User(@NonNull String userId,
-                String email,
-                boolean emailVerified) {
+                String email) {
         this.userId = userId;
         this.email = email;
-        this.emailVerified = emailVerified;
     }
 
     @NonNull
@@ -28,9 +25,5 @@ public class User {
 
     public String getEmail() {
         return email;
-    }
-
-    public boolean isEmailVerified() {
-        return emailVerified;
     }
 }

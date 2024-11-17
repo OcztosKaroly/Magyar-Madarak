@@ -2,27 +2,32 @@ package com.example.magyar_madarak.data.repository;
 
 import android.app.Application;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.magyar_madarak.data.dao.UserDAO;
+import com.example.magyar_madarak.data.dao.user.UserDAO;
 import com.example.magyar_madarak.data.database.HunBirdsRoomDatabase;
-import com.example.magyar_madarak.data.model.User;
+import com.example.magyar_madarak.data.model.user.User;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class UserRepository {
+    private static final String LOGTAG = "USERDATA";
+
     private UserDAO userDAO;
 
     private final ExecutorService executorService;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore mFirestore;
-    private CollectionReference mUsersCollection;
+    private CollectionReference mUsersSettingsCollection;
 
     private LiveData<User> user;
 
@@ -34,7 +39,7 @@ public class UserRepository {
 
         mAuth = FirebaseAuth.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
-        mUsersCollection = mFirestore.collection("users");
+        mUsersSettingsCollection = mFirestore.collection("users_settings");
 //        syncUserWithFirestore(application); // TODO: syncUserWithFirestore
     }
 
@@ -45,20 +50,20 @@ public class UserRepository {
     }
 
     public LiveData<User> getUserById(String userId) {
-        return userDAO.getUserById(userId);
+        return userDAO.getById(userId);
     }
 
     public void updateUser(User user) {
         executorService.execute(() -> {
-            userDAO.updateUser(user);
-            mUsersCollection.document(user.getUserId()).set(user);
+            userDAO.update(user);
+            mUsersSettingsCollection.document(user.getUserId()).set(user);
         });
     }
 
     public void deleteUserById(String userId) {
         executorService.execute(() -> {
-            userDAO.deleteUserById(userId);
-            mUsersCollection.document(userId).delete();
+            userDAO.deleteById(userId);
+            mUsersSettingsCollection.document(userId).delete();
         });
     }
 
@@ -66,17 +71,29 @@ public class UserRepository {
         this.deleteUserById(user.getUserId());
     }
 
-    private void syncUserWithFirestore(String userId) {
-        mUsersCollection.document(userId)
-                .get()
-                .addOnSuccessListener(documentSnapshot -> {
-                    User user = documentSnapshot.toObject(User.class);
-                    if (user != null) {
+    private void syncUserWithFirestore(Application application) {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if (currentUser == null) {
+            Log.w(LOGTAG ,"No registered user detected.");
+            return;
+        }
+
+        if (currentUser.isEmailVerified()) {
+            User user = new User(
+                    Objects.requireNonNull(mAuth.getUid()),
+                    currentUser.getEmail()
+            );
+            insertUser(user);
+            mUsersSettingsCollection.document(currentUser.getUid())
+                    .get()
+                    .addOnSuccessListener(documentSnapshot -> {
                         insertUser(user);
-                    } else {
-                        Log.e("DATA", "--Firestore user not found!--");
-                    }
-                });
+                    });
+        } else {
+            Toast.makeText(application.getApplicationContext(), "Erősítsd meg az email címet a kiküldött email-ben (" + currentUser.getEmail() + ")!", Toast.LENGTH_LONG).show();
+            Log.w(LOGTAG ,"User email not verified yet.");
+        }
     }
 
 //    private void syncUserWithFirestore(Application application) {

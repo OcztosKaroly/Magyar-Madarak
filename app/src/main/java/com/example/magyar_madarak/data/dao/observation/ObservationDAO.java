@@ -1,4 +1,4 @@
-package com.example.magyar_madarak.data.dao;
+package com.example.magyar_madarak.data.dao.observation;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -7,7 +7,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.magyar_madarak.data.model.Observation;
+import com.example.magyar_madarak.data.model.observation.Observation;
 
 import java.util.List;
 
@@ -17,17 +17,17 @@ public interface ObservationDAO {
     void insert(Observation observation);
 
     @Query("SELECT * FROM Observations WHERE observationId = :observationId")
-    LiveData<Observation> getObservationById(String observationId);
+    LiveData<Observation> getById(String observationId);
 
     @Query("SELECT * FROM observations WHERE userId = :userId")
-    LiveData<List<Observation>> getAllObservationByUserId(String userId);
+    LiveData<List<Observation>> getAllByUserId(String userId);
 
     @Update
-    void updateObservation(Observation observation);
+    void update(Observation observation);
 
     @Query("DELETE FROM observations WHERE observationId = :observationId")
-    void deleteObservationById(String observationId);
+    void deleteById(String observationId);
 
     @Query("DELETE FROM observations WHERE userId = :userId")
-    void deleteAllObservationsByUserId(String userId);
+    void deleteAllByUserId(String userId);
 }

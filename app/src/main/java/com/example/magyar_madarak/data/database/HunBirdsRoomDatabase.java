@@ -10,16 +10,16 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.example.magyar_madarak.data.dao.ObservationDAO;
-import com.example.magyar_madarak.data.dao.UserDAO;
+import com.example.magyar_madarak.data.dao.observation.ObservationDAO;
+import com.example.magyar_madarak.data.dao.user.UserDAO;
 import com.example.magyar_madarak.data.dao.bird.BirdDAO;
 import com.example.magyar_madarak.data.dao.constants.*;
 import com.example.magyar_madarak.data.model.CrossRefTables.ColorCrossRef;
 import com.example.magyar_madarak.data.model.CrossRefTables.DietCrossRef;
 import com.example.magyar_madarak.data.model.CrossRefTables.HabitatCrossRef;
 import com.example.magyar_madarak.data.model.CrossRefTables.ShapeCrossRef;
-import com.example.magyar_madarak.data.model.Observation;
-import com.example.magyar_madarak.data.model.User;
+import com.example.magyar_madarak.data.model.observation.Observation;
+import com.example.magyar_madarak.data.model.user.User;
 import com.example.magyar_madarak.data.model.bird.Bird;
 import com.example.magyar_madarak.data.model.bird.BirdEntity;
 import com.example.magyar_madarak.data.model.constants.Color;
@@ -30,8 +30,6 @@ import com.example.magyar_madarak.data.model.constants.Shape;
 import com.example.magyar_madarak.utils.ConverterUtils;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -218,7 +216,7 @@ public abstract class HunBirdsRoomDatabase extends RoomDatabase {
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for (DocumentSnapshot document: queryDocumentSnapshots) {
-                        String conservationReferencePath = document.getDocumentReference("conservationValue").getPath();
+                        String conservationReferencePath = Objects.requireNonNull(document.getDocumentReference("conservationValue")).getPath();
                         String conservationId = conservationReferencePath.substring(conservationReferencePath.lastIndexOf('/') + 1);
 
                         List<String> dietIds = getFirestoreReferences((List<DocumentReference>) document.get("diets"));

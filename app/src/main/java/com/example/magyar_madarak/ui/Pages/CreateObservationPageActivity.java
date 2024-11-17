@@ -1,7 +1,5 @@
 package com.example.magyar_madarak.ui.Pages;
 
-import static com.example.magyar_madarak.ui.Adapters.ObservationsAdapter.selectedObservation;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -13,8 +11,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.magyar_madarak.R;
-import com.example.magyar_madarak.data.model.Observation;
-import com.google.android.material.appbar.MaterialToolbar;
 
 public class CreateObservationPageActivity extends AppCompatActivity {
     private static final String LOG_TAG = CreateObservationPageActivity.class.getName();
