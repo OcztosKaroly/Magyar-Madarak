@@ -34,7 +34,12 @@ public class ObservationViewModel extends AndroidViewModel {
     }
 
     public void insertObservation(Observation observation) {
-        observationRepository.insertObservation(observation);
+        observationRepository.createObservation(
+                observation.getUserId(),
+                observation.getName(),
+                observation.getObservationDate(),
+                observation.getDescription()
+        );
     }
 
     public LiveData<Observation> getObservationById(String observationId) {

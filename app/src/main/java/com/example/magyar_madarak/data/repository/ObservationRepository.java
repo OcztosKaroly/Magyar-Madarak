@@ -1,5 +1,6 @@
 package com.example.magyar_madarak.data.repository;
 
+import static com.example.magyar_madarak.utils.AuthUtils.getCurrentUser;
 import static com.example.magyar_madarak.utils.AuthUtils.isUserAuthenticated;
 
 import android.app.Application;
@@ -11,13 +12,16 @@ import com.example.magyar_madarak.data.dao.observation.ObservationDAO;
 import com.example.magyar_madarak.data.database.HunBirdsRoomDatabase;
 import com.example.magyar_madarak.data.model.observation.Observation;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -30,7 +34,6 @@ public class ObservationRepository {
     private final ExecutorService executorService;
 
     private FirebaseFirestore mFirestore;
-    private FirebaseAuth mAuth;
     private CollectionReference mObservationsCollection;
 
     public ObservationRepository(Application application) {
@@ -40,7 +43,6 @@ public class ObservationRepository {
         executorService = Executors.newSingleThreadExecutor();
 
         mFirestore = FirebaseFirestore.getInstance();
-        mAuth = FirebaseAuth.getInstance();
         mObservationsCollection = mFirestore.collection("observations");
 
         syncObservationsWithFirestore();
@@ -60,14 +62,7 @@ public class ObservationRepository {
             );
 
             observationDAO.insert(observation);
-            mObservationsCollection.document(observation.getObservationId()).set(observation);
-        });
-    }
-
-    public void insertObservation(Observation observation) {
-        executorService.execute(() -> {
-            observationDAO.insert(observation);
-            mObservationsCollection.document(observation.getObservationId()).set(observation);
+            setFirestoreObservation(observation);
         });
     }
 
@@ -82,14 +77,46 @@ public class ObservationRepository {
     public void updateObservation(Observation observation) {
         executorService.execute(() -> {
             observationDAO.update(observation);
-            mObservationsCollection.document(observation.getObservationId()).set(observation);
+            setFirestoreObservation(observation);
         });
+    }
+
+    // create, update
+    private void setFirestoreObservation(Observation observation) {
+        if (isUserAuthenticated()) {
+            // create Firestore object; bc the observationId stored in Observation object too, but we store in Firestore as document id
+            Map<String, Object> firestoreObservation = new HashMap<>();
+            firestoreObservation.put("userId", observation.getUserId());
+            firestoreObservation.put("creationDate", observation.getCreationDate());
+            firestoreObservation.put("lastModificationDate", observation.getLastModificationDate());
+            firestoreObservation.put("name", observation.getName());
+            firestoreObservation.put("observationDate", observation.getObservationDate());
+            firestoreObservation.put("description", observation.getDescription());
+
+            mObservationsCollection.document(observation.getObservationId())
+                    .set(firestoreObservation)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Log.i(LOG_TAG, "--Observation (" + observation.getName() + ") successfully created.--");
+                        } else {
+                            Log.e(LOG_TAG, "--Error occurred when creating observation (" + observation.getName() + ").--", task.getException());
+                        }
+            });
+        }
     }
 
     public void deleteObservationById(String observationId) {
         executorService.execute(() -> {
             observationDAO.deleteById(observationId);
-            mObservationsCollection.document(observationId).delete();
+            if (isUserAuthenticated()) {
+                mObservationsCollection.document(observationId).delete().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.i(LOG_TAG, "--FireBase observation (" + observationId + ") successfully deleted.--");
+                    } else {
+                        Log.e(LOG_TAG, "--FireBase query (delete observation by id) failed.--", task.getException());
+                    }
+                });
+            }
         });
     }
 
@@ -100,40 +127,41 @@ public class ObservationRepository {
     public void deleteAllObservationsByUserId(String userId) {
         executorService.execute(() -> {
             observationDAO.deleteAllByUserId(userId);
-            mObservationsCollection
-                    .whereEqualTo("userId", userId)
-                    .get()
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot observation: task.getResult()) {
-                                mObservationsCollection.document(observation.getId()).delete();
-                            }
-                        } else {
-                            Log.e(LOG_TAG, "FireBase query (delete all observations of user) failed.", task.getException());
+            if (isUserAuthenticated()) {
+                mObservationsCollection.whereEqualTo("userId", userId).get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot observation: task.getResult()) {
+                            mObservationsCollection.document(observation.getId()).delete();
                         }
-                    });
+                    } else {
+                        Log.e(LOG_TAG, "--FireBase query (delete all observations of user) failed.--", task.getException());
+                    }
+                });
+            }
         });
     }
 
     private void syncObservationsWithFirestore() {
         if (isUserAuthenticated()) {
-            mObservationsCollection.whereEqualTo("userId", mAuth.getUid()).get().addOnSuccessListener(querySnapshot -> {
-                        for (DocumentSnapshot document : querySnapshot.getDocuments()) {
-                            Observation observation = new Observation(
-                                    document.getId(),
-                                    Objects.requireNonNull(document.getString("userId")),
-                                    Objects.requireNonNull(document.getDate("creationDate")),
-                                    Objects.requireNonNull(document.getDate("lastModificationDate")),
-                                    Objects.requireNonNull(document.getString("name")),
-                                    document.getDate("observationDate"),
-                                    document.getString("description")
-                            );
-                            insertObservation(observation);
-                            Log.d(LOG_TAG, "--Firestore observation got: " + observation + ".--");
-                        }
-                    }).addOnFailureListener(e -> {
-                        Log.e(LOG_TAG, "--Firestore observation query error: --", e);
+            mObservationsCollection.whereEqualTo("userId", getCurrentUser().getUid()).get().addOnSuccessListener(querySnapshot -> {
+                for (DocumentSnapshot document : querySnapshot.getDocuments()) {
+                    executorService.execute(() -> {
+                        Observation observation = new Observation(
+                                document.getId(),
+                                Objects.requireNonNull(document.getString("userId")),
+                                Objects.requireNonNull(document.getDate("creationDate")),
+                                Objects.requireNonNull(document.getDate("lastModificationDate")),
+                                Objects.requireNonNull(document.getString("name")),
+                                document.getDate("observationDate"),
+                                document.getString("description")
+                        );
+                        observationDAO.insert(observation);
+                        Log.d(LOG_TAG, "--Firestore observation got: " + observation + ".--");
                     });
+                }
+            }).addOnFailureListener(e -> {
+                Log.e(LOG_TAG, "--Firestore observation query error: --", e);
+            });
         }
     }
 }

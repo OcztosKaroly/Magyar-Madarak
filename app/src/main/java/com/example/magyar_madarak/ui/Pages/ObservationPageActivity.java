@@ -51,12 +51,6 @@ public class ObservationPageActivity extends AppCompatActivity {
             return insets;
         });
 
-        if (selectedObservation != null) {
-            Log.i(LOG_TAG, "--Modify observation " + selectedObservation.getName() + ".--");
-        } else {
-            Log.i(LOG_TAG, "--Start creating new observation.--");
-        }
-
         initializeData();
     }
 
@@ -74,6 +68,16 @@ public class ObservationPageActivity extends AppCompatActivity {
         observationDescriptionET = findViewById(R.id.etObservationDescription);
         observationDateDP = findViewById(R.id.datePickerObservationDate);
         observationDateTP = findViewById(R.id.timePickerObservationDate);
+        observationDateTP.setIs24HourView(true);
+
+        if (selectedObservation != null) {
+            observationNameET.setText(selectedObservation.getName());
+            setTime();
+            observationDescriptionET.setText(selectedObservation.getDescription());
+            Log.i(LOG_TAG, "--Modify observation " + selectedObservation.getName() + ".--");
+        } else {
+            Log.i(LOG_TAG, "--Start creating new observation.--");
+        }
 
         initializeListeners();
     }
@@ -98,9 +102,24 @@ public class ObservationPageActivity extends AppCompatActivity {
         }
     }
 
+    private void setTime() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(selectedObservation.getObservationDate());
+
+        observationDateDP.updateDate(
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+        );
+
+        observationDateTP.setHour(calendar.get(Calendar.HOUR_OF_DAY));
+        observationDateTP.setMinute(calendar.get(Calendar.MINUTE));
+    }
+
     private void deleteObservation() {
         if (selectedObservation != null) {
             mObservationViewModel.deleteObservation(selectedObservation);
+            Toast.makeText(this.getApplication(), "Megfigyelés törlése folyamatban.", Toast.LENGTH_SHORT).show();
             selectedObservation = null;
         }
         finish();

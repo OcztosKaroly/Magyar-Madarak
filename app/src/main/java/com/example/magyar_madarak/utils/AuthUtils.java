@@ -1,10 +1,17 @@
 package com.example.magyar_madarak.utils;
 
+import static com.example.magyar_madarak.HunBirdApplication.getAppContext;
+
 import android.app.Activity;
+import android.app.Application;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.magyar_madarak.data.dao.observation.ObservationDAO;
+import com.example.magyar_madarak.data.dao.user.UserDAO;
+import com.example.magyar_madarak.data.database.HunBirdsRoomDatabase;
+import com.example.magyar_madarak.data.repository.ObservationRepository;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -15,9 +22,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.util.concurrent.Executors;
+
 public class AuthUtils {
     private static final String LOG_TAG = "AUTHENTICATION";
     private static final int REQUEST_CODE = 74;
+
+    private static final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     public static void performAuthWithGoogle(GoogleSignInClient mGoogleSignInClient, Activity activity) {
         Log.i(LOG_TAG, "--Initiate login/registration with Google.--");
@@ -60,9 +71,31 @@ public class AuthUtils {
         });
     }
 
+    public static void logout() {
+        if (isUserAuthenticated()) {
+            Log.i(LOG_TAG, "--Signing out.--");
+            clearAllUserData();
+            mAuth.signOut();
+        }
+    }
+
+    // possibly used for log out data deletion
+    public static void clearAllUserData() {
+        HunBirdsRoomDatabase database = HunBirdsRoomDatabase.getInstance(getAppContext());
+
+        UserDAO userDao = database.userDAO();
+        ObservationDAO observationsDao = database.observationDAO();
+
+        String userId = getCurrentUser().getUid();
+
+        Executors.newSingleThreadExecutor().execute(() -> {
+            userDao.deleteById(userId);
+            observationsDao.deleteAllByUserId(userId);
+        });
+    }
+
     public static boolean isUserAuthenticated() {
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = auth.getCurrentUser();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             if (!currentUser.isEmailVerified()) {
                 Log.w(LOG_TAG, "--User email still not verified.--");
@@ -73,5 +106,10 @@ public class AuthUtils {
         }
         Log.w(LOG_TAG, "--No authenticated user detected.--");
         return false;
+    }
+
+    public static FirebaseUser getCurrentUser() {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        return mAuth.getCurrentUser();
     }
 }

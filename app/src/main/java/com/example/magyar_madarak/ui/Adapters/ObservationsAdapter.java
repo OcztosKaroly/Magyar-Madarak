@@ -17,19 +17,22 @@ import com.example.magyar_madarak.data.model.observation.Observation;
 import com.example.magyar_madarak.ui.Pages.ObservationPageActivity;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class ObservationsAdapter extends RecyclerView.Adapter<ObservationsAdapter.ObservationsViewHolder> implements View.OnClickListener {
     Context mContext;
 
-    List<Observation> mObservations;
+    List<Observation> mObservations = new ArrayList<>();
 
     public static Observation selectedObservation = null;
 
     public ObservationsAdapter(Context context, List<Observation> observations) {
         this.mContext = context;
 
-        this.mObservations = observations;
+        setObservations(observations);
     }
 
     public void setObservations(List<Observation> observations) {
@@ -40,16 +43,21 @@ public class ObservationsAdapter extends RecyclerView.Adapter<ObservationsAdapte
             int index = mObservations.indexOf(observation);
             if (index != -1) {
                 mObservations.remove(observation);
-                notifyItemRemoved(index);
+//                notifyItemRemoved(index);
             }
         }
 
         for (Observation observation: observations) {
             if (!mObservations.contains(observation)) {
                 mObservations.add(observation);
-                notifyItemInserted(mObservations.size() - 1);
+//                notifyItemInserted(mObservations.size() - 1);
             }
         }
+
+        mObservations.sort(Comparator.comparing(Observation::getLastModificationDate).reversed());
+        notifyDataSetChanged();
+        // TODO: Ha csak a törlésnél és beszúrásnál jelzek, van valami duplikációs bug
+        //  de ez lehet csak a nem megfelelő adatbázis törlések és beszúrások miatt van.
     }
 
     @Override
@@ -95,7 +103,12 @@ public class ObservationsAdapter extends RecyclerView.Adapter<ObservationsAdapte
         }
 
         public void bindTo(Observation observation) {
-            lastModificationDate.setText(String.valueOf(observation.getLastModificationDate().getTime()));
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(observation.getLastModificationDate());
+
+            String date = calendar.get(Calendar.YEAR) + ". " + (calendar.get(Calendar.MONTH) + 1) +
+                    ". " + calendar.get(Calendar.DAY_OF_MONTH) + ".";
+            lastModificationDate.setText(date);
             observationName.setText(observation.getName());
         }
     }

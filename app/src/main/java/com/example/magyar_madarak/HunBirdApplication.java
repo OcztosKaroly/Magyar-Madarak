@@ -1,26 +1,31 @@
 package com.example.magyar_madarak;
 
+import static com.example.magyar_madarak.utils.AuthUtils.logout;
 import static com.example.magyar_madarak.utils.CommonUtils.isRunningNotificationByTag;
 
 import android.app.Application;
-import android.util.Log;
+import android.content.Context;
 
 import androidx.work.PeriodicWorkRequest;
-import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 
 import com.example.magyar_madarak.data.database.HunBirdsRoomDatabase;
 import com.example.magyar_madarak.workers.NotificationWorker;
-import com.google.common.util.concurrent.ListenableFuture;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class HunBirdApplication extends Application {
 
+    private static Context appContext;
+
     @Override
     public void onCreate() {
         super.onCreate();
+
+        appContext = getApplicationContext();
+
+        logout(); // TODO: Ez csak a tesztelésekhez kell a fejlesztés során!!!!!!!
+
 
         // TODO: !!!!!!!!!! Törölni az adatbázistörlőt későbbiekben !!!!!!!!!!
         this.deleteDatabase("hun_birds_database");
@@ -35,5 +40,9 @@ public class HunBirdApplication extends Application {
                     TimeUnit.HOURS).addTag("daily_notification").build();
             WorkManager.getInstance(this).enqueue(dailyWorkRequest);
         }
+    }
+
+    public static Context getAppContext() {
+        return appContext;
     }
 }
