@@ -5,10 +5,10 @@ import androidx.room.Embedded;
 import androidx.room.Junction;
 import androidx.room.Relation;
 
-import com.example.magyar_madarak.data.model.CrossRefTables.ColorCrossRef;
-import com.example.magyar_madarak.data.model.CrossRefTables.DietCrossRef;
-import com.example.magyar_madarak.data.model.CrossRefTables.HabitatCrossRef;
-import com.example.magyar_madarak.data.model.CrossRefTables.ShapeCrossRef;
+import com.example.magyar_madarak.data.model.crossRefTables.ColorCrossRef;
+import com.example.magyar_madarak.data.model.crossRefTables.DietCrossRef;
+import com.example.magyar_madarak.data.model.crossRefTables.HabitatCrossRef;
+import com.example.magyar_madarak.data.model.crossRefTables.ShapeCrossRef;
 import com.example.magyar_madarak.data.model.constants.Color;
 import com.example.magyar_madarak.data.model.constants.ConservationValue;
 import com.example.magyar_madarak.data.model.constants.Diet;

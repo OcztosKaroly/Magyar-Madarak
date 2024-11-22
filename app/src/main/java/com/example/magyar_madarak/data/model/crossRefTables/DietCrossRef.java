@@ -1,4 +1,4 @@
-package com.example.magyar_madarak.data.model.CrossRefTables;
+package com.example.magyar_madarak.data.model.crossRefTables;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
@@ -6,11 +6,11 @@ import androidx.room.ForeignKey;
 import androidx.room.Index;
 
 import com.example.magyar_madarak.data.model.bird.BirdEntity;
-import com.example.magyar_madarak.data.model.constants.Color;
+import com.example.magyar_madarak.data.model.constants.Diet;
 
 @Entity(
-        tableName = "color_cross_refs",
-        primaryKeys = {"birdId", "colorId"},
+        tableName = "diet_cross_refs",
+        primaryKeys = {"birdId", "dietId"},
         foreignKeys = {
                 @ForeignKey(
                         entity = BirdEntity.class,
@@ -19,25 +19,26 @@ import com.example.magyar_madarak.data.model.constants.Color;
                         onDelete = ForeignKey.CASCADE
                 ),
                 @ForeignKey(
-                        entity = Color.class,
-                        parentColumns = "colorId",
-                        childColumns = "colorId",
+                        entity = Diet.class,
+                        parentColumns = "dietId",
+                        childColumns = "dietId",
                         onDelete = ForeignKey.CASCADE
                 )
         },
         indices = {
                 @Index("birdId"),
-                @Index("colorId")
+                @Index("dietId")
         }
 )
-public class ColorCrossRef {
+public class DietCrossRef {
     @NonNull
     public String birdId;
-    @NonNull
-    public String colorId;
 
-    public ColorCrossRef(@NonNull String birdId, @NonNull String colorId) {
+    @NonNull
+    public String dietId;
+
+    public DietCrossRef(@NonNull String birdId, @NonNull String dietId) {
         this.birdId = birdId;
-        this.colorId = colorId;
+        this.dietId = dietId;
     }
 }

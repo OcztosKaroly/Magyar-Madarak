@@ -24,10 +24,6 @@ import com.example.magyar_madarak.ui.Fragments.BirdIdentificationFragments.BirdI
 import com.example.magyar_madarak.ui.Fragments.BirdIdentificationFragments.BirdShapeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
 public class BirdIdentificationActivity extends AppCompatActivity {
     private static final String LOG_TAG = BirdIdentificationActivity.class.getName();
 
@@ -38,7 +34,6 @@ public class BirdIdentificationActivity extends AppCompatActivity {
     private FragmentManager mFragmentManager;
     private Fragment colorFragment, shapeFragment, habitatFragment, resultFragment;
     private String currentFragmentClassName;
-    private Map<String, ArrayList<String>> selectedItems;
 
     private View mView;
     private FrameLayout mContent;
@@ -71,8 +66,6 @@ public class BirdIdentificationActivity extends AppCompatActivity {
         nextBtn.setVisibility(View.VISIBLE);
         previousBtn = findViewById(R.id.btnPreviousBirdIdentification);
         previousBtn.setVisibility(View.INVISIBLE);
-
-        selectedItems = new HashMap<>();
 
         colorFragment = BirdColorFragment.newInstance();
         shapeFragment = BirdShapeFragment.newInstance();

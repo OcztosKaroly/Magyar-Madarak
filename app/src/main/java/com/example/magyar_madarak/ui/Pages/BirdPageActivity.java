@@ -1,6 +1,6 @@
 package com.example.magyar_madarak.ui.Pages;
 
-import static com.example.magyar_madarak.ui.Adapters.KnowledgeBaseAdapter.selectedBird;
+import static com.example.magyar_madarak.ui.Adapters.ListBirdsAdapter.selectedBird;
 import static com.example.magyar_madarak.utils.CommonUtils.capitalizeFirstLetter;
 
 import android.graphics.text.LineBreaker;

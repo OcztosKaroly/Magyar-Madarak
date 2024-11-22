@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Objects;
+
 @Entity(tableName = "shapes")
 public class Shape {
     @PrimaryKey
@@ -25,5 +27,21 @@ public class Shape {
     @NonNull
     public String getShapeName() {
         return shapeName;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null || getClass() != other.getClass()) {
+            return false;
+        }
+        return Objects.equals(this.getShapeId(), ((Shape) other).getShapeId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getShapeId());
     }
 }

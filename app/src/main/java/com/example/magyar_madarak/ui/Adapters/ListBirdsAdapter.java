@@ -23,7 +23,7 @@ import com.example.magyar_madarak.ui.Pages.BirdPageActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KnowledgeBaseAdapter extends RecyclerView.Adapter<KnowledgeBaseAdapter.BirdViewHolder> implements View.OnClickListener, Filterable {
+public class ListBirdsAdapter extends RecyclerView.Adapter<ListBirdsAdapter.BirdViewHolder> implements View.OnClickListener, Filterable {
     Context mContext;
 
     List<Bird> mBirdsAll = new ArrayList<>();
@@ -33,10 +33,10 @@ public class KnowledgeBaseAdapter extends RecyclerView.Adapter<KnowledgeBaseAdap
 
     public static Bird selectedBird = null;
 
-    public KnowledgeBaseAdapter(Context context, List<Bird> birds) {
+    public ListBirdsAdapter(Context context) {
         this.mContext = context;
 
-        setBirds(birds);
+        setBirds(new ArrayList<>());
 
         this.lastPosition = -1;
     }
@@ -62,13 +62,14 @@ public class KnowledgeBaseAdapter extends RecyclerView.Adapter<KnowledgeBaseAdap
 
         mBirdsAll.sort((b1, b2) -> b1.getBirdName().compareToIgnoreCase(b2.getBirdName()));
         mBirds = new ArrayList<>(mBirdsAll);
+        notifyDataSetChanged();
     }
 
     @Override
     public void onClick(View v) {
         int position = (Integer) v.getTag();
         Bird bird = mBirds.get(position);
-        Log.i("ADAPTER", "--Selected bird: " + bird + "--");
+        Log.d("ADAPTER", "--Selected bird: " + bird + "--");
         selectedBird = bird;
 
         startActivity(mContext, BirdPageActivity.class);

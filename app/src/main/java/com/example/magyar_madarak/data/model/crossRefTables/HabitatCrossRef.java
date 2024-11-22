@@ -1,4 +1,4 @@
-package com.example.magyar_madarak.data.model.CrossRefTables;
+package com.example.magyar_madarak.data.model.crossRefTables;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;

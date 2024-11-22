@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.magyar_madarak.R;
 import com.example.magyar_madarak.data.model.bird.Bird;
 import com.example.magyar_madarak.data.viewModel.BirdViewModel;
-import com.example.magyar_madarak.ui.Adapters.KnowledgeBaseAdapter;
+import com.example.magyar_madarak.ui.Adapters.ListBirdsAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class KnowledgeBaseActivity extends AppCompatActivity {
 
     private SearchView mSearchBar;
     private RecyclerView mRecyclerView;
-    private KnowledgeBaseAdapter mBirdAdapter;
+    private ListBirdsAdapter mBirdAdapter;
     private LiveData<List<Bird>> mBirds;
 
     private BirdViewModel mBirdViewModel;
@@ -60,7 +60,7 @@ public class KnowledgeBaseActivity extends AppCompatActivity {
         mBirdViewModel = new ViewModelProvider(this).get(BirdViewModel.class);
 
         mSearchBar = findViewById(R.id.searchViewKnowledgeBase);
-        mBirdAdapter = new KnowledgeBaseAdapter(this, new ArrayList<>());
+        mBirdAdapter = new ListBirdsAdapter(this);
         mRecyclerView = findViewById(R.id.recyclerViewKnowledgeBase);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mBirdAdapter);

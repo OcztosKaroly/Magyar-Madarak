@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Objects;
+
 @Entity(tableName = "habitats")
 public class Habitat {
     @PrimaryKey
@@ -23,5 +25,21 @@ public class Habitat {
     @NonNull
     public String getHabitatName() {
         return habitatName;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null || getClass() != other.getClass()) {
+            return false;
+        }
+        return Objects.equals(this.getHabitatId(), ((Habitat) other).getHabitatId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getHabitatId());
     }
 }

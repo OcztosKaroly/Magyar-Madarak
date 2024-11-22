@@ -9,10 +9,10 @@ import androidx.room.Query;
 import androidx.room.Transaction;
 import androidx.room.Update;
 
-import com.example.magyar_madarak.data.model.CrossRefTables.ColorCrossRef;
-import com.example.magyar_madarak.data.model.CrossRefTables.DietCrossRef;
-import com.example.magyar_madarak.data.model.CrossRefTables.HabitatCrossRef;
-import com.example.magyar_madarak.data.model.CrossRefTables.ShapeCrossRef;
+import com.example.magyar_madarak.data.model.crossRefTables.ColorCrossRef;
+import com.example.magyar_madarak.data.model.crossRefTables.DietCrossRef;
+import com.example.magyar_madarak.data.model.crossRefTables.HabitatCrossRef;
+import com.example.magyar_madarak.data.model.crossRefTables.ShapeCrossRef;
 import com.example.magyar_madarak.data.model.bird.Bird;
 import com.example.magyar_madarak.data.model.bird.BirdEntity;
 import com.example.magyar_madarak.data.model.constants.Color;
@@ -71,6 +71,8 @@ public interface BirdDAO {
     @Query("SELECT * FROM birds WHERE birdName IN (:birdNames)")
     LiveData<List<Bird>> getAllByNames(List<String> birdNames);
 
+
+
     @Transaction
     @Query("SELECT * FROM birds")
     LiveData<List<Bird>> getAll();
@@ -89,12 +91,26 @@ public interface BirdDAO {
 
 
     @Transaction
+    default void delete(BirdEntity bird) {
+        deleteById(bird.getBirdId());
+    }
+
+    @Transaction
+    default void deleteById(String birdId) {
+        deleteDietCrossRefsByBirdId(birdId);
+        deleteColorCrossRefsByBirdId(birdId);
+        deleteShapeCrossRefsByBirdId(birdId);
+        deleteHabitatCrossRefsByBirdId(birdId);
+        _deleteById(birdId);
+    }
+
+    @Transaction
     @Delete
-    void delete(BirdEntity bird);
+    void _delete(BirdEntity bird);
 
     @Transaction
     @Query("DELETE FROM birds WHERE birdId = :birdId")
-    void deleteById(String birdId);
+    void _deleteById(String birdId);
 
     @Query("DELETE FROM diet_cross_refs WHERE birdId = :birdId")
     void deleteDietCrossRefsByBirdId(String birdId);

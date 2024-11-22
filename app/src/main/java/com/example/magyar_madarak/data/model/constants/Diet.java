@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Objects;
+
 @Entity(tableName = "diets")
 public class Diet {
     @PrimaryKey
@@ -25,5 +27,21 @@ public class Diet {
     @NonNull
     public String getDietName() {
         return dietName;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null || getClass() != other.getClass()) {
+            return false;
+        }
+        return Objects.equals(this.getDietId(), ((Diet) other).getDietId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getDietId());
     }
 }
