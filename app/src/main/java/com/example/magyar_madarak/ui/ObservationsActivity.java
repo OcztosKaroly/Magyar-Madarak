@@ -94,7 +94,7 @@ public class ObservationsActivity extends AppCompatActivity {
         mObservations.observe(this, observations -> mObservationsAdapter.setObservations(observations));
 
         notLoggedInTW.setOnClickListener(l -> NavigationUtils.startActivity(this, LoginActivity.class));
-        offlineTW.setOnClickListener(l -> NavigationUtils.startActivity(this, Settings.class));
+        offlineTW.setOnClickListener(l -> NavigationUtils.startActivity(this, SettingsActivity.class));
     }
 
     private void setTopUserBar() {

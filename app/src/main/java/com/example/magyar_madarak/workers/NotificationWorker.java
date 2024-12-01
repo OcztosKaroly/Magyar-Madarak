@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
@@ -25,8 +26,11 @@ public class NotificationWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        createNotificationChannel();
-        sendNotification();
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("notifications", Context.MODE_PRIVATE);
+        if (sharedPreferences.getBoolean("dailyNotificationEnabled", true)) {
+            createNotificationChannel();
+            sendNotification();
+        }
         return Result.success();
     }
 

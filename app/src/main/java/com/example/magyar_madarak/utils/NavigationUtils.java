@@ -11,7 +11,7 @@ import com.example.magyar_madarak.ui.LoginActivity;
 import com.example.magyar_madarak.R;
 import com.example.magyar_madarak.ui.ObservationsActivity;
 import com.example.magyar_madarak.ui.RegisterActivity;
-import com.example.magyar_madarak.ui.Settings;
+import com.example.magyar_madarak.ui.SettingsActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class NavigationUtils {
@@ -52,9 +52,9 @@ public class NavigationUtils {
                 redirect(from, ObservationsActivity.class);
                 return true;
             }
-            if (itemId == R.id.nav_profile && !from.getClass().equals(Settings.class) &&
+            if (itemId == R.id.nav_profile && !from.getClass().equals(SettingsActivity.class) &&
                     !from.getClass().equals(LoginActivity.class) && !from.getClass().equals(RegisterActivity.class)) {
-                redirect(from, Settings.class);
+                redirect(from, SettingsActivity.class);
                 return true;
             }
 

@@ -108,12 +108,6 @@ public abstract class HunBirdsRoomDatabase extends RoomDatabase {
             Executors.newSingleThreadExecutor().execute(() -> {
                 syncFirestoreBirds();
             });
-
-            // Erre nincs szükség, mert az adatbázis létrehozásakor még fixen nincs bejelentkezve a felhasználó
-//            Executors.newSingleThreadExecutor().execute(() -> {
-//                syncFirestoreUsers(); // Recently this means only one user
-//                syncFirestoreObservations(); // This means the (only one) user's observations
-//            });
         }
     };
 
@@ -127,7 +121,7 @@ public abstract class HunBirdsRoomDatabase extends RoomDatabase {
                         Diet diet = new Diet(document.getId(), Objects.requireNonNull(document.getString("dietName")));
                         Executors.newSingleThreadExecutor().execute(() -> {
                             instance.dietDAO().insert(diet);
-//                            Log.d("DATA", "--Firestore diet got: " + diet.getDietName() + ".--");
+                            Log.d("DATA", "--Firestore diet got: " + diet.getDietName() + ".--");
                         });
                     }
                 }).addOnFailureListener(e -> {
@@ -145,7 +139,7 @@ public abstract class HunBirdsRoomDatabase extends RoomDatabase {
                         ConservationValue conservationValue = new ConservationValue(document.getId(), Objects.requireNonNull(document.get("conservationValue", Integer.class)));
                         Executors.newSingleThreadExecutor().execute(() -> {
                             instance.conservationValueDAO().insert(conservationValue);
-//                            Log.d("DATA", "--Firestore conservation value got: " + conservationValue.getConservationValue() + ".--");
+                            Log.d("DATA", "--Firestore conservation value got: " + conservationValue.getConservationValue() + ".--");
                         });
                     }
                 }).addOnFailureListener(e -> {
@@ -163,7 +157,7 @@ public abstract class HunBirdsRoomDatabase extends RoomDatabase {
                         Color color = new Color(document.getId(), Objects.requireNonNull(document.getString("colorName")));
                         Executors.newSingleThreadExecutor().execute(() -> {
                             instance.colorDAO().insert(color);
-//                            Log.d("DATA", "--Firestore color got: " + color.getColorName() + ".--");
+                            Log.d("DATA", "--Firestore color got: " + color.getColorName() + ".--");
                         });
                     }
                 }).addOnFailureListener(e -> {
@@ -181,7 +175,7 @@ public abstract class HunBirdsRoomDatabase extends RoomDatabase {
                         Shape shape = new Shape(document.getId(), Objects.requireNonNull(document.getString("shapeName")));
                         Executors.newSingleThreadExecutor().execute(() -> {
                             instance.shapeDAO().insert(shape);
-//                            Log.d("DATA", "--Firestore shape got: " + shape.getShapeName() + ".--");
+                            Log.d("DATA", "--Firestore shape got: " + shape.getShapeName() + ".--");
                         });
                     }
                 }).addOnFailureListener(e -> {
@@ -199,15 +193,13 @@ public abstract class HunBirdsRoomDatabase extends RoomDatabase {
                         Habitat habitat = new Habitat(document.getId(), Objects.requireNonNull(document.getString("habitatName")));
                         Executors.newSingleThreadExecutor().execute(() -> {
                             instance.habitatDAO().insert(habitat);
-//                            Log.d("DATA", "--Firestore habitat got: " + habitat.getHabitatName() + ".--");
+                            Log.d("DATA", "--Firestore habitat got: " + habitat.getHabitatName() + ".--");
                         });
                     }
                 }).addOnFailureListener(e -> {
                     Log.e("DATA", "--Failed to load habitats from FireBase.--", e);
                 });
     }
-
-
 
     private static void syncFirestoreBirds() {
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
@@ -277,7 +269,7 @@ public abstract class HunBirdsRoomDatabase extends RoomDatabase {
 
                                 Executors.newSingleThreadExecutor().execute(() -> {
                                     instance.birdDAO().insert(bird);
-//                                    Log.d("DATA", "--Firestore bird got: " + bird.getBirdName() + ".--");
+                                    Log.d("DATA", "--Firestore bird got: " + bird.getBirdName() + ".--");
                                 });
                             });
                         }
@@ -303,73 +295,4 @@ public abstract class HunBirdsRoomDatabase extends RoomDatabase {
         }
         return tasks;
     }
-
-//    private static void syncFirestoreUsers() {
-//      // Félkész
-//        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-//        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-//
-//        // TODO: ha még nincs visszaigazolva az email cím, akkor nem lehet a felhasználónak adata.
-//        if (currentUser != null) {
-//            firestore.collection("users")
-//                    .document(currentUser.getUid())
-//                    .get()
-//                    .addOnSuccessListener(document -> {
-//                        UserBase userBase = new UserBase(currentUser.getUid(), Objects.requireNonNull(currentUser.getEmail()));
-//                        UserDetail userDetail = new UserDetail(
-//                                currentUser.getUid(),
-//                                currentUser.isEmailVerified(),
-//                                Boolean.TRUE.equals(document.getBoolean("saveOnlineObservations")),
-//                                Boolean.TRUE.equals(document.getBoolean("notificationsEnabled"))
-//                        );
-//                        Log.d("DATA", "--Firestore user got: " + userBase.getEmail() + ". " +
-//                                "The user's settings: " + userDetail + "--");
-//                    }).addOnFailureListener(e -> {
-//                        Log.e("DATA", "--Failed to load user from FireBase.--", e);
-//                    });
-//        } else {
-//            Log.w("DATA", "--User data could not be loaded because no user is authenticated.--");
-//        }
-//    }
-
-//    private static void syncFirestoreObservations() {
-//      // Félkész
-//        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-//        FirebaseAuth auth = FirebaseAuth.getInstance();
-//        FirebaseUser currentUser = auth.getCurrentUser();
-//
-//        // TODO: ha nincs bejelentkezve a felhasználó, akkor nem tud letölteni adatokat
-//        if (currentUser != null) {
-//            firestore.collection("observations")
-//                    .whereEqualTo("userId", currentUser.getUid())
-//                    .get()
-//                    .addOnSuccessListener(queryDocumentSnapshots -> {
-//                        for (DocumentSnapshot document: queryDocumentSnapshots) {
-//                            ObservationBase observationBase = new ObservationBase(
-//                                    document.getId(),
-//                                    Objects.requireNonNull(document.getString("userId")),
-//                                    Objects.requireNonNull(document.getString("description"))
-//                            );
-//                            ObservationDetail observationDetail = new ObservationDetail(
-//                                    document.getId(),
-//                                    Objects.requireNonNull(document.getString("userId")),
-//                                    document.getString("createdAt"),
-//                                    document.getString("lastModified"),
-//                                    document.getString("observationDate"),
-//                                    document.getString("observationLocation"),
-//                                    document.getString("observationDescription"),
-//                                    (List<String>) document.get("observedBirdColors"),
-//                                    (List<String>) document.get("observedBirdShapess"),
-//                                    (List<String>) document.get("observedBirdHabitats")
-//                            );
-//                            Log.d("DATA", "--Firestore observation got: " + observationBase.getObservationName() + ". " +
-//                                    "The observation's details: " + observationDetail + "--");
-//                        }
-//                    }).addOnFailureListener(e -> {
-//                        Log.e("DATA", "--Failed to load observations from FireBase.--", e);
-//                    });
-//        } else {
-//            Log.w("DATA", "--Observation data could not be loaded because no user is authenticated.--");
-//        }
-//    }
 }

@@ -27,13 +27,13 @@ public class HunBirdApplication extends Application {
         this.deleteDatabase("hun_birds_database");
         HunBirdsRoomDatabase db = HunBirdsRoomDatabase.getInstance(this);
 
-        WorkManager.getInstance(this).cancelAllWork();
+//        WorkManager.getInstance(this).cancelAllWork();
 
         if (!isRunningNotificationByTag(this, "daily_notification")) {
             PeriodicWorkRequest dailyWorkRequest = new PeriodicWorkRequest.Builder(
                     NotificationWorker.class,
-                    24,
-                    TimeUnit.HOURS).addTag("daily_notification").build();
+                    15,
+                    TimeUnit.MINUTES).addTag("daily_notification").build();
             WorkManager.getInstance(this).enqueue(dailyWorkRequest);
         }
     }

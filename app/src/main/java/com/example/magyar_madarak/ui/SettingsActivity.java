@@ -5,7 +5,9 @@ import static com.example.magyar_madarak.utils.AuthUtils.isUserAuthenticated;
 import static com.example.magyar_madarak.utils.AuthUtils.logout;
 import static com.example.magyar_madarak.utils.NavigationUtils.navigationBarRedirection;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,7 +30,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseUser;
 
-public class Settings extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity {
     private static final String LOG_TAG = "SETTINGS";
 
     private FirebaseUser mUser;
@@ -41,6 +43,8 @@ public class Settings extends AppCompatActivity {
     private CheckBox dailyNotificationCheckBox;
     private TextView emailAddressTW;
     private EditText newPasswordET, reNewPasswordET, oldPasswordET;
+
+    private SharedPreferences mSharedPreferences;
 
     private View mView;
     private BottomNavigationView mBottomNavigationView;
@@ -62,10 +66,13 @@ public class Settings extends AppCompatActivity {
     private void initializeData() {
         mView = findViewById(R.id.contentSettings);
 
+        mSharedPreferences = getApplicationContext().getSharedPreferences("notifications", Context.MODE_PRIVATE);
+
         mBottomNavigationView = findViewById(R.id.bottomNavigationView);
         mBottomNavigationView.getMenu().findItem(R.id.nav_profile).setChecked(true);
 
         dailyNotificationCheckBox = findViewById(R.id.checkBoxDailyNotification);
+        dailyNotificationCheckBox.setChecked(mSharedPreferences.getBoolean("dailyNotificationEnabled", true));
 
         profileSettingsLayout = findViewById(R.id.layoutProfileSettings);
         authenticationLayout = findViewById(R.id.layoutAuthentication);
@@ -115,6 +122,8 @@ public class Settings extends AppCompatActivity {
     }
 
     private void initializeListeners() {
+        dailyNotificationCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> applyNotificationsChanges(isChecked));
+
         if (isUserAuthenticated()) {
             saveBtn.setOnClickListener(l -> {
                 if (isPasswordChangable) {
@@ -132,6 +141,11 @@ public class Settings extends AppCompatActivity {
         }
 
         navigationBarRedirection(mBottomNavigationView, this);
+    }
+
+    private void applyNotificationsChanges(boolean isChecked) {
+        mSharedPreferences.edit().putBoolean("dailyNotificationEnabled", isChecked).apply();
+        Toast.makeText(this, "Értesítések változtatásai elmentődtek.", Toast.LENGTH_SHORT).show();
     }
 
     private void save() {
