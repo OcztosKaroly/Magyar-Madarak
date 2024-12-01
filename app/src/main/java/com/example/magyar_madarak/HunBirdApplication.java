@@ -1,6 +1,5 @@
 package com.example.magyar_madarak;
 
-import static com.example.magyar_madarak.utils.AuthUtils.logout;
 import static com.example.magyar_madarak.utils.CommonUtils.isRunningNotificationByTag;
 
 import android.app.Application;
@@ -24,19 +23,16 @@ public class HunBirdApplication extends Application {
 
         appContext = getApplicationContext();
 
-        logout(); // TODO: Ez csak a tesztelésekhez kell a fejlesztés során!!!!!!!
-
-
         // TODO: !!!!!!!!!! Törölni az adatbázistörlőt későbbiekben !!!!!!!!!!
         this.deleteDatabase("hun_birds_database");
         HunBirdsRoomDatabase db = HunBirdsRoomDatabase.getInstance(this);
 
-//        WorkManager.getInstance(this).cancelAllWork();
+        WorkManager.getInstance(this).cancelAllWork();
 
         if (!isRunningNotificationByTag(this, "daily_notification")) {
             PeriodicWorkRequest dailyWorkRequest = new PeriodicWorkRequest.Builder(
                     NotificationWorker.class,
-                    23,
+                    24,
                     TimeUnit.HOURS).addTag("daily_notification").build();
             WorkManager.getInstance(this).enqueue(dailyWorkRequest);
         }
