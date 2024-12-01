@@ -1,6 +1,6 @@
 package com.example.magyar_madarak.ui;
 
-import static com.example.magyar_madarak.utils.NavigationUtils.navigationBarRedirection;
+import static com.example.magyar_madarak.utils.AuthUtils.isUserAuthenticated;
 import static com.example.magyar_madarak.utils.NavigationUtils.redirect;
 
 import android.content.Intent;
@@ -23,14 +23,13 @@ import com.example.magyar_madarak.utils.AuthUtils;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class RegisterActivity extends AppCompatActivity {
     private static final String LOG_TAG = RegisterActivity.class.getName();
 
     private EditText emailET, passwordET, rePasswordET;
-    private Button registerBTN, registerWithGoogleBTN, redirectToLoginBTN;
+    private Button registerBTN, registerWithGoogleBTN, redirectToLoginBTN, cancelBTN;
 
 //    private ImageView tooltipEmail;
 
@@ -38,7 +37,6 @@ public class RegisterActivity extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
 
     private View mView;
-    private BottomNavigationView mBottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,17 +45,20 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.contentRegister), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        if (isUserAuthenticated()) {
+            finish();
+            return;
+        }
 
         initializeData();
     }
 
     private void initializeData() {
         mView = findViewById(R.id.contentRegister);
-        mBottomNavigationView = findViewById(R.id.bottomNavigationView);
-        mBottomNavigationView.getMenu().findItem(R.id.nav_profile).setChecked(true);
 
         emailET = findViewById(R.id.etRegisterEmailAddress);
         passwordET = findViewById(R.id.etRegisterPassword);
@@ -66,6 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerBTN = findViewById(R.id.btnRegister);
         registerWithGoogleBTN = findViewById(R.id.btnRegisterWithGoogle);
         redirectToLoginBTN = findViewById(R.id.btnRegisterToLogin);
+        cancelBTN = findViewById(R.id.buttonCancel);
 
         mAuth = FirebaseAuth.getInstance();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -84,8 +86,10 @@ public class RegisterActivity extends AppCompatActivity {
         registerBTN.setOnClickListener(v -> performRegister());
         registerWithGoogleBTN.setOnClickListener(v -> AuthUtils.performAuthWithGoogle(mGoogleSignInClient, this));
         redirectToLoginBTN.setOnClickListener(v -> redirect(this, LoginActivity.class));
-
-        navigationBarRedirection(mBottomNavigationView, this);
+        cancelBTN.setOnClickListener(v -> {
+            Log.i(LOG_TAG, "--Navigate back.--");
+            finish();
+        });
     }
 
     private void performRegister() {
@@ -108,6 +112,7 @@ public class RegisterActivity extends AppCompatActivity {
                         mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(this, emailSenderTask -> {
                             if (emailSenderTask.isSuccessful()) {
                                 Toast.makeText(RegisterActivity.this, "Megerősítő email elküldve a " + mAuth.getCurrentUser().getEmail() + " címre.", Toast.LENGTH_LONG).show();
+                                finish();
                             } else {
                                 Toast.makeText(RegisterActivity.this, "Hiba lépett fel a megerősítő email elküldésekor!", Toast.LENGTH_LONG).show();
                             }
@@ -128,7 +133,7 @@ public class RegisterActivity extends AppCompatActivity {
         //    return false;
         //}
 
-        //nem email lett megadva emailnek
+        // nem email lett megadva emailnek
         if (email == null || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             Log.e(LOG_TAG, "--Incorrect email address.--");
             Toast.makeText(RegisterActivity.this, "Ez az email cím érvénytelen!", Toast.LENGTH_LONG).show();
@@ -146,7 +151,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (password.length() < 12) {
             //TODO: Jelszóbonyolultság ellenőrzést felvenni, szóközök létét átgondolni és kezelni.
             Log.e(LOG_TAG, "--Password too short.--");
-            Toast.makeText(RegisterActivity.this, "Túl rövid a jelszó!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "A jelszónak legalább 12 karakteresnek kell lennie!", Toast.LENGTH_LONG).show();
             return false;
         }
 
@@ -161,50 +166,10 @@ public class RegisterActivity extends AppCompatActivity {
         return true;
     }
 
-//    private void performRegisterWithGoogle() {
-//        Log.i(LOG_TAG, "Initiate registration with Google.");
-//        mGoogleSignInClient.signOut().addOnCompleteListener(this, task -> {
-//            Intent googleRegisterIntent = mGoogleSignInClient.getSignInIntent();
-//            startActivityForResult(googleRegisterIntent, RC_REGISTER);
-//        });
-//        //TODO: A felső megoldás a Google regisztrációs funkció teszteléséig bent marad, a végleges alkalmazásban az alsó megoldás fog helyet kapni
-//        //Intent googleRegisterIntent = mGoogleSignInClient.getSignInIntent();
-//        //startActivityForResult(googleRegisterIntent, RC_REGISTER);
-//        AuthUtils.performAuthWithGoogle(mGoogleSignInClient, this);
-//    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         AuthUtils.handleGoogleAuthResult(requestCode, data, mAuth, this);
-//
-//        if (requestCode == RC_REGISTER) {
-//            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-//
-//            try {
-//                GoogleSignInAccount account = task.getResult(ApiException.class);
-//                Log.d(LOG_TAG, "Google account email: " + account.getEmail());
-//                //Log.d(LOG_TAG, "google account information: " + account.getPhotoUrl());
-//                firebaseAuthWithGoogle(account.getIdToken());
-//            } catch (ApiException e) {
-//                Log.e(LOG_TAG, "Google sign in error: " + e);
-//            }
-//        }
     }
-
-//    private void firebaseAuthWithGoogle(String idToken) {
-//        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-//        mAuth.signInWithCredential(credential).addOnCompleteListener(this, task -> {
-//            if (task.isSuccessful()) {
-//                Log.i(LOG_TAG, "Google registration/login to app successful.");
-//                // TODO: Átirányítás a regisztrációról regisztráció után.
-//                Toast.makeText(RegisterActivity.this, "Sikeres regisztráció/bejelentkezés Google fiókkal.", Toast.LENGTH_SHORT).show();
-//            } else {
-//                Log.e(LOG_TAG, "Google registration/login to app unsuccessful.");
-//                // TODO: Regisztrációs errorok felsorolása. Toast törlése
-//                Toast.makeText(RegisterActivity.this, "Hiba a Google regisztráció/bejelentkezés során!", Toast.LENGTH_LONG).show();
-//            }
-//        });
-//    }
 }

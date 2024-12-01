@@ -1,6 +1,6 @@
 package com.example.magyar_madarak.ui;
 
-import static com.example.magyar_madarak.utils.NavigationUtils.navigationBarRedirection;
+import static com.example.magyar_madarak.utils.AuthUtils.isUserAuthenticated;
 import static com.example.magyar_madarak.utils.NavigationUtils.redirect;
 
 import android.content.Intent;
@@ -23,20 +23,18 @@ import com.example.magyar_madarak.utils.AuthUtils;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String LOG_TAG = LoginActivity.class.getName();
 
     EditText emailET, passwordET;
-    Button loginBTN, loginWithGoogleBTN, redirectToRegisterBTN;
+    Button loginBTN, loginWithGoogleBTN, redirectToRegisterBTN, cancelBTN;
 
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
 
     private View mView;
-    private BottomNavigationView mBottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,17 +43,20 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.contentLogin), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        if (isUserAuthenticated()) {
+            finish();
+            return;
+        }
 
         initializeData();
     }
 
     private void initializeData() {
         mView = findViewById(R.id.contentLogin);
-        mBottomNavigationView = findViewById(R.id.bottomNavigationView);
-        mBottomNavigationView.getMenu().findItem(R.id.nav_profile).setChecked(true);
 
         emailET = findViewById(R.id.etLoginEmailAddress);
         passwordET = findViewById(R.id.etLoginPassword);
@@ -63,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
         loginBTN = findViewById(R.id.btnLogin);
         loginWithGoogleBTN = findViewById(R.id.btnLoginWithGoogle);
         redirectToRegisterBTN = findViewById(R.id.btnLoginToRegister);
+        cancelBTN = findViewById(R.id.buttonCancel);
 
         mAuth = FirebaseAuth.getInstance();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -79,8 +81,11 @@ public class LoginActivity extends AppCompatActivity {
         loginBTN.setOnClickListener(v -> performLogin());
         loginWithGoogleBTN.setOnClickListener(v -> AuthUtils.performAuthWithGoogle(mGoogleSignInClient, this));
         redirectToRegisterBTN.setOnClickListener(v -> redirect(this, RegisterActivity.class));
+        cancelBTN.setOnClickListener(v -> {
+            Log.i(LOG_TAG, "--Navigate back.--");
+            finish();
+        });
 
-        navigationBarRedirection(mBottomNavigationView, this);
     }
 
     private void performLogin() {
@@ -97,7 +102,8 @@ public class LoginActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 Log.i(LOG_TAG, "--Login successful.--");
                 Toast.makeText(LoginActivity.this, "Sikeres bejelentkezés.", Toast.LENGTH_LONG).show();
-                redirect(this, KnowledgeBaseActivity.class); // TODO: Jobban átgondolt átirányítás, esetleg csak a logint egy új activityként elindítani, és jelen helyzetben csak bezárni azt
+                Log.d(LOG_TAG, "--Bejelentkezési adatok: " + FirebaseAuth.getInstance().getCurrentUser());
+                finish();
             } else {
                 Log.e(LOG_TAG, "--Login error.--");
                 Toast.makeText(LoginActivity.this, "Hibás felhasználónév vagy jelszó!", Toast.LENGTH_LONG).show();
@@ -106,14 +112,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean isLoginDataValid(String email, String password) {
-        // TODO: Ezek többségét kezeli a FireStore, nem feltétlen szükséges leellenőrizni
-        if (email == null || email.isEmpty()) {
+        if (email.isEmpty()) {
             Log.e(LOG_TAG, "--Email address is null.--");
             Toast.makeText(LoginActivity.this, "Email cím kitöltése kötelező!", Toast.LENGTH_LONG).show();
             return false;
         }
 
-        if (password == null || password.isEmpty()) {
+        if (password.isEmpty()) {
             Log.e(LOG_TAG, "--Password is null.--");
             Toast.makeText(LoginActivity.this, "Jelszó kitöltése kötelező!", Toast.LENGTH_LONG).show();
             return false;

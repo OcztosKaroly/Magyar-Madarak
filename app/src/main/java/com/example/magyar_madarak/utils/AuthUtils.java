@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.magyar_madarak.HunBirdApplication;
 import com.example.magyar_madarak.data.dao.observation.ObservationDAO;
 import com.example.magyar_madarak.data.dao.user.UserDAO;
 import com.example.magyar_madarak.data.database.HunBirdsRoomDatabase;
@@ -18,10 +19,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.util.Objects;
 import java.util.concurrent.Executors;
 
 public class AuthUtils {
@@ -47,8 +50,6 @@ public class AuthUtils {
 
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                //Log.d(LOG_TAG, "--Google account email: " + account.getEmail());
-                //Log.d(LOG_TAG, "google account information: " + account.getPhotoUrl());
                 firebaseAuthWithGoogle(account.getIdToken(), auth, activity);
             } catch (ApiException e) {
                 Log.e(LOG_TAG, "--Google sign in error: " + e + ".--");
@@ -61,12 +62,11 @@ public class AuthUtils {
         auth.signInWithCredential(credential).addOnCompleteListener(activity, task -> {
             if (task.isSuccessful()) {
                 Log.i(LOG_TAG, "--Google login/registration to app successful.--");
-                // TODO: Átirányítás a regisztrációról regisztráció után.
-                Toast.makeText(activity, "Sikeres bejelentkezés/regisztráció Google fiókkal.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "Sikeres bejelentkezés Google fiókkal.", Toast.LENGTH_SHORT).show();
+                activity.finish();
             } else {
                 Log.e(LOG_TAG, "--Google login/registration to app unsuccessful.--");
-                // TODO: Regisztrációs errorok felsorolása. Toast törlése
-                Toast.makeText(activity, "Hiba a Google bejelentkezés/regisztráció során!", Toast.LENGTH_LONG).show();
+                Toast.makeText(activity, "Hiba a Google bejelentkezés során!", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -74,7 +74,8 @@ public class AuthUtils {
     public static void logout() {
         if (isUserAuthenticated()) {
             Log.i(LOG_TAG, "--Signing out.--");
-            clearAllUserData();
+            Toast.makeText(HunBirdApplication.getAppContext(), "Kijelentkezés...", Toast.LENGTH_SHORT).show();
+//            clearAllUserData(); // TODO
             mAuth.signOut();
         }
     }
@@ -95,18 +96,27 @@ public class AuthUtils {
     }
 
     public static boolean isUserAuthenticated() {
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
         if (currentUser != null) {
-            if (!currentUser.isEmailVerified()) {
-                Log.w(LOG_TAG, "--User email still not verified.--");
-                return false;
-            }
-            Log.i(LOG_TAG, "--User authenticated.--");
-            return true;
+            currentUser.reload().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    if (currentUser.isEmailVerified()) {
+                        Log.i(LOG_TAG, "--User authenticated and email verified.--");
+                    } else {
+                        Log.w(LOG_TAG, "--User email still not verified.--");
+                    }
+                } else {
+                    Log.e(LOG_TAG, "--Failed to reload user data.--");
+                }
+            });
+            return currentUser.isEmailVerified();
         }
+
         Log.w(LOG_TAG, "--No authenticated user detected.--");
         return false;
     }
+
 
     public static FirebaseUser getCurrentUser() {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();

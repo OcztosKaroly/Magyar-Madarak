@@ -30,12 +30,15 @@ import com.example.magyar_madarak.data.model.constants.Shape;
 import com.example.magyar_madarak.utils.ConverterUtils;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
@@ -127,7 +130,7 @@ public abstract class HunBirdsRoomDatabase extends RoomDatabase {
                         Diet diet = new Diet(document.getId(), Objects.requireNonNull(document.getString("dietName")));
                         Executors.newSingleThreadExecutor().execute(() -> {
                             instance.dietDAO().insert(diet);
-                            Log.d("DATA", "--Firestore diet got: " + diet.getDietName() + ".--");
+//                            Log.d("DATA", "--Firestore diet got: " + diet.getDietName() + ".--");
                         });
                     }
                 }).addOnFailureListener(e -> {
@@ -145,7 +148,7 @@ public abstract class HunBirdsRoomDatabase extends RoomDatabase {
                         ConservationValue conservationValue = new ConservationValue(document.getId(), Objects.requireNonNull(document.get("conservationValue", Integer.class)));
                         Executors.newSingleThreadExecutor().execute(() -> {
                             instance.conservationValueDAO().insert(conservationValue);
-                            Log.d("DATA", "--Firestore conservation value got: " + conservationValue.getConservationValue() + ".--");
+//                            Log.d("DATA", "--Firestore conservation value got: " + conservationValue.getConservationValue() + ".--");
                         });
                     }
                 }).addOnFailureListener(e -> {
@@ -163,7 +166,7 @@ public abstract class HunBirdsRoomDatabase extends RoomDatabase {
                         Color color = new Color(document.getId(), Objects.requireNonNull(document.getString("colorName")));
                         Executors.newSingleThreadExecutor().execute(() -> {
                             instance.colorDAO().insert(color);
-                            Log.d("DATA", "--Firestore color got: " + color.getColorName() + ".--");
+//                            Log.d("DATA", "--Firestore color got: " + color.getColorName() + ".--");
                         });
                     }
                 }).addOnFailureListener(e -> {
@@ -181,7 +184,7 @@ public abstract class HunBirdsRoomDatabase extends RoomDatabase {
                         Shape shape = new Shape(document.getId(), Objects.requireNonNull(document.getString("shapeName")));
                         Executors.newSingleThreadExecutor().execute(() -> {
                             instance.shapeDAO().insert(shape);
-                            Log.d("DATA", "--Firestore shape got: " + shape.getShapeName() + ".--");
+//                            Log.d("DATA", "--Firestore shape got: " + shape.getShapeName() + ".--");
                         });
                     }
                 }).addOnFailureListener(e -> {
@@ -199,7 +202,7 @@ public abstract class HunBirdsRoomDatabase extends RoomDatabase {
                         Habitat habitat = new Habitat(document.getId(), Objects.requireNonNull(document.getString("habitatName")));
                         Executors.newSingleThreadExecutor().execute(() -> {
                             instance.habitatDAO().insert(habitat);
-                            Log.d("DATA", "--Firestore habitat got: " + habitat.getHabitatName() + ".--");
+//                            Log.d("DATA", "--Firestore habitat got: " + habitat.getHabitatName() + ".--");
                         });
                     }
                 }).addOnFailureListener(e -> {
@@ -277,7 +280,7 @@ public abstract class HunBirdsRoomDatabase extends RoomDatabase {
 
                                 Executors.newSingleThreadExecutor().execute(() -> {
                                     instance.birdDAO().insert(bird);
-                                    Log.d("DATA", "--Firestore bird got: " + bird.getBirdName() + ".--");
+//                                    Log.d("DATA", "--Firestore bird got: " + bird.getBirdName() + ".--");
                                 });
                             });
                         }

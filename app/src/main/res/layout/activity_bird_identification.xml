@@ -10,20 +10,21 @@
     <FrameLayout
         android:id="@+id/contentBirdIdentification"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:padding="10dp"
+        android:layout_margin="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/pageBtnsBirdIdentification"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1"
-        app:layout_constraintBottom_toTopOf="@id/pageBtnsBirdIdentification" />
+        app:layout_constraintVertical_bias="0.1" />
 <!--        tools:layout="@layout/fragment_bird_color" />-->
 
     <LinearLayout
         android:id="@+id/pageBtnsBirdIdentification"
         style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="horizontal"
         android:paddingHorizontal="10dp"
         app:layout_constraintEnd_toEndOf="parent"

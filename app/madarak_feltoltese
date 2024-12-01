@@ -1,0 +1,1596 @@
+    private static void madarak_feltoltese() {
+        // CONSERVATION VALUES
+        String OTSZAZ = "/conservationValues/8DjOvpnzsjVDI5aXjfDu";
+        String HUSZONOT = "/conservationValues/8keS6yBDkSZwQZKqHdap";
+        String OTVEN = "/conservationValues/9AqPvAvkZdh3wh6wl8mt";
+        String TIZ = "/conservationValues/FBRq5FYc9Yhw6FrTpUUK";
+        String SZAZ = "/conservationValues/KoYD7LkDxN4mSbM3apiv";
+        String NULLA = "/conservationValues/T3EAUaFuHd0oy8Nnl4gb";
+        String MILLIO = "/conservationValues/mE47KiD0l1iy8kiwL0Yo";
+        String KETSZAZOTVEN = "/conservationValues/shjjrp70tyRtyF6JKzty";
+
+        // DIETS
+        String NOVENYEK = "/diets/6abUZ8FJDiCEdAjtPCeb";
+        String MADARAK = "/diets/9TwtZW9Aj3hajb6gZlKU";
+        String DOGOK = "/diets/PPlemHdjgyUF93x1cQav";
+        String KETELTUEK = "/diets/RT8S6DVNJRhNa1roLjn0";
+        String EMLOSOK = "/diets/XTp9lJRxplY35IMMxLOW";
+        String BOGARAK = "/diets/tcWuM7TU0XkJq5o0zdv0";
+        String VIZIALLATOK = "/diets/tjshTpqiS6xTfODtzn1N";
+
+        // COLORS
+        String BARNA = "/colors/1qecIyMyWHskUXxRFlTd";
+        String FEKETE = "/colors/7AfCiZTHmqWxgpval05K";
+        String NARANCS = "/colors/Fwgzdhc4rVQ53XjOReTQ";
+        String FEHER = "/colors/NXeJheyPgjAaxABA2cQO";
+        String CITROM = "/colors/YUvm39RY0ZTIGuxskgpl";
+        String SZURKE = "/colors/a5ZZUyXT98180Azm4fRp";
+        String PIROS = "/colors/fgH5EKuklcLDlEqy6lgi";
+        String VILAGOSBARNA = "/colors/orlkDJWLHBQKrqMSl76y";
+        String ZOLD = "/colors/ys5gkr7dLHPg5XycpPmD";
+        String KEK = "/colors/YmEAFht6cbh3NYxkXWZQ";
+        String LILA = "/colors/z2votBaha2KoEZaIIDXX";
+
+        // SHAPES
+        String GAZLO = "/shapes/41X2c9cNY0rVu7F0mkIj";
+        String SZALONKA = "/shapes/9Ii3ENSTtC9KPrQrKg54";
+        String VARJU = "/shapes/CAqNhVI5Xd2uEGhGKkrc";
+        String GALAMB = "/shapes/OFFPJboNWGxMgqPnFJ5C";
+        String LILE = "/shapes/Rhgd5ZXh6SOhtUpGYMFC";
+        String ENEKES = "/shapes/W4tqatV9iChngGeMf24G";
+        String HARKALY = "/shapes/Zabi6Fdo72uqG52onLGS";
+        String HOSSZULABU = "/shapes/ZrL2ERhzCeqaUZremXho";
+        String RAGADOZO = "/shapes/fc2p00EeKX67DVoHSBDI";
+        String RECE = "/shapes/jFl6jywBt3MVDCtsrwAc";
+        String PARTI = "/shapes/kZyJ7FRHH5QCwPbCExGH";
+        String TYUK = "/shapes/oGBsEGxGKJtoQTqMT0W8";
+        String TUZOK = "/shapes/vaPcWZMqVQElXxYLUqSO";
+        String BAGOLY = "/shapes/gy4jvU5ucLM44e1QViTz";
+
+        // HABITATS
+        String SZANTO = "/habitats/3TMbRTPmsWcAgmMQR8Ao";
+        String VAROS = "/habitats/FcB4r04tpDwGVO0ZtRbB";
+        String TUNDRA = "/habitats/Nv9kGvNzNUPALgVDyqji";
+        String ERDO = "/habitats/PaCHP6DRb26xMzhk2OJR";
+        String VIZ = "/habitats/u5cmOJxhIH6J6YomNFH6";
+        String RET = "/habitats/vOMxnzsf08JjFADxhvKr";
+
+        // ide kerulnek a nyers madarak
+        ;
+//        madar_feltoltese(
+//                "bütykös hattyú",
+//                List.of(FEHER),
+//                HUSZONOT,
+//                "Jól alkalmazkodott az emberi jelenléthez. Télen a hazai állomány mellé északról is érkeznek vendégek. A nálunk költő példányok nagyrészt a hazai és a tőlünk dél-nyugati, be nem fagyó vizeken telelnek (jellemzően a horvátországi Dráva szakaszon, illetve a vajdasági Duna szakaszon). A madarak évről évre visszajárnak bejáratott helyeikre, ahol az emberek etetik őket.",
+//                List.of(NOVENYEK, BOGARAK, KETELTUEK, VIZIALLATOK),
+//                List.of("A XIX. században eltűnt Magyarországról, de az 1970-es években nyugat felől újra megjelent, mára az egész országban elterjedt."),
+//                List.of(VIZ),
+//                "cygnus olor",
+//                false,
+//                List.of(RECE),
+//                "145-160 cm",
+//                "208-238 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "nyári lúd",
+//                List.of(FEHER, SZURKE, BARNA, VILAGOSBARNA),
+//                NULLA,
+//                "Neve arra utal, hogy nyáron, költési időben is megfigyelhető Magyarországon, szemben a többi vadlúddal, melyek nem költenek nálunk. Hazai állománya a sok évtizedes védelemnek és vadászati tilalomnak köszönhetően napjainkra jelentősen megerősödött, így újra vadászhatóvá tették. Ősszel a hazai állomány mellé északról érkeznek vendégek, a tél beálltával együtt vonulnak dél felé. Kis csapatai rendszeresen áttelelnek. Eurázsia jelentős részén elterjedt faj, a többi lúdfajnál délre népesíti be a vizes élőhelyeket. Nagyon korán kezdi a költést, gyakran már márciusban kotlik. Nádasokban, mocsarakban költ, nagy alapterületű fészkét általában nádból építi. Fészekalja legtöbbször 5-6 tojásból áll, de előfordul, hogy több tojó azonos fészekbe rakja tojásait, ilyenkor a költőpár jóval több kislibát is vezethet. A kotlási idő 27-28 nap. Csak a tojó ül a tojásokon, de a fiókákat mindkét szülő vezetgeti és védelmezi. A fiatalok kéthónaposan már önállóak, nyár közepére a családok nagyobb csapatokba verődnek. Táplálékában a szárazföldi fűfélék dominálnak, de kevés vízinövényt is fogyaszt. Gabonatarlókra és vetésekre is kijár táplálkozni. ",
+//                List.of(NOVENYEK),
+//                List.of("A házilúdfajták többségének őse.", "A legkorábban költő hazai lúdféle. Gyakran már március elején a tojásain kotlik."),
+//                List.of(VIZ, RET, SZANTO),
+//                "anser anser",
+//                true,
+//                List.of(RECE),
+//                "75-90 cm",
+//                "147-180 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "tőkés réce (tojó)",
+//                List.of(SZURKE, BARNA, VILAGOSBARNA, KEK),
+//                NULLA,
+//                "Mivel azzal korlátlanul kereszteződik, típusos egyedein kívül változatos színű egyedek is előfordulnak állományában. Alkalmazkodó faj, szinte minden vizes élőhelyen előfordul, a legnagyobb folyóktól a városi parkokban lévő apró tavakig. Állományát ismereteink szerint semmilyen folyamat nem veszélyezteti, természetes populációját tenyészetekből származó egyedekkel növelik a vadászok. Nem védett, vadászható faj. A hazai állomány jelentős része be nem fagyó vizeinken telel át, sokan érkeznek hozzánk északabbról is, kemény teleken viszont délebbre vonulnak, nagyon lecsökkenhet a nálunk tartózkodó madarak száma.",
+//                List.of(NOVENYEK, BOGARAK),
+//                List.of("A leggyakoribb hazai réce, a házi kacsa őse."),
+//                List.of(VIZ),
+//                "anas platyrhynchos",
+//                false,
+//                List.of(RECE),
+//                "50-65 cm",
+//                "81-98 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "tőkés réce (hím)",
+//                List.of(SZURKE, BARNA, VILAGOSBARNA, ZOLD),
+//                NULLA,
+//                "Mivel azzal korlátlanul kereszteződik, típusos egyedein kívül változatos színű egyedek is előfordulnak állományában. Alkalmazkodó faj, szinte minden vizes élőhelyen előfordul, a legnagyobb folyóktól a városi parkokban lévő apró tavakig. Állományát ismereteink szerint semmilyen folyamat nem veszélyezteti, természetes populációját tenyészetekből származó egyedekkel növelik a vadászok. Nem védett, vadászható faj. A hazai állomány jelentős része be nem fagyó vizeinken telel át, sokan érkeznek hozzánk északabbról is, kemény teleken viszont dlebbre vonulnak, nagyon lecsökkenhet a nálunk tartózkodó madarak száma.",
+//                List.of(NOVENYEK, BOGARAK),
+//                List.of("A leggyakoribb hazai réce, a házi kacsa őse."),
+//                List.of(VIZ),
+//                "anas platyrhynchos",
+//                false,
+//                List.of(RECE),
+//                "50-65 cm",
+//                "81-98 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "barátréce (tojó)",
+//                List.of(SZURKE, BARNA, VILAGOSBARNA),
+//                OTVEN,
+//                "A bukórécék közül hazánkban a leggyakoribb. Ennek ellenére néhány éve már védelmet élvez, hiszen állománya még így is töredéke a tőkés récéének és csökkenő, ráadásul röptében könnyű összetéveszteni más ritka fajjal, többek közt a fokozottan védett cigányrécével. Európai állománya csökkenő. Ennek ellenére sok országban vadászható. Nálunk márciusban és az ősz második felében lehet legnagyobb csapatait megfigyelni, de egész évben jelentős számban tartózkodik hazánkban. A téli hónapok idején – amikor vizeink befagynak – dél-európai telelőhelyeire vonul.",
+//                List.of(NOVENYEK, BOGARAK, VIZIALLATOK),
+//                List.of("Táplálékát főleg bukva szerzi, hínárt, magvakat, rovarokat hoz fel a víz alól.", "Néha más récefajok fészkébe csempészi tojásait."),
+//                List.of(VIZ),
+//                "aythya ferina",
+//                false,
+//                List.of(RECE),
+//                "42-49 cm",
+//                "72-82 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "barátréce (hím)",
+//                List.of(SZURKE, BARNA, FEKETE),
+//                OTVEN,
+//                "A bukórécék közül hazánkban a leggyakoribb. Ennek ellenére néhány éve már védelmet élvez, hiszen állománya még így is töredéke a tőkés récéének és csökkenő, ráadásul röptében könnyű összetéveszteni más ritka fajjal, többek közt a fokozottan védett cigányrécével. Európai állománya csökkenő. Ennek ellenére sok országban vadászható. Nálunk márciusban és az ősz második felében lehet legnagyobb csapatait megfigyelni, de egész évben jelentős számban tartózkodik hazánkban. A téli hónapok idején – amikor vizeink befagynak – dél-európai telelőhelyeire vonul.",
+//                List.of(NOVENYEK, BOGARAK, VIZIALLATOK),
+//                List.of("Táplálékát főleg bukva szerzi, hínárt, magvakat, rovarokat hoz fel a víz alól.", "Néha más récefajok fészkébe csempészi tojásait."),
+//                List.of(VIZ),
+//                "aythya ferina",
+//                false,
+//                List.of(RECE),
+//                "42-49 cm",
+//                "72-82 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "cigányréce",
+//                List.of(FEHER, BARNA, FEKETE),
+//                MILLIO,
+//                "Természetvédelmi szempontból talán a legjelentősebb hazai récefaj. Világállománya erősen csökken, a hazai állománya európai léptékben is jelentős. Magyarország szerepe emiatt a faj törvényes oltalma szempontjából igen fontos. A védelmi intézkedések, amelyek a faj hazai állományának megőrzését célozzák, közvetetten sok egyéb madárnak és más élőlénynek teremtenek kedvező feltételeket. A kisebb tavak eltűnése, a nem megfelelő tógazdálkodás, és a madarak zavarása sok helyen a cigányréce eltűnését eredményezte. A vadászati tevékenység pedig a tévedésből adódó lelövéseken kívül a sörétszemek lenyeléséből adódó ólommérgezést is előidézte. Az amur és a bütykös hattyú terjedése lokálisan szintén szerepet játszhat állománycsökkenésében. A vadásztársadalom és a halastavakon gazdálkodók felvilágosítása, valamint a velük folytatott párbeszéd kiemelten fontos feladata a természetvédelemnek. Vonuló madár, a telet Dél-Európában, Afrikában és a Közel-Keleten tölti, de néhány példány minden évben áttelel hazánkban is.",
+//                List.of(NOVENYEK, BOGARAK, VIZIALLATOK),
+//                List.of("A tojók szeme sötétbarna, míg a gácsérok szivárványhártyája fehér színű."),
+//                List.of(VIZ),
+//                "aythya nyroca",
+//                false,
+//                List.of(RECE),
+//                "38-42 cm",
+//                "63-67 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "fogoly",
+//                List.of(SZURKE, BARNA, VILAGOSBARNA, NARANCS),
+//                NULLA,
+//                "Magyarországon általánosan elterjedt költőfaj, de az elmúlt évtizedekben jelentős állománycsökkenést szenvedett el Európa-szerte. A XX. század elején még óriási számban költött a hazai agrárkörzetekben. A mezőgazdasági struktúra átalakulása, a gépesítés, a téeszesítés, a vegyszeres növényvédelem elterjedése a fogolyállomány drasztikus összeomlását eredményezte. Az iparszerű mezőgazdaság következtében eltűnt a kisparcellás gazdálkodás, nagy monokultúrák alakultak ki. Ez a jelenség a fogoly és a legtöbb agrárterületen élő madárfaj számára kedvezőtlen. Aratás után hirtelen hatalmas táblák válnak sivár területté, ahol a foglyok sem táplálékot, sem búvóhelyet nem találnak. A gépek is sok madár pusztulását okozzák, főleg a kotlás során. A vegyszeres növényvédelem következtében pedig visszaszorultak a gyomfajok és a rovarok, melyek e tyúkszerű madár fő táplálékát jelentik. Kevésbé intenzív gazdálkodással talán megállítható a faj egyedszámának csökkenése. A táblaszegélyek, mezsgyék meghagyása is segítheti a fogoly megmaradását az agrárterületeken. Vadászható faj, október 1-jétől december 31-ig, kizárólag nem természetes állományból származó egyedek kibocsátása esetén és külön engedéllyel.",
+//                List.of(NOVENYEK, BOGARAK),
+//                List.of("Betelepítették Új-Zéland, Kanada és az Egyesült Államok területére is."),
+//                List.of(RET, SZANTO),
+//                "perdix perdix",
+//                false,
+//                List.of(TYUK),
+//                "29-31 cm",
+//                "45-48 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "fürj",
+//                List.of(FEKETE, BARNA, VILAGOSBARNA, FEHER),
+//                OTVEN,
+//                "A legkisebb európai tyúkalakú, bár nem mondható ritkának, mégis ritkán kerül szem elé rejtőzködő életmódja miatt. Hangja azonban jellegzetes, gyakran hallatja, vonuláskor akár közparkokban, kertekben is hallható pitypalattyolása. A fogolyhoz hasonlóan megsínylette a mezőgazdaság átalakulását. A nagy monokultúrák sem táplálékot, sem menedéket nem nyújtanak az apró tyúkfélének. A vegyszeres növényvédelem miatt mérgezések is előfordulnak. A mediterrán vidékeken sok fürjet elejtenek, a helyi fürjspecialitások miatt, pedig a japán fürj könnyen, gazdaságosan tenyészthető háziállat, és szintén alkalmas lenne erre a célra. A fürj az egyetlen vonuló tyúkalakú, nálunk főleg április és október között tartózkodik, a telet Európa déli és Afrika északi részén tölti. Eurázsia jelentős részén elterjedt. Mezőgazdasági területeken, száraz gyepeken bárhol előfordulhat. A parlagokat, gyomos szántókat, gyümölcsösöket is kedveli. Évente általában kétszer költ. A kakas territóriumot tart, ahol több tyúkkal is párosodhat. A kis tyúk a földön kialakított fészkébe 9-13 tojást rak. A csibék 18 nap kotlás után kelnek ki. Csak a tojó vezeti őket, eleinte kizárólag rovarokkal táplálkoznak. Folyamatosan térnek át a magevésre. Kifejlett madarak táplálékában különféle gyommagvak dominálnak.",
+//                List.of(NOVENYEK, BOGARAK),
+//                List.of("Aratáskor a kipergett gabonamagvakat is összeszedi, ezzel kárt nem tesz, rovarirtással viszont nagy hasznot hajt."),
+//                List.of(RET, SZANTO),
+//                "coturnix coturnix",
+//                true,
+//                List.of(TYUK),
+//                "16-18 cm",
+//                "32-35 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "fácán (tojó)",
+//                List.of(FEKETE, BARNA, VILAGOSBARNA),
+//                NULLA,
+//                "Jelenleg a legfontosabb apróvad Magyarországon. A XIX. századig a colhicus alfaj élt hazánkban, később telepítették be a nyakörvös alfajokat, melyek idővel dominánssá váltak a hazai állományban. A fácán az ország egész területén gyakori, mert a vadásztársaságok minden éven nagy számban bocsátanak ki zárt térben tenyésztett madarakat. Ezek a fiatal fácánok kezdetben nagyon szelídek, sok példányuk esik ragadozók áldozatául, sokat elütnek autóval, emiatt csak viszonylag keveset tudnak hasznosítani a vadászok. A több generáció óta fogságban tenyésztett madarak kotlási ösztöne gyengébb, sok tyúk nem nevel utódokat. Nem őshonos, gyakori faj, ami ennek ellenére természetvédelmi kárt sem okoz, de vadgazdálkodási jelentősége egyben természetvédelmi problémát jelent áttételesen, mivel sok védett tollas és prémes ragadozó esik áldozatául annak, hogy vélt vagy valós fácánpusztítása miatt lelövik a vadászok. Állandó madár, jelentősebb kóborlásai sem jellemzőek. A kakas október és február között vadászható, tyúk csak tenyésztett állományból származó egyedek kibocsátása esetén.",
+//                List.of(NOVENYEK, BOGARAK),
+//                List.of("Eredetileg ázsiai faj, Európába feltehetően az ókorban telepítették be."),
+//                List.of(RET, SZANTO, VAROS),
+//                "phasianus colchicus",
+//                false,
+//                List.of(TYUK),
+//                "53-89 cm",
+//                "70-90 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "fácán (hím)",
+//                List.of(FEKETE, BARNA, VILAGOSBARNA, PIROS),
+//                NULLA,
+//                "Jelenleg a legfontosabb apróvad Magyarországon. A XIX. századig a colhicus alfaj élt hazánkban, később telepítették be a nyakörvös alfajokat, melyek idővel dominánssá váltak a hazai állományban. A fácán az ország egész területén gyakori, mert a vadásztársaságok minden éven nagy számban bocsátanak ki zárt térben tenyésztett madarakat. Ezek a fiatal fácánok kezdetben nagyon szelídek, sok példányuk esik ragadozók áldozatául, sokat elütnek autóval, emiatt csak viszonylag keveset tudnak hasznosítani a vadászok. A több generáció óta fogságban tenyésztett madarak kotlási ösztöne gyengébb, sok tyúk nem nevel utódokat. Nem őshonos, gyakori faj, ami ennek ellenére természetvédelmi kárt sem okoz, de vadgazdálkodási jelentősége egyben természetvédelmi problémát jelent áttételesen, mivel sok védett tollas és prémes ragadozó esik áldozatául annak, hogy vélt vagy valós fácánpusztítása miatt lelövik a vadászok. Állandó madár, jelentősebb kóborlásai sem jellemzőek. A kakas október és február között vadászható, tyúk csak tenyésztett állományból származó egyedek kibocsátása esetén.",
+//                List.of(NOVENYEK, BOGARAK),
+//                List.of("Eredetileg ázsiai faj, Európába feltehetően az ókorban telepítették be."),
+//                List.of(RET, SZANTO, VAROS),
+//                "phasianus colchicus",
+//                false,
+//                List.of(TYUK),
+//                "53-89 cm",
+//                "70-90 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "búbos vöcsök",
+//                List.of(FEHER, BARNA, SZURKE, PIROS),
+//                OTVEN,
+//                "A legnagyobb hazai vöcsök, mely hazánk nagyobb állóvizeinek rendszeres és jellegzetes költőfaja. A vizes élőhelyek védelmével, a mesterséges vízfelületek szakszerű gondozásával a hazai állomány léte biztosított. Rövidtávú vonuló, elsősorban Dél-Európában telel, hazánkból a madarak nagy része késő ősszel elvonul, csak néhányan maradnak a be nem fagyó vizeken. Nevét a fejen található, jellegzetesen felmeredő dísztollairól kapta, mely csak az öreg madarakon figyelhető meg kora tavasztól nyár végéig.",
+//                List.of(NOVENYEK, BOGARAK, VIZIALLATOK),
+//                List.of("Gyakran saját tollaikat is fogyasztják, ami a halszálkák elleni védelmet segíthetik."),
+//                List.of(VIZ),
+//                "podiceps cristatus",
+//                false,
+//                List.of(RECE),
+//                "46-51 cm",
+//                "85-90 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "nagy kárókatona",
+//                List.of(FEHER, SZURKE, FEKETE),
+//                HUSZONOT,
+//                "Viszonylag gyakori, korábban jelentős hazai állománynövekedésen átesett faj. Ősszel az itthoni populáció egyedei mellé északabbról érkeznek csapatok. A vizek befagyásával a madarak jelentős része déli irányba vonul, a be nem fagyó vizeken azonban sok példány áttelel. Egyike a hazai madárfauna azon tagjainak, amely jelentős károkat okozhat a halastavakon gazdálkodóknak. A hazai állomány törvényes oltalma a 13/2001 KöM rendelet szerint Európai Közösségben természetvédelmi szempontból jelentős állatfaj kategória szerint értelmezhető, a jogszabály feltételei mellett  lehetőség van riasztására és vadászati eszközökkel történő gyérítésére is. Halastavainkon, természetes vizeinken károkozásának mérséklése a fent linkelt jogszabály szerint lehetséges, de figyelembe kell venni az adott területen élő egyéb madárfajok jelenlétét, védelmét.",
+//                List.of(VIZIALLATOK),
+//                List.of("Kormorán néven is ismert.", "Tollazata nem vízálló, így vadászat után kitárt szárnyakkal szárítkozik."),
+//                List.of(VIZ),
+//                "podiceps cristatus",
+//                true,
+//                List.of(PARTI),
+//                "80-100 cm",
+//                "130-160 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "bakcsó (kifejlett)",
+//                List.of(SZURKE, FEKETE),
+//                SZAZ,
+//                "Az egyik leggyakoribb hazai gémféle. Nagy telepei alakulhatnak ki, ezek közelében a kedvezőtlen változások miatt lokálisan sok pár költése meghiúsulhat. Szerencsére mára a nagy gémtelepek többsége védett területen található, ezekről pedig a természetvédelem megfelelően gondoskodik. Vonuló madár, március-április táján érkezik vissza afrikai telelőterületeiről. Az őszi vonulás szeptemberben kezdődik, de az időjárás függvényében el is húzódhat.   Eurázsiában, Afrikában, Észak- és Dél-Amerikában elterjedt gémféle. Nálunk legnagyobb számban ártéri ligeterdőkben költ, sokszor vegyes gémtelepen, ahol szürke gémek, kis kócsagok és kárókatonák társaságában fészkel. Ritkábban társulhatnak a közösséghez kis kárókatonák, üstökös gémek, batlák, sőt pásztorgémek is. Kisebb telepei halastavaknál is megtalálhatók, egyre nagyobb számban költ nádi gémtelepeken is. Vékony ágakból építi egyszerű fészkét. Tojásainak száma 3-5.  A költési idő körülbelül 3 hét. Mindkét szülő kotlik, a fiókák gondozásában a hím is részt vesz. Főleg éjszaka aktív, az alkonyati órákban csapatosan repülnek táplálkozóhelyeikre. A madarak lesben állva vadásznak, mozdulatlanul bevárják zsákmányukat, majd hirtelen lecsapnak rá. Kétéltűekkel, halakkal, rovarokkal táplálkoznak. ",
+//                List.of(KETELTUEK, EMLOSOK, BOGARAK, VIZIALLATOK),
+//                List.of("A mondókából mindenki által ismerős vakvarjúról kevesen tudják, hogy ez a név tulajdonképpen a bakcsót takarja. Népi nevének eredete nem a látására utal, hanem hangját utánozza."),
+//                List.of(VIZ),
+//                "nycticorax nycticorax",
+//                true,
+//                List.of(PARTI, HOSSZULABU),
+//                "58-65 cm",
+//                "105-112 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "nagy kócsag",
+//                List.of(FEHER),
+//                SZAZ,
+//                "A kis kócsagtól méretén túl lassabb, méltóságteljesebb szárnycsapáú röpte, hosszabb lába, a lábszár és a csüd sárga színezete alapján lehet megkülönböztetni. Ujjai feketék, szemben a kis kócsag sárga ujjaival. A XIX. században egész Európában divat volt a kócsagtollas viselet. Nászruhájának dísztollai miatt szinte teljesen kipusztították a fajt Magyarországról. Hogy megóvják a kipusztulástól, 1924-ben alkalmazták az első kócsagőrt a Kis-Balatonon, ami igen jelentős állomása volt a magyar természetvédelem történetének. A hetvenes évek után állománya folyamatosan növekedni kezdett. A halastavakon még mindig problémát jelent a zavarás, a fészkelőhelyek növényzetének kaszálása és égetése, még akkor is, ha nem fészkelési időben végzik. Kiterjedt, időszakos elöntésekkel, valamint a nádaratás megfelelő időzítésével állománya tovább növelhető. Korán, már február végén, március elején visszatér telelőterületeiről. Elvonulásuk szeptemberben kezdődik, de még novemberben is sok helyen látni. Egyre nagyobb számban telelnek át példányai a Kárpát-medencében is. Világszerte elterjedt faj, négy alfaja a sarki tájak és Észak-Amerika nagy része kivételével mindenhol megtalálható. A Kárpát-medencében élő madarak egy szigetszerűen elkülönült populációt alkotnak. Eredetileg a nagy kiterjedésű, összefüggő nádasok és ősmocsarak fészkelője volt, de megtelepedett a kisebb kiterjedésű nádasokban, halastavak nádszigeteiben, nádszegélyeiben is. Telepeinek nagysága változó, a 3-4 párostól a 80-100 párosig terjed. Fészkét legtöbbször sűrű, avas nádba rakja. A nádszálakat 130-150 cm magasan elfektetve töri meg, hogy erre az alapra építse fészkét, melynek anyaga nagyrészt szintén nád. Fészekalja 3-4, ritkán 5 világoskék tojásból áll. A kotlási idő 25-26 nap. Más gémfélékhez hasonlóan a fiókák még röpképességük elérése előtt kimásznak a fészekből. A szülők ilyenkor tovább etetik őket. Erős napsütés esetén a az öreg madarak fiókákat szárnyukkal árnyékolják. Röpképességüket 34-35 napos korukban érik el. Főként a sekély, alacsony növényzettel ritkásan benőtt vizeken táplálkoznak. Elsősorban halakat, kisebb mértékben csíkbogarakat, csíborokat, szitakötőlárvákat fogyasztanak, de békákat, gyíkokat, lótücsköt és kisemlősöket is fognak. Az ősszel vonuló, és a növekvő számban áttelelő példányok gyakran szürke gémekkel együtt egerésznek, pockoznak a tarlókon és lucernásokban.",
+//                List.of(KETELTUEK, EMLOSOK, BOGARAK, VIZIALLATOK),
+//                List.of("Magyar természetvédelem címermadara.", "Az 5 forintos érme hátulján is ez a faj látható."),
+//                List.of(VIZ, RET, SZANTO),
+//                "egretta alba",
+//                false,
+//                List.of(HOSSZULABU),
+//                "85-102 cm",
+//                "140-170 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "kanalasgém",
+//                List.of(FEHER, CITROM),
+//                OTSZAZ,
+//                "A kanalasgém nevét hosszú, kanálszerűen kiszélesedő csőréről kapta. A gólyákhoz hasonlóan nyújtott nyakkal repül (a gémek ugyanezt behúzott nyakkal teszik). Tollazata fehér, de a fiatal madarakon jellemzően négy éves korig az evezők és a szárnyfedők végén fekete mintázat figyelhető meg. A fiatalok csőre egyszínű, barnás, de mire ivaréretté válnak csőrük átszíneződik, fekete-szürkésen márványozottá válik, míg a „kanalukon” változó kiterjedésű narancsszínű mintázat alakul ki. A narancssárga folt mérete és alakja lehetővé teszi közelről a madarak egyedi azonosítását is. Az öreg kanalasgémek tarkójáról nászidőszakban tollbóbita nyúlik hátra, továbbá begyükön egy narancssárgás szalag húzódik keresztbe. Torkuk csupasz, sárga és narancssárga színekben pompázik. Magyarországon a fészkelő-állomány nagy része az Alföld vizes élőhelyein koncentrálódik. Fészektelepeik sík vidéki mocsarak, árterek, tavak, halastavak területén találhatók. Hazánkban jellemzően nádasban fészkel, de fákon, bokrokon is költ. Nyugat-Európában (pl. Hollandiában) fészkét gyakran a talajra építi. A kanalasgém hazai nádas költőhelyein a derékig érő vízborítás biztosítása szükséges a fészkelés sikerének érdekében. Ez a vízmélység már megakadályozza a ragadozó emlősöket, köztük a vaddisznókat, hogy a tojásos, vagy a fiókás fészkeket megközelítsék és elpusztítsák. Más telepesen költő fajokkal vegyes kolóniát is alkothatnak, de a kanalasgémek a gémtelepen belül rendszerint elkülönülve költenek, gyakran a nádas belsejében található kisebb tavacskákat, nyíltabb részeket lakják körbe, ahol a nád babásodik.",
+//                List.of(KETELTUEK, BOGARAK, VIZIALLATOK),
+//                List.of("A kanalasgém nevét összetéveszthetetlen hosszú, kanálszerűen kiszélesedő csőréről kapta."),
+//                List.of(VIZ),
+//                "platalea leucorodia",
+//                true,
+//                List.of(HOSSZULABU),
+//                "80-90 cm",
+//                "115-130 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "fehér gólya",
+//                List.of(FEHER, FEKETE),
+//                SZAZ,
+//                "Mindenki által ismert, közkedvelt madarunk. Sorsa összefonódott a falvakéval, ahol fészkét építi. Hazai állománya az elmúlt száz évben erősen ingadozott, jelenleg csökkenő trendet mutat, 4000-4500 pár körül alakul. Védelme nagyban függ a megfelelő tájgazdálkodástól, a nedves, mocsaras rétek megszűnésével eltűnnek táplálkozóhelyei. Az egész országra jellemző, hogy csökken a legelő haszonállatok mennyisége, ez pedig a gyepterületek nagyságának kedvezőtlen változását vonja maga után. Az áramütés veszélye speciális költési stratégiájának és méretének következtében ezt a fajt fenyegeti legnagyobb mértékben, emiatt a vezetékek szigetelése stratégiai fontosságú a faj védelme szempontjából. Mivel táplálékának jelentős részét mezőgazdasági területeken szerzi, ezért sok egyed pusztulását okozza mérgezés. Ez afrikai telelőterületein még súlyosabb probléma, hiszen ott sok olyan szert is használnak, amit Európában veszélyessége miatt betiltottak. A faj védelmét villanyoszlopokra kihelyezett fészektartó-állványokkal segíthetjük, a már meglévő fészkek kiemelése is fontos feladat. Minden évben sok gólya kerül mentőközpontokba, ahonnan, ha lehetséges, megerősödésük után szabadon engedik őket. Mint közismert és népszerű madárnak, kiemelt szerepe van a környezeti nevelésben. Vonuló madár, márciustól szeptemberig figyelhető meg hazánkban. A telet Afrika trópusi területein tölti. Európában, Észak-Afrikában és Kis-Ázsiában fészkel. Fészkét az esetek döntő többségében emberi településeken építi. Manapság hazánkban főleg villanyoszlopokon költ, ezek elterjedése előtt kéményeken, tetőkön és fákon fészkelt. Időnként laza telepei alakulhatnak ki. Évente új párt választanak, az állandó párok fennmaradása is inkább a területhűséggel hozható összefüggésbe. Nagyméretű gallyfészket épít, amibe általában 3-5 tojást rak a tojó.  A fiókákat az egyik szülő a kezdeti időszakban állandóan védi az időjárás szélsőségeitől és a ragadozóktól. A fiatalok 8 hetes koruk után teszik meg az első repülésüket a fészek körül. Tápláléka változatos, férgekből, rovarokból, halakból, kétéltűekből, hüllőkből és más kisebb gerincesekből áll.",
+//                List.of(KETELTUEK, BOGARAK, VIZIALLATOK, EMLOSOK),
+//                List.of("Van, hogy mohát visz a csőrében, és azzal szállítja a vizet fiókáinak.", "Általános vélekedéstől eltérően nem egymáshoz, hanem a fészekhez hűségesek. A párok a vonuláskor sem tartanak össze."),
+//                List.of(VIZ, VAROS, RET, SZANTO),
+//                "ciconia ciconia",
+//                true,
+//                List.of(HOSSZULABU),
+//                "100-115 cm",
+//                "155-165 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "rétisas",
+//                List.of(FEHER, BARNA, VILAGOSBARNA),
+//                MILLIO,
+//                "A legnagyobb európai sas. Kontinensünk állománya élőhelyeinek elvesztése és a mérgezések miatt a ’70-es években kritikus pontot ért el. Hazai populációja azóta folyamatosan nő. A rétisas a zavarásra és a környezet állapotára érzékeny faj, védelme ezért a magyar természetvédelem kiemelt feladata. Élőhelyeinek védelme, más kevésbé látványos fajok oltalmához is hozzájárul. Állományát fészkelő- és táplálkozó területeinek zavarása, valamint megszűnése veszélyezteti leginkább. Mint a legtöbb nagytestű madár esetében, a sasoknál is nagyon gyakori az áramütés miatti pusztulás. Szándékos és véletlen mérgezések miatt is sok madár pusztul el, időnként pedig le is lövik ezeket a ritka madarakat. Élőhelyük zavartalanságának biztosítása, a megfelelő erdő- és tógazdálkodás, valamint tudatformálás mellett a természetvédelem fontos feladata a sérült madarak gondozása és visszavadítása. A hazai párok egész évben a fészek környékén tartózkodnak, a fiatalok pedig kóborolnak. Évente 500-700 rétisas érkezik hozzánk a Baltikumból a tél folyamán, ezek áttelelését a madarak etetésével segíthetjük.",
+//                List.of(VIZIALLATOK, MADARAK, EMLOSOK),
+//                List.of("Nagyon hamar költésbe kezd, akár már februárban is."),
+//                List.of(VIZ, ERDO, RET, SZANTO),
+//                "haliaeetus albicilla",
+//                false,
+//                List.of(RAGADOZO),
+//                "70-90 cm",
+//                "200-240 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "parlagi sas",
+//                List.of(FEHER, BARNA, VILAGOSBARNA, SZURKE),
+//                MILLIO,
+//                "A parlagi sas a magyar természetvédelem egyik kiemelten fontos madara. A Kárpát-medencében lévő állomány a faj elterjedésének nyugati határán található. Mivel világállománya csökken, a Szlovákiával közös hazai állomány pedig növekszik, a fajvédelmi munkában hazánknak kiemelt szerepe van. A természetvédelmi munkáknak köszönhetően az elmúlt 30 év alatt az állomány megtízszereződött. Kiemelten fontos a hazai állomány megőrzése az európai populáció szempontjából. Az állománynövekedés mellett megfigyelhető, hogy a párok egyre nagyobb része átköltözik a középhegységekből az eredeti pusztai élőhelyeikre, az alföldi területekre. Az erdei környezetben költő párok esetében az erdészeti munkákat a fészek közelében korlátozni kell. Az ürgés legelők megóvása stratégiai fontosságú a faj védelme érdekében, ugyanis ez a legfőbb tápláléka a parlagi sasnak. Nagyon sok sas pusztul el áramütés következtében, ezért a középfeszültségű vezetékeket madárbarát módon szigetelni kell a madarakat legveszélyeztettebben érintett területeken. Azoknál a fészkeknél, ahol fennáll a lehetősége annak, hogy kifosztják, a folyamatos őrzés elkerülhetetlen. Az elharapódzott mérgezési hullámok egyre súlyosabb mértékben érintik ezt a fokozottan védett sasfajunkat is, több mint 50 esetben találtak mérgezett sast a szakemberek az elmúlt fél évtized alatt.  Az öreg madarak egész évben a költőhelyükön maradnak. A fiatalok kóborlásba kezdenek, egy részük a Balkánon, Kis-Ázsiában vagy Afrikában telel.",
+//                List.of(MADARAK, EMLOSOK, DOGOK),
+//                List.of("Az összeszokott párok olykor közösen vadásznak."),
+//                List.of(ERDO, RET, SZANTO),
+//                "aquila heliaca",
+//                false,
+//                List.of(RAGADOZO),
+//                "72-83 cm",
+//                "190-210 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "barna rétihéja (hím)",
+//                List.of(FEKETE, BARNA, VILAGOSBARNA, SZURKE),
+//                OTVEN,
+//                "A faj állománya az 1970-es években nagyon megfogyatkozott. A dúvadirtás szabályainak szigorodása kedvezően hatott a fészkelő párok számára. A kedvező helyzet megőrzéséhez a vadászati és természetvédelmi szakemberek együttműködésére van szükség. Vonuló madár, április és október között tartózkodik hazánkban. A telet általában Afrika Szaharán túli részén tölti, de egyre több esetben fordulnak elő áttelelő példányok. Eurázsiában és Afrika északi részén költ. Hozzá nagyon hasonló fajok élnek szinte az egész Óvilágban. Síkvidéki mocsarakban, nádasokban szinte mindenhol költ. Ezek hiányában ritkán mezőgazdasági területeken, száraz gyepeken is megtelepszik. Tavaszi visszaérkezésük után a párok látványos nászrepülést mutatnak be. Fészkét nádszálakból építi. Mivel vizes környezetben költ a talajon, a fészekanyagnak magasan a vízszint fölött kell tartania a fészekaljat. A tojó 3-6 tojást rak, a fiókák 32 nap kotlás után kelnek ki. A tojásokat csak a tojó melegíti, a fiókákat is ő eteti, eközben a hím vadászik, ő gondoskodik a család táplálékellátásáról. A fiókák 40 napos korban hagyják el a fészket. A rétihéják sajátos módon vadásznak. A nyílt területen a növényzet felett néhány méterrel pásztázzák át vadászterületüket, ha megpillantanak valamit, rávágnak. A barna rétihéja tápláléka kisemlősökből, kisebb madarakból és fiókáikból, tojásokból, békákból, ritkán halakból áll.",
+//                List.of(MADARAK, EMLOSOK),
+//                List.of("Nászrepülésük látványos, amit rögtön a tavaszi visszaétkezésük után bemutatnak."),
+//                List.of(VIZ, RET, SZANTO),
+//                "circus aeruginosus",
+//                true,
+//                List.of(RAGADOZO),
+//                "48-56 cm",
+//                "115-130 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "barna rétihéja (tojó)",
+//                List.of(FEKETE, BARNA, VILAGOSBARNA, FEHER),
+//                OTVEN,
+//                "A faj állománya az 1970-es években nagyon megfogyatkozott. A dúvadirtás szabályainak szigorodása kedvezően hatott a fészkelő párok számára. A kedvező helyzet megőrzéséhez a vadászati és természetvédelmi szakemberek együttműködésére van szükség. Vonuló madár, április és október között tartózkodik hazánkban. A telet általában Afrika Szaharán túli részén tölti, de egyre több esetben fordulnak elő áttelelő példányok. Eurázsiában és Afrika északi részén költ. Hozzá nagyon hasonló fajok élnek szinte az egész Óvilágban. Síkvidéki mocsarakban, nádasokban szinte mindenhol költ. Ezek hiányában ritkán mezőgazdasági területeken, száraz gyepeken is megtelepszik. Tavaszi visszaérkezésük után a párok látványos nászrepülést mutatnak be. Fészkét nádszálakból építi. Mivel vizes környezetben költ a talajon, a fészekanyagnak magasan a vízszint fölött kell tartania a fészekaljat. A tojó 3-6 tojást rak, a fiókák 32 nap kotlás után kelnek ki. A tojásokat csak a tojó melegíti, a fiókákat is ő eteti, eközben a hím vadászik, ő gondoskodik a család táplálékellátásáról. A fiókák 40 napos korban hagyják el a fészket. A rétihéják sajátos módon vadásznak. A nyílt területen a növényzet felett néhány méterrel pásztázzák át vadászterületüket, ha megpillantanak valamit, rávágnak. A barna rétihéja tápláléka kisemlősökből, kisebb madarakból és fiókáikból, tojásokból, békákból, ritkán halakból áll.",
+//                List.of(MADARAK, EMLOSOK),
+//                List.of("Nászrepülésük látványos, amit rögtön a tavaszi visszaétkezésük után bemutatnak."),
+//                List.of(VIZ, RET, SZANTO),
+//                "circus aeruginosus",
+//                true,
+//                List.of(RAGADOZO),
+//                "48-56 cm",
+//                "115-130 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "egerészölyv",
+//                List.of(SZURKE, BARNA, VILAGOSBARNA, FEHER),
+//                HUSZONOT,
+//                "Magyarországon a leggyakoribb ragadozómadár. Mindenki ismeri az autópályák vadkerítéseinek oszlopairól, bár sokan tévesen sasnak gondolják. A vadászok részéről felmerült az igény, hogy ismét vadászható faj legyen. A természetvédelmi szakemberek cáfolják azokat a tévhiteket, amelyek a faj túlszaporodására ás az apróvadállományban okozott számottevő károkozására irányulna, mivel azok állománycsökkenése sokkal inkább élőhelyük átalakulásával magyarázható, mintsem a természetes ragadozómadár-állományok megerősödésével. Emellett problémás lehet, hogy összetévesztenék ritka fajokkal, pl. pusztai ölyvvel, hiszen sokszor a szakemberek is csak alapos megfigyelés után tudják biztosan elkülöníteni a többi hasonló ragadozótól. A határozást ráadásul megnehezíti az egerészölyv rendkívüli színezetbeli változatossága. Rágcsálópusztításával hasznot hajt a mezőgazdaságnak, bár a mai szemlélet már szerencsére nem ezek alapján a szempontok alapján dönt egy madár státuszáról. A hazai állomány állandó, de télen észak-európai madarak érkeznek Magyarországra.",
+//                List.of(MADARAK, EMLOSOK, KETELTUEK, BOGARAK),
+//                List.of("Hsaznot is hajtó pocokvadászatát mezőgazdasági területeken segíthetjük T alakú ulőfák telepítésével."),
+//                List.of(ERDO, RET, SZANTO, VIZ, VAROS),
+//                "buteo buteo",
+//                false,
+//                List.of(RAGADOZO),
+//                "51-57 cm",
+//                "113-128 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "karvaly",
+//                List.of(SZURKE, NARANCS, VILAGOSBARNA, FEHER),
+//                OTVEN,
+//                "Apró madarak elejtésére specializálódott ragadozó, városi környezetben is költ. A két nem közötti méretkülönbség kifejezett, a tojók nagyobbak. Magyarországon általánosan elterjedt faj. A hazai állomány állandó, télen észak-európai madarak is érkeznek hozzánk.",
+//                List.of(MADARAK),
+//                List.of("Kis mérete és látványos vadászata miatt egyes országokban kedvelt solymász madár."),
+//                List.of(ERDO, RET, SZANTO, VIZ, VAROS),
+//                "accipiter nisus",
+//                false,
+//                List.of(RAGADOZO, GALAMB),
+//                "28-38 cm",
+//                "55-70 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "vörös vércse (hím)",
+//                List.of(SZURKE, FEKETE, NARANCS, BARNA),
+//                OTVEN,
+//                "Az egyik legismertebb ragadozómadarunk, ami még Budapest belvárosában is költ. Mivel fészket nem épít, mesterséges fészekalapokkal, illetve speciális költőládákkal lehet segíteni megtelepedését. Agrárkörnyezetben magasabb fákra, városokban tornyokra, magas épületekre célszerű költőládát kihelyezni. A hazai állomány jelentős része elvonul, a telet tőlünk délre tölti, de északi madarak, valamint az idősebb példányok nálunk telelnek át.",
+//                List.of(MADARAK, EMLOSOK, BOGARAK),
+//                List.of("Jellemző vadászati stratégiája az úgynevezett \"szitálás\", amikor a levegőben egy helyben megállva, lebegve lesi az alatta felbukkanó prédát."),
+//                List.of(ERDO, RET, SZANTO, VAROS),
+//                "falco tinnunculus",
+//                false,
+//                List.of(RAGADOZO, GALAMB),
+//                "32-35 cm",
+//                "71-80 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "vörös vércse (tojó)",
+//                List.of(VILAGOSBARNA, FEKETE, NARANCS, BARNA),
+//                OTVEN,
+//                "Az egyik legismertebb ragadozómadarunk, ami még Budapest belvárosában is költ. Mivel fészket nem épít, mesterséges fészekalapokkal, illetve speciális költőládákkal lehet segíteni megtelepedését. Agrárkörnyezetben magasabb fákra, városokban tornyokra, magas épületekre célszerű költőládát kihelyezni. A hazai állomány jelentős része elvonul, a telet tőlünk délre tölti, de északi madarak, valamint az idősebb példányok nálunk telelnek át.",
+//                List.of(MADARAK, EMLOSOK, BOGARAK),
+//                List.of("Jellemző vadászati stratégiája az úgynevezett \"szitálás\", amikor a levegőben egy helyben megállva, lebegve lesi az alatta felbukkanó prédát."),
+//                List.of(ERDO, RET, SZANTO, VAROS),
+//                "falco tinnunculus",
+//                false,
+//                List.of(RAGADOZO, GALAMB),
+//                "32-35 cm",
+//                "71-80 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "kerecsensólyom",
+//                List.of(VILAGOSBARNA, FEHER, SZURKE, BARNA),
+//                MILLIO,
+//                "A hazai természetvédelem kiemelten fontos feladata a faj védelme, ugyanis ez a termetes sólyomfaj a Kárpát-medencében éri el elterjedési területének nyugati határát. Az Európai Unión belül nálunk él a legnagyobb számban. Szinte mindenhol csökken az állománya, de a hazai populáció a fajvédelmi intézkedéseknek köszönhetően növekszik. Korábban a legnagyobb veszélyt a fészkek kifosztása jelentette, mivel a kerecsenből kiváló solymászmadarat lehetett nevelni. Ezt a veszélyeztetett fészkek őrzésével, nagyrészt önkéntesek segítségével sikerült visszaszorítani. Jelenleg az áramütés veszélyezteti leginkább, ezért a vezetékek szigetelése a természetvédelem egyik legfontosabb feladata. Magasfeszültségű vezetékek oszlopira kihelyezett mesterséges költőládákkal elősegíthető megtelepedése. Részben ennek köszönhető, hogy a hegylábi területekről áttevődött az állomány súlypontja az eredeti élőhelyeket jelentő nyílt, sík vidéki agrárterületekre.Emellett természetes facsoportokban, fasorokban lévő fészkeinek védelme is fontos, itt fokozottan ügyelni kell arra, hogy költés közben feleslegesen ne zavarják a mezőgazdasági területeken dolgozó emberek. Mivel egyik fő tápláléka az ürge, ahol megfelelő élőhelyeken hiányzik ez a védett rágcsáló, érdemes telepítési programot indítani. Az állomány egy része elvonul, a telet Kis-Ázsiában és Észak-Afrikában tölti. Magyarországon február és november közt figyelhető meg, de az öreg párok egész évben itthon maradhatnak.",
+//                List.of(MADARAK, EMLOSOK),
+//                List.of("A magyarok eredetmondáiban szereplő turul feltételezhetően a kerecsensólyom volt, vagy róla mintázták.", "Az 50 forintos érmén is ez a madár látható."),
+//                List.of(ERDO, RET, SZANTO),
+//                "falco cherrug",
+//                true,
+//                List.of(RAGADOZO),
+//                "45-55 cm",
+//                "102-126 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "szárcsa",
+//                List.of(FEHER, FEKETE),
+//                NULLA,
+//                "Országszerte gyakori, akár az ember közelségét is elviselő koromfekete madár, legfeltűnőbb ismertetőjegye fehér homlokpajzsa. Nem ismertek olyan folyamatok, melyek egész állományát negatívan befolyásolják. Vadászható faj, de nálunk nincs különösebb tradíciója vadászatának. Vonuló, az állomány legnagyobb része a telet tőlünk délre tölti, de egyre több példány telel át be nem fagyó vizeinken.",
+//                List.of(VIZIALLATOK, BOGARAK),
+//                List.of("Ugyan vadászható, de ellentétben egyes nyugat-európai országokkal, Magyarországon nincs igazi hagyománya."),
+//                List.of(VIZ),
+//                "fulica atra",
+//                true,
+//                List.of(RECE),
+//                "36-38 cm",
+//                "70-80 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "túzok",
+//                List.of(FEHER, SZURKE, NARANCS, BARNA),
+//                MILLIO,
+//                "Hatalmas termetű madár, a kakasok elérhetik akár 16 kg-os testtömeget is, a tyúkok jóval kisebbek. Mivel világszerte veszélyeztetett faj, a viszonylag erős hazai állomány megőrzése a faj egésze szempontjából is kiemelten fontos feladat. A hazai állomány az 1980-as években nagyon megfogyatkozott, de a célzott védelmi intézkedéseknek köszönhetően stabilizálódott. 1975-ben létrehozták a Dévaványai Túzokrezervátumot, ami elsősorban a mentett tojások keltetését, a csibék felnevelését és repatriálását szolgálja. A legfontosabb feladat azonban a túzok élőhelyeinek védelme, a költő- és dürgőhelyek zavartalanságának biztosítása. A túzok élőhelyein körültekintően kell megválasztani vetésszerkezetet, a gépi munkák idejét szabályozni kell, a fészkek helyének kijelölésével pedig védőzónát kell hagyni annak közvetlen környezetében. Repcetáblákkal biztosítani kell, hogy a túzokok a téli időszakban se kezdjenek kóborlásba, hanem a védett területeken belül maradjanak. Megfelelő technológiával csökkenteni kell a vezetékekkel való ütközések miatti pusztulást. A környezetbarát és természetközeli gazdálkodási módokat támogatni kell, a gazdálkodókat is érdekeltté kell tenni a faj védelmében. A túzok a magyar vadászhagyomány egyik kuriózuma volt, szerencsére a vadásztársadalom felől sem nehezedik nyomás a természetvédelemre, a faj fokozottan védett státusza biztosított. A túzoknak kedvező tájhasználat sok más állat és növényfaj számára is hasznos.",
+//                List.of(EMLOSOK, BOGARAK, NOVENYEK, MADARAK),
+//                List.of("A hazai természetvédelem emblematikus faja, a Magyar Madártani és Természetvédelmi Egyesület és a Körös-Maros Nemzeti Park címerében is ez a faj látható."),
+//                List.of(RET, SZANTO),
+//                "otis tarda",
+//                true,
+//                List.of(TUZOK),
+//                "75-105 cm",
+//                "190-260 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "daru",
+//                List.of(FEHER, SZURKE, PIROS, BARNA),
+//                OTVEN,
+//                "A daru a magyar néphagyományban kiemelt jelentőséggel bír, krúgatása az ősz egyik elmaradhatatlan hangulati eleme. A darutollas kalap pedig egyfajta státuszszimbólum volt a magyar nép körében. Egykor Magyarországon is nagy számban költött, de az 1910-es évek óta erre nem volt példa. Több mint 100 év után 2015-ben először figyelték meg egy daru pár költését Magyarországon. Ősszel nagy tömegben vonul át hazánkon. A Hortobágy az európai daruállomány kiemelt fontosságú gyülekezőhelye. A madarak nagy része novemberben elhagyja hazánkat, de egyre gyakrabban telelnek át csapatai.  A nálunk megpihenő darvak szántókon, tarlókon megfelelő táplálkozóhelyet találnak, az éjszakákat lecsapolt halastavakon, pusztai elöntéseken töltik. A darvak szempontjából jelentős területeken folyó gazdálkodást úgy kell kialakítani, hogy figyelembe vegyék ennek a zavarásra érzékeny fajnak az érdekeit is. A telet Európa déli részén és Észak-Afrikában tölti.",
+//                List.of(EMLOSOK, BOGARAK, NOVENYEK, MADARAK, VIZIALLATOK),
+//                List.of("A Hortobágyi Nemzeti Park címermadara."),
+//                List.of(RET, SZANTO, VIZ),
+//                "grus grus",
+//                true,
+//                List.of(HOSSZULABU),
+//                "110-120 cm",
+//                "220-245 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "gulipán",
+//                List.of(FEHER, FEKETE),
+//                KETSZAZOTVEN,
+//                "Jellegzetes színe és semmilyen más madáréhoz nem hasonlító csőre miatt összetéveszthetetlen. Kisszámú, de rendszeres fészkelő. Tradicionális költőhelyei a Kiskunsági szikes tavak, de az Alföld más területein és a Dunántúlon is fészkel. Állománya a csapadékviszonyok függvényében ingadozik. A szikesek rekonstrukciója, megfelelő kezelése hosszú távon biztosíthatja a hazai állomány fennmaradását. Mentett tojásokból több ízben neveltek fel gulipánokat zárt körülmények között, ezek túlélési esélyeiről a vadonban kevés információnk van. Színes jelölőgyűrűs egyedek megkerülései alapján a hazai madarak délnyugati irányba vonulnak el októberben és novemberben. Tavasszal márciusban érkezik vissza, a telet a mediterrán térségben és Afrikában töltik.",
+//                List.of(BOGARAK, VIZIALLATOK),
+//                List.of("Gyakran fészkel kisebb szigeteken, ahol a szárazföldi ragadozóktól biztonságban van."),
+//                List.of(RET, VIZ),
+//                "recurvirostra avosetta",
+//                true,
+//                List.of(HOSSZULABU, PARTI),
+//                "42-45 cm",
+//                "77-80 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "gólyatöcs",
+//                List.of(FEHER, FEKETE),
+//                KETSZAZOTVEN,
+//                "Gólyára emlékeztető, fekete-fehér színezetű, hosszú lábú partimadár. Magyarországon rendszeres fészkelő, a nálunk költő párok száma az adott év csapadékviszonyaitól függ. Főleg szikeseken, nedves réteken, elöntéseken, belvizeken lehet megfigyelni. Vonuló madár, március-áprilisban érkezik meg a trópusi Afrikából, augusztusban a többség el is hagyja hazánkat. Európai állománya stabil, a hazánkban költő párok száma ingadozó, a természetes szikes tavak védelme nélkül nem lehet stabilizálni állományát. A vizes élőhelyek rekonstrukciója a faj számára kedvező, várhatóan a sikeres költések számának növekedését eredményezi. A jelentősebb költőhelyei védelem alatt állnak, ezek megfelelő kezelésén múlik a faj hosszú távú jövője hazánkban.",
+//                List.of(BOGARAK, VIZIALLATOK),
+//                List.of("Népi elnevezése a \"széki gólya\", ami egyaránt utal megjelenésére és jellemző élőhelyére, a szikes vizekre"),
+//                List.of(RET, VIZ),
+//                "himantopus himantopus",
+//                true,
+//                List.of(HOSSZULABU, PARTI),
+//                "35-40 cm",
+//                "67-83 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "kis lile",
+//                List.of(FEHER, FEKETE, BARNA),
+//                OTVEN,
+//                "Hazánkban rendszeres fészkelő, jellemzően a nagyobb folyók zátonyain telepszik meg. Európai és hazai állománya stabil. Költését a hirtelen áradások, az illegális kavicsbányászat és a zavarás veszélyeztetheti. A faj alkalmazkodóképességét mutatja, hogy mesterségesen kialakult élőhelyeken, így ülepítőtavakon, kavicsbányákban, építkezéseken is megjelenik. Vonuló, hazánkban március és október között lehet megfigyelni. Vonulás előtt csapatokat alkot, melyek leggyakrabban lecsapolt halastavakon, folyók mentén, ülepítőkön gyülekeznek.",
+//                List.of(BOGARAK, VIZIALLATOK),
+//                List.of("A kifejlett madarak  vékony sárga szemgyűrűt viselnek, aminek segítségével megkülönböztethető aközeli rokonától, a parti lilétől."),
+//                List.of(VIZ),
+//                "charadrius dubius",
+//                true,
+//                List.of(ENEKES, PARTI),
+//                "14-15 cm",
+//                "42-48 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "bíbic",
+//                List.of(FEHER, FEKETE, VILAGOSBARNA, ZOLD),
+//                OTVEN,
+//                "Jellegzetes bóbitájáról könnyen felismerhető, közkedvelt madárfaj. A hazánkban is költő partimadarak közül messze a leggyakoribb. Gyakori fészkelő nedves réteken, szikes területeken, árasztásokon, vizes környezetben lévő szántókon. Mivel részben az agrárkultúrákban is megtalálja életfeltételeit, az extenzív mezőgazdasági környezethez még tudott alkalmazkodni, de a vegyszerek negatívan hatottak állományára. Elterjedési területének legnagyobb részén vonuló. A költést követően nagyobb vizes élőhelyeken gyülekezik, nagyobb csapatokban vonul Nyugat- és Dél-Európa felé, Afrikába is eljut. Az őszi vonulás nagymértékben függ az adott év időjárásától, sok madár csak akkor hagyja el hazánkat, mikor igazán keményre fordul az idő. Tavasszal sokszor már februárban megérkeznek első csapatai, jellemzően seregélyek társaságában. A hideg lehűlések, és éjszakai fagyok ilyenkor sok bíbic pusztulását okozhatják. Költését a legelő állatok és a mezőgazdasági munkák veszélyeztethetik.",
+//                List.of(BOGARAK, NOVENYEK),
+//                List.of("Az ingovány, puha süppedős talaján rendkívül ügyesen tud szaladni, s ebben három hosszú és előre jól szétterpeszthető ujja van a segítségére."),
+//                List.of(VIZ, RET, SZANTO),
+//                "charadrius dubius",
+//                true,
+//                List.of(GALAMB, PARTI),
+//                "28-31 cm",
+//                "82-87 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "piroslábú cankó",
+//                List.of(FEHER, SZURKE, VILAGOSBARNA, BARNA),
+//                KETSZAZOTVEN,
+//                "Hazai szikes rétjeink, mocsárrétjeink egyetlen fészkelő cankófaja. A megtelepedésére alkalmas nedves élőhelyek kiszáradása, lecsapolása, nem megfelelő mértékű legeltetése okozza a faj visszaszorulását. Tavasszal és ősszel gyakori átvonuló, a hazai fészkelők sokszor már júliusban elhagyják az országot. A telet a mediterrán térségben, kisebb számban Afrikában töltik. Öt alfaja Eurázsia jelentős részén előfordul. Hazánkban főleg az alföldi szikeseken, vizenyős réteken, legelőkön fészkel, sokszor bíbicek és nagy godák társaságában. Fészkét zsombékra építi növényi anyagokból, lehetőleg sekély víz által körülvett lokális magaslaton. Fészekalja 4 tojásból áll, a kotlási idő 23 nap. A fészekhagyó fiókákat a szülők a növényzet között, tocsogós területeken nevelik. A fiatalok 25-35 naposan már röpképesek. Táplálékát is tocsogós területeken szerzi, főleg rovarokat, apró rákokat és férgeket fogyaszt.",
+//                List.of(BOGARAK, VIZIALLATOK),
+//                List.of("A fiatalok 25-35 naposan már röpképesek."),
+//                List.of(VIZ, RET),
+//                "tringa totanus",
+//                true,
+//                List.of(HOSSZULABU, PARTI),
+//                "85-130 cm",
+//                "59-66 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "dankasirály",
+//                List.of(FEHER, SZURKE, FEKETE, BARNA),
+//                OTVEN,
+//                "Magyarországon a leggyakoribb fészkelő sirályfaj, s költési időn kívül is sok madár tartózkodik a Kárpát-medencében. Tömeges tavaszi és őszi átvonuló. A fővárosban is sok dankasirály jelenik meg a Duna mentén a költési idő után. Viszonylag sok madarat gyűrűznek színes jelölőgyűrűvel, elsősorban még fiókakorban. Viszonylag sok megkerülésünk van, a legtöbb madarat az Appennini-félszigeten figyelték meg. Hozzánk északról érkeznek télire csapatai. Európában gyakori faj, hazai állománya sincs veszélyben. Telepein más ritkább fajok is megtelepednek, ezért is fontos, hogy a költési időszakban a sirálytelep nyugalma biztosított legyen.",
+//                List.of(BOGARAK, VIZIALLATOK, NOVENYEK, DOGOK),
+//                List.of("Hangos fészektelepeikhez gyakran más madárfajok is csatlakoznak, mert a hangoskodó tömegben védelmet találnak a ragadozóktól."),
+//                List.of(VIZ, RET, SZANTO, VAROS),
+//                "larus ridibundus",
+//                true,
+//                List.of(PARTI),
+//                "34-37 cm",
+//                "100-110 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "sárgalábú sirály",
+//                List.of(FEHER, SZURKE, FEKETE, VILAGOSBARNA),
+//                HUSZONOT,
+//                "Déli, mediterrán elterjedésű faj. Úszólábakkal rendelkezik, a vízi életmódhoz alkalmazkodott. A sztyeppi sirályhoz igen hasonló életmódú és megjelenésű madár, attól elkülöníteni csak megfelelő közelségből lehet. Hazánkban egész évben, változó mennyiségben találkozhatunk egyedeivel. Néhány évtized óta majdnem minden évben költ néhány pár Magyarországon. Vonuló, késő tavasszal és nyár elején kis számban, rendszerint a nem költő, még ivaréretlen madarak, nyár végétől pedig már nagyszámú öreg madarak tartózkodnak a Kárpát-medencében, ahol szántóföldeket, folyópartokat, szeméttelepeket és lehalászott halastavakat keresnek fel. Áttelelő egyedei is megfigyelhetők.",
+//                List.of(BOGARAK, VIZIALLATOK, NOVENYEK, KETELTUEK, EMLOSOK, MADARAK),
+//                List.of("Korábban azonosnak tartották az északi tájakon jellemző ezüstsirállyal."),
+//                List.of(VIZ, RET, SZANTO, VAROS),
+//                "larus michahellis",
+//                false,
+//                List.of(PARTI),
+//                "59-67 cm",
+//                "130-158 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "küszvágó csér",
+//                List.of(FEHER, SZURKE, FEKETE),
+//                SZAZ,
+//                "Eurázsiai, valamint észak-amerikai elterjedésű faj. Az egyetlen hazánkban rendszeresen költő csérféle. Nevét az egyik legfontosabb táplálékáról, a szélhajtó küszről kapta. Halakra, vízirovarokra és azok lárváira vadászik, de olykor sáskákat is fogyaszt. Hosszú távú vonuló, a telet Afrikában, az Egyenlítőtől délre tölti.",
+//                List.of(BOGARAK, VIZIALLATOK),
+//                List.of("Költési időben a vízszint emelkedése veszélyt jelenthet a fészekaljra, mivel elmoshatja azt."),
+//                List.of(VIZ),
+//                "sterna hirundo",
+//                true,
+//                List.of(PARTI),
+//                "31-35 cm",
+//                "77-98 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "örvös galamb",
+//                List.of(FEHER, SZURKE, FEKETE),
+//                NULLA,
+//                "Legnagyobb termetű galambunk, melynek urbanizációja jelenleg is tart hazánkban. Fehér szárnysávja és nagy mérete alapján könnyen elkülöníthetjük a többi hazai galamb- és gerlefajtól. Főként növényi táplálékot fogyaszt, amely különféle magvakból áll, de bogyókat, rügyeket, sőt, apró csigákat és gilisztákat is eszik. Rövidtávú vonuló, a telet a Mediterráneumban tölti, de enyhébb teleken áttelelő példányokkal is találkozhatunk. Elterjedési területe főként Európára terjed ki, de megtalálható Északnyugat-Afrikában, valamint Délnyugat-Ázsiában is. Városi parkokban, fasorokban, erdőszéleken, fás legelőkön telepszik meg. Évente kétszer költ. Egy fészekalj rendszerint 2 tojásból áll, melyen a szülők felváltva kotlanak. A galambokra jellemzően sokszor az első fészekalj kirepülése előtt elkezdik a következő fészekrakást.",
+//                List.of(BOGARAK, VIZIALLATOK),
+//                List.of("Fiókáit az első napokban a saját begyváladékával eteti, az úgynevezett \"begytejjel\". Ez hazánkban csak a galambfélékre jellemző."),
+//                List.of(VIZ, VAROS, RET, ERDO, SZANTO),
+//                "columba palumbus",
+//                true,
+//                List.of(GALAMB),
+//                "40-42 cm",
+//                "75-80 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "vadgerle",
+//                List.of(SZURKE, BARNA, NARANCS, VILAGOSBARNA),
+//                OTVEN,
+//                "A legkisebb hazai galambféle. Jellegzetes hangja messziről elárulja jelenlétét. Magevő. Parlagokon, mezőgazdasági területeken, főként tarlókon táplálkozik. Gabona- és gyommagvakat egyaránt fogyaszt. Vonuló, a telet Afrikában, a Szaharán túl tölti. Május és szeptember között tartózkodik nálunk.",
+//                List.of(NOVENYEK),
+//                List.of("Költött városokban és falvakban is, de onnan teljesen kiszorítottta 1930-as években megjelenő balkáni gerle."),
+//                List.of(VAROS, RET, ERDO, SZANTO),
+//                "streptopelia turtur",
+//                true,
+//                List.of(GALAMB),
+//                "26-28 cm",
+//                "47-53 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "kakukk",
+//                List.of(SZURKE, FEHER),
+//                OTVEN,
+//                "Fészekparazita madár, tojásait nem maga költi ki, hanem más madárfajok fészkébe rakja. Számos gazdamadara van, hazánkban elsősorban a nádirigó és a vörösbegy, de közel ötven madárfaj fészkében mutattak már ki kakukktojást, illetve -fiókát. A tojó kakukk a gazdamadár fészkét egy magas pontról figyeli ki, majd amikor az elhagyja a fészkét, beletojja tojását. Ez rendszerint a gazdamadár egy–három tojásos fészekaljánál figyelhető meg, amikor az még nem kezdte meg a kotlást. A kakukk sokszor egy–két tojást el is távolít a gazdamadár fészkéből. Főleg hernyókkal táplálkozik, de számos ízeltlábú kifejlett egyedeit is elfogyasztja. Vonuló, a telet Afrika trópusi részén tölti.",
+//                List.of(BOGARAK),
+//                List.of("A tojónak kétféle színváltozata is létezik. A nálunk is gyakori hamuszürke mellett néha vörös színezetű egyedek is láthatók."),
+//                List.of(VAROS, RET, ERDO, SZANTO, VIZ),
+//                "cuculus canorus",
+//                true,
+//                List.of(GALAMB),
+//                "32-34 cm",
+//                "55-60 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "erdei fülesbagoly",
+//                List.of(SZURKE, FEHER, BARNA, VILAGOSBARNA),
+//                OTVEN,
+//                "Leggyakoribb hazai bagolyfajunk. Közepes méretű, tollfülei hosszúak. A múlt század első felében a varjak vadászata során sok fészekaljat kilőttek, mivel gyakran foglalja el az elhagyott varjúfészkeket költésre. A telet sokszor a településekre húzódva, általában örökzöldeken vészelik át. Egy-egy fenyőn nem ritkán több tucat egyed is nappalozik, majd sötétedéskor vadászatra indulnak. Gyakran ütik el éjjel az autók. Hazai állománya stabil, de a varjútelepek növelésével növelhető az erdei fülesbagoly állomány is. Előszeretettel foglalják el költőhelyül a varjak fészkeit. Szarkák, vetési és dolmányos varjak fészkeit költ, de ragadozó madarak gallyfészkében is előfordul, hogy megtelepszik, kivételesen pedig a talajon is költhet. Hazánkban általánosan elterjedt, de a magasan fekvő, zárt erdőket elkerüli. Évente egyszer költ, viszonylag korán, már márciusban teljes a fészekalja. Egy átlagos fészekalj 5-6 tojásból áll. A hím csak a táplálékszerzésben segíti a tojót a költésben. A fiókák még jóval röpképességük előtt elhagyják a fészket, és a közeli fákon üldögélnek. Ebben az időszakban a fiókákra számos ragadozó jelent veszélyt (róka, nyest, héja és egerészölyv).",
+//                List.of(MADARAK, EMLOSOK),
+//                List.of("Bár hallása kiválló, tollfülei csak díszek - nem valódi hallószervek - melynek csak az egyedek közötti kommunikációban van szerepe.", "Néha csupán embermagasságban ül, és ha úgy haladunk el mellette, hogy azt hiszi, nem vettük észre, nem repül el, csak nagy szemével kíséri minden mozdulatunkat."),
+//                List.of(VAROS, ERDO),
+//                "asio otus",
+//                false,
+//                List.of(BAGOLY),
+//                "25-37 cm",
+//                "90-100 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "füvesbagoly",
+//                List.of(BARNA, VILAGOSBARNA, ZOLD, LILA, PIROS, CITROM),
+//                NULLA,
+//                "(KITALÁLT) (VICC) A különféle drogok terjedésével egyre több helyen jelent meg, de különös életmódja miatt sosem tudott igazán megnőni az egyedszáma.",
+//                List.of(NOVENYEK),
+//                List.of("Habár igen ritka, nem védett, mivel káros szokásokat terjeszt fiatalok körében."),
+//                List.of(VAROS),
+//                "herbidus otus",
+//                false,
+//                List.of(BAGOLY),
+//                "25-37 cm",
+//                "90-100 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "macskabagoly",
+//                List.of(BARNA, FEKETE, SZURKE, FEHER),
+//                OTVEN,
+//                "Közepes nagyságú. Tollfülei nincsenek. Éjjel aktív. Írisze sötét színű. Jellegzetes, kísérteties huhogó hangját sötétedés után hallatja. Tápláléka igen változatos. A kisemlősök közül elsősorban erdei egeret és erdei pockot fogyaszt, de más pockokat, cickányokat, peléket, madarakat is szívesen elejt.",
+//                List.of(EMLOSOK, MADARAK, BOGARAK),
+//                List.of("Két színben is előfordul. A szürke alapszín valamelyest gyakoribb, mint a vörhenyes."),
+//                List.of(VAROS, ERDO),
+//                "strix aluco",
+//                false,
+//                List.of(BAGOLY),
+//                "37-39 cm",
+//                "94-104 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "kuvik",
+//                List.of(BARNA, FEHER),
+//                SZAZ,
+//                "Gyakori bagolyfajunk, főleg az alföldi tanyasi és mezőgazdasági területeken. Speciális mesterséges odúk kihelyezésével segíthetjük állományának növekedését. Részben nappal is aktív, ezért gyakrabban látni, mint a többi bagolyfajt. Röpte hullámzó, harkályszerű. Ha megzavarják, izgalmában le-fel billegeti magát. Főleg kisemlősöket és énekesmadarakat fogyaszt, de kisebb hüllőket, kétéltűeket és rovarokat is elkap.",
+//                List.of(EMLOSOK, MADARAK, BOGARAK, KETELTUEK),
+//                List.of("A fajt, életmódját félreértelmezve, \"halálmadárnak\" tartották és gyakran elpusztították."),
+//                List.of(VAROS, RET, ERDO, SZANTO),
+//                "athene noctua",
+//                false,
+//                List.of(BAGOLY),
+//                "21-23 cm",
+//                "54-58 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "gyöngybagoly",
+//                List.of(BARNA, FEHER),
+//                SZAZ,
+//                "Főleg pockokkal, cickányokkal, egerekkel táplálkozik, ezért a fészekalj nagysága nagymértékben függ a mezei pocok állományától, de apróbb énekesmadarakat is elejt. Két alfaja fordul elő hazánkban. A sárgás, narancssárgás mellű alfaj elterjedtebb, míg a fehér mellű alfaj igen ritka, leginkább Dél-Dunántúlon fordul elő, a két alfaj kereszteződései is megfigyelhetők. Szív alakú arcfátyláról könnyen felismerhető. Írisze sötét. Európai állománya csökken, melynek oka elsősorban a tanyasi, extenzív mezőgazdálkodás csökkenése, valamint a külterjes állattartás csökkenése. Jelentős veszélyező tényező a faj számára az utakon történő elütés, a másodlagos mérgezés és a nyestek predációja.",
+//                List.of(EMLOSOK, MADARAK, KETELTUEK, BOGARAK),
+//                List.of("Fiókáinak száma igen magas, akár 10 tojást is rakhat."),
+//                List.of(VAROS, RET, ERDO, SZANTO),
+//                "tyto alba",
+//                false,
+//                List.of(BAGOLY),
+//                "33-35 cm",
+//                "85-93 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "búbosbanka",
+//                List.of(FEKETE, FEHER, VILAGOSBARNA, NARANCS),
+//                OTVEN,
+//                "Hosszútávú vonuló, a telet Afrikában tölti. Főként rovarokat, férgeket, hernyókat, tücsköket, bogarakat, sáskát, vagyis csak állati eredetű táplálékot fogyaszt. Röpte lepkeszerűen hullámzó. Táplálékkeresés közben sokat mozog a talajon, ilyenkor kevésbé feltűnő. Az állattartó telepek körül találkozhatunk vele leggyakrabban, mert a szerves trágyában előforduló rovarokat, férgeket előszeretettel fogyasztja. A mezőgazdaság intenzívvé válása kedvezőtlenül hat az állomány nagyságára. A kisparcellás, extenzív mezőgazdaság növelésével pozitív hatást érhetünk el a faj elterjedésében.",
+//                List.of(BOGARAK),
+//                List.of("Ismert népi elnevezése a \"büdös banka\", mert a fiókák veszély esetén a támadókat bűzös ürülékükkel \"bombázzák\"."),
+//                List.of(VAROS, RET, ERDO, SZANTO),
+//                "upupa epops",
+//                true,
+//                List.of(GALAMB),
+//                "26-28 cm",
+//                "42-46 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "jégmadár",
+//                List.of(FEHER, KEK, NARANCS),
+//                OTVEN,
+//                "Hazánk egyik legszínpompásabb madara, mely folyók és tavak mentén található partfalakban költ. Állandó madarunk, mely télen a be nem fagyó folyóknál vészeli át a zord hónapokat. Sokszor lehet látni, amint a víz felett szitál, azaz kolibriszerűen egyhelyben „lebeg”. Erre a költőhely kialakításánál éppúgy szüksége van, mint a vadászata során. Gyakran látni víz fölé behajló ágakon, melyekről mozdulatlanul lesi a víz tetején úszó apró halakat. Nyugat-Európában állománya csökkenő tendenciát mutat, Európa többi részén azonban stabil populációkat találunk. Főként halakkal, vízi rovarokkal táplálkozik, ezért erősen kötődik a vizes élőhelyekhez, főként a mély vizű tavakhoz, patakokhoz, folyókhoz. Fészkelőhelyét meredek partfalba vájva alakítja ki. Évente két alkalommal költ. Költőüregének kialakítását eleinte a csőrükkel kezdik, majd a lábaikkal folytatják. A kialakított járat mélysége akár 50-100 cm-es hosszúságú is lehet, aminek végébe rakja 6-10 tojását. A kotlásban és az etetésben is mindkét szülő részt vesz. Territoriális madár, költési időn kívül még saját párját sem tűri meg vadászterületén.",
+//                List.of(VIZIALLATOK),
+//                List.of("Tollazatának égszínkék árnyalatai nem festékanyagoktól származnak, hanem a tollak speciális fénytörésének eredményei."),
+//                List.of(VIZ),
+//                "alcedo atthis",
+//                true,
+//                List.of(ENEKES),
+//                "16-17 cm",
+//                "24-26 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "gyurgyalag",
+//                List.of(CITROM, KEK, PIROS, BARNA),
+//                SZAZ,
+//                "Egyik legszínesebb madarunk. Méhészmadárnak is hívják, mivel méheket is fogyaszt, de darazsakkal, lepkékkel és egyéb repülő rovarokkal is táplálkozik. Vonuló, augusztusban több százas csapatokkal találkozhatunk, amint déli irányba, telelőhelyük felé repülnek. A telet Afrikában tölti. A házi méh igen kis részét képezi a táplálékának, melyet leginkább csak hűvös időben fogyaszt. A meglévő telepek védelmével, karbantartásával, valamint új költőhelyek kialakításával segíthetjük az állomány növekedését. Telepes fészkelő, lösz- és homokfalakban, homokbányákban, csatornák, mélyebb árkok falában alakít ki lyukakat költőhelyül. Folyók meredek partfalában is megtelepedhet. Költőürege még a jégmadárénál is hosszabb, elérheti a 2 métert is. Későn, április végén - május elején érkezik vissza, ezért évente csak egyszer költ. Költési sikerét a vízparton veszélyeztethetik az áradások, máshol siklók, valamint a homok- és löszfalak leomlása, elhordása okozhat jelentős problémát, ezért állományait oltalmazni kell a káros hatásoktól. Fészekalja 6-7 tojásból áll, melyeken mindkét szülő kotlik.",
+//                List.of(BOGARAK),
+//                List.of("Méhészmadárnak is hívják, mivel méheket is fogyaszt. Akár 250 méhet is elfogyaszthat egy nap. Egy spanyol kutatás szerint táplálékának 69,4%-82%-át a házi méhek teszik ki, bár ez kevéssé érinti a családokat, mivel a kaptárak csak a dolgozók kevesebb, mint 1%-át veszítik el emiatt."),
+//                List.of(VIZ, VAROS, SZANTO, RET),
+//                "merops apiaster",
+//                true,
+//                List.of(ENEKES),
+//                "27-29 cm",
+//                "44-49 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "szalakóta",
+//                List.of(KEK, LILA, BARNA),
+//                OTSZAZ,
+//                "Gyíkokkal, rovarokkal, egyenesszárnyúakkal, kisebb pockokkal táplálkozik. Hamar elvonul, a telet Afrikában tölti és csak május elején érkezik vissza költőhelyére. Állománya az Alföld egyes területein az utóbbi évtizedek odúkihelyezéseinek köszönhetően nőtt. A Dunántúlon igen ritka fészkelő, legtöbbször csak vonulási időben találkozhatunk vele ezen a vidéken. Vonulásakor igen nagy veszélynek van kitéve a vadászat miatt. Impozáns külleme és mérete miatt előszeretettel lövik a tőlünk délebbre található országokban. A túllegeltetett és az elhagyatott legelőket sem szereti, mert amíg az előbbiben kevés táplálékot talál, addig az utóbbiban könnyen elbújnak zsákmányállatai. Igazi vártamadár: előszeretettel ül ki egy kimagasló pontra, ahonnan jól szemmel tarthatja a körülötte lévő nyílt területeket. Innen levágva szerzi meg táplálékát. Laza csapatokban vagy magányosan vonul. Augusztusban, a vonulás kezdetén sokszor kisebb csoportokban éjszakázik. Állománya Nyugat-Európában nagyon megritkult, sok helyről el is tűnt. Öreg fák odvaiban, fekete harkály és zöld küllő által vájt odúkban, ritkán homokfalak üregeiben költ. Fészekalja általában 4-5 darab fehér színű tojásból áll. Szívesen elfoglalja a mesterséges odúkat is, melyek kihelyezésére a megfelelő nagyságú fák hiánya, és ezáltal a zöld küllő és fekete harkály hiánya miatt van szükség. A legelőkhöz, kaszálókhoz, mezőgazdasági területekhez kötődik, hiszen rovarokból álló táplálékát itt könnyen megtalálja.",
+//                List.of(BOGARAK, EMLOSOK),
+//                List.of("A gyurgyalaghoz és a jégmadárhoz hasonlóan, néha meredek partfalakba vájt üregben is költ."),
+//                List.of(ERDO, SZANTO, RET),
+//                "coracias garrulus",
+//                true,
+//                List.of(ENEKES, GALAMB),
+//                "30-32 cm",
+//                "66-73 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "zöld küllő",
+//                List.of(FEKETE, PIROS, SZURKE, ZOLD),
+//                OTVEN,
+//                "Gyakori harkályfélénk. Fő táplálékát a hangyák jelentik, de a fák kérge alatt megbújó más rovarokat és azok lárváit, bábjait is elfogyasztja. Rendszeresen keresgél a talajon is. A hideg idő beálltával gyümölcsöket és magvakat is eszik, de előszeretettel bontja ki a hangyabolyokat, melyekben hangyákat és lárvákat keres. Állandó madár, de télen kóborolhat. Idős fák meghagyásával segíthetjük, hogy állománya ne csökkenjen.",
+//                List.of(BOGARAK, NOVENYEK),
+//                List.of("A szeme alatt húzódó bajuszsáv elárulja a nemét. A tojóké tiszta fekete, a hímekén vörös szín is található."),
+//                List.of(ERDO, VAROS),
+//                "picus viridis",
+//                false,
+//                List.of(HARKALY),
+//                "31-33 cm",
+//                "40-42 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "nyaktekercs",
+//                List.of(SZURKE, VILAGOSBARNA, BARNA),
+//                OTVEN,
+//                "Ez a harkályfélék közé tartozó madár elképesztő kéregmintás tollazattal rendelkezik, sokszor még pár méterről is nehéz észrevenni. Ha veszélyben érzi magát, fejtollait felborzolja és nyakát kígyószerűen tekergeti. A nevét is innen kapta. Főként hangyákkal táplálkozik, melyeket a talajon vagy a fatörzsön szedeget össze. A nyelve hegyén lévő kis horgok is a hatékonyabb táplálékszerzést szolgálják. Vonuló, a telet Afrikában tölti. Megtelepedését odúk kihelyezésével segíthetjük.",
+//                List.of(BOGARAK),
+//                List.of("Habár a fák kérgét nem kopogtatja, a nyelve, a többi harkányfélékhez hasonlóan, rendkívül hosszú."),
+//                List.of(ERDO, VAROS, RET, SZANTO),
+//                "jynx torquilla",
+//                true,
+//                List.of(ENEKES, HARKALY),
+//                "16-17 cm",
+//                "25-27 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "fekete harkály",
+//                List.of(FEKETE, PIROS),
+//                OTVEN,
+//                "A legnagyobb testű hazai harkály. Állománya a természetközelibb erdőgazdálkodás hatására erősen növekszik. Táplálékát a fán lakó nagyobb hangyák, lárvák, pajorok, bogarak adják. A fa törzsén és a talajon egyaránt szokott táplálék után kutatni. Állandó madár meglehetősen nagy területhűség jellemzi. Elhagyott odúiban költhet többek között a szalakóta és a füleskuvik is. ",
+//                List.of(BOGARAK),
+//                List.of("A római mitológiában a harkály Mars istennek, a háború istenének, kedvenc madara."),
+//                List.of(ERDO, VAROS),
+//                "dryocopus martius",
+//                false,
+//                List.of(HARKALY),
+//                "45-57 cm",
+//                "64-68 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "nagy fakopáncs",
+//                List.of(FEKETE, PIROS, FEHER),
+//                HUSZONOT,
+//                "Egész Európában, Észak-Ázsiában és Északnyugat-Afrikában megtalálható. Hazánkban a leggyakoribb harkályféle. A fák lombkoronájában lévő hernyókat, törzsön lévő rovarokat fogyasztja, de táplálékának részét képezik a hangyák is. Télen csonthéjas gyümölcsöket, makkot is fogyaszt, de az etetők környékén is rendszeresen feltűnik. Állandó madár, mindössze télen kóborolhat el kisebb távolságra megszokott élőhelyétől.",
+//                List.of(BOGARAK, NOVENYEK, MADARAK),
+//                List.of("A fákat károsító rovarlárvákat is fogyasztja, ezért a fák doktoraként is hivatkoznak rá."),
+//                List.of(ERDO, VAROS),
+//                "dendrocopos major",
+//                false,
+//                List.of(HARKALY),
+//                "22-23 cm",
+//                "34-39 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "mezei pacsirta",
+//                List.of(SZURKE, FEHER, CITROM, BARNA),
+//                HUSZONOT,
+//                "Pusztáink legjellegzetesebb madara rövidtávú vonuló, csak az igazi tél beálltával repül kissé délebbre, de áttelelő példányaival is rendszeresen találkozhatunk. Legtöbbször a talajon tartózkodik, csak a hangja utal jelenlétére. Nászrepülésekor a hím és a tojó néhány méter magasságban kergetőzik, majd ismét a földre szállnak. A fészkelőterület kiválasztása után a hím nagy magasságokba emelkedve, folyamatosan énekelve hirdeti ki a pár költőhelyét. Nyáron rovarokat, rovarlárvákat, szipolyokat, sáskákat és hernyókat zsákmányol, míg ősszel és télen magvakat fogyaszt.",
+//                List.of(BOGARAK, NOVENYEK),
+//                List.of("A mezei pacsirta éneke ihlette Percy Bysshe Shelley Egy mezei pacsirtához (To a Skylark) című költeményét.", "Hátulsó lábujján a karom aránytalanul hosszú, ami a talajhoz kötött életmódjára utal."),
+//                List.of(RET, SZANTO),
+//                "alauda arvensis",
+//                false,
+//                List.of(ENEKES),
+//                "18-19 cm",
+//                "30-36 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "füsti fecske",
+//                List.of(FEKETE, FEHER, PIROS, KEK),
+//                OTVEN,
+//                "A legbizalmasabb fecskefaj, kötődik az emberhez. A farka mélyen villás. Épületeken költ. Vonuló, az európai állomány a telet Afrikában tölti. Szinte minden repülő rovart képes elejteni, melyek nem túl nagy méretűek. Állománya meglehetősen ingadozó, amit leginkább a szélsőséges időjárás befolyásol. Sajnálatos módon az utóbbi évtizedek adatai a lassú, de folyamatos csökkenés irányába mutatnak. Mind a mai napig előfordul, hogy lakóházakról leverik a madarak fészkét, pedig deszkák – úgynevezett fecskepelenkák – felhelyezésével minimálisra csökkenthető a lepotyogó ürülékek által okozott kellemetlenség. Sárgyűjtő helyekkel és műfészkekkel segíthetjük a megtelepedését.",
+//                List.of(BOGARAK),
+//                List.of("Amikor eső közeleg, a rovarok is földközelben maradnak, ezért jelzik az alacsonyan szálló fecskék az időjárásváltozást."),
+//                List.of(RET, SZANTO, VIZ, VAROS),
+//                "hirundo rustica",
+//                true,
+//                List.of(ENEKES),
+//                "17-19 cm",
+//                "32-34 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "molnárfecske",
+//                List.of(FEKETE, FEHER),
+//                OTVEN,
+//                "Magyarországon általánosan elterjedt, városi környezetben még a füsti fecskénél is gyakrabban fordul elő. Apró rovarokkal táplálkozik, melyeket főleg a levegőben, de sokszor a házak falán fog el. Vonuló, a telet Afrikában, a Szaharán túl tölti.",
+//                List.of(BOGARAK),
+//                List.of("A fészkeit gyakran leverik a fiókák által hátrahagyott ürülékkupacok miatt. Ez megelőzhető, ha a fészek alá deszkát, úgynevezett \"fecskepelenkát\" erősítünk."),
+//                List.of(RET, SZANTO, VIZ, VAROS),
+//                "delichon urbicum",
+//                true,
+//                List.of(ENEKES),
+//                "15-23 cm",
+//                "26-29 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "sarlósfecske",
+//                List.of(FEKETE, FEHER, BARNA),
+//                HUSZONOT,
+//                "Nevével ellentétben nem a fecskefélék családjába tartozik, sőt, nem is énekesmadár.  Legközelebbi rokonai az újvilági kolibri fajokhoz tartoznak. Fáradhatatlan repülő, szinte kizárólag a költési időben száll le. Éjjel is folyamatosan, nagyobb magasságban, csapatokban repülnek. A városok madara, megfelelő fészkelőhelyet jelent neki a panelházak repedései, ahol a ragadozóktól is védve van. Repülve vadászik, repülő rovarokkal és a levegőben sodródó pókokkal táplálkozik. A fiókák meglehetősen jól bírják az éhezést, ilyenkor testhőmérsékletük csökkentéssel és alvással próbálják átvészelni a táplálékhiányos időszakot. Sokszor a víz fölött nagy tömegben előforduló rovarokat fogyasztja. Vonuló, a telet Afrika déli részén tölti. Szinte egész Európában, Északnyugat-Afrikában és Ázsia nagy területén megtalálható.  Eredetileg  sziklafalak repedéseiben, löszfalakban, kisebb számban odúban költött, de a városok kialakulásával szinte teljesen megváltozott a költő- és élőhelye. Ma már szinte kizárólag épületeken, telepesen költ. Tetőszerkezetek üregeiben, panelházak repedéseiben, valamint az épületek legkülönbözőbb réseiben telepszik meg, de a molnárfecskék és házi verebek fészkét is elfoglalja. A fészket puha növényi anyagokkal, szöszökkel, tollakkal béleli, melyeket a levegőben gyűjt össze. Rendszerint 2-3 tojást rak, melyen mindkét ivar egyaránt kotlik. Viszonylag későn, csak április második felében érkezik vissza telelőhelyéről, augusztustól pedig már elkezdődik a vonulás. A rövid itt tartózkodás csak egy fészekalj felnevelésére elegendő, de annak sikertelensége esetén pótköltéssel próbálkozik. ",
+//                List.of(BOGARAK),
+//                List.of("Belvárosi területeken is feltűnő jelenség, ahogy kisebb csoportokban, éles hangon visítozva, sebesen repked."),
+//                List.of(VAROS),
+//                "apus apus",
+//                true,
+//                List.of(ENEKES),
+//                "16-17 cm",
+//                "42-48 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "barázdabillegető",
+//                List.of(FEKETE, FEHER, SZURKE),
+//                HUSZONOT,
+//                "Hazánkban mindenütt megtalálható, általánosan elterjedt énekesmadarunk. Főleg rovarevő, de csigákkal is táplálkozik. Fiókáit vízhez kötődő ízeltlábúakkal, legyekkel, szúnyogokkal, hernyókkal eteti. A hazai állomány rövidtávú vonuló, a fagyok beálltával délebbre húzódik, de az idő enyhülésekor hamar megjelenik. Ősszel nagyobb, több százas csapatokba is verődhet. Megtelepedését elősegíthetjük az úgynevezett C-típusú mesterséges odú kihelyezésével.",
+//                List.of(BOGARAK),
+//                List.of("Nevét onnan kapta, hogy gyakran keresi táplálékát a szántóföldek, kapás kultúrák barázdái között, a farktollait pedig rendszeresen billegeti."),
+//                List.of(VAROS, RET, VIZ, SZANTO),
+//                "motacilla alba",
+//                true,
+//                List.of(ENEKES),
+//                "18 cm",
+//                "25-30 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "vörösbegy",
+//                List.of(NARANCS, FEHER, SZURKE, BARNA),
+//                HUSZONOT,
+//                "Elterjedt költőfajunk, szinte minden élőhelyen találkozhatunk vele, de állománya a bokros, dombvidéki környezetben a legsűrűbb. Hazánkban erdei környezetben a vörösbegy a kakukk egyik leggyakoribb gazdamadara. Rovarokkal és pókokkal táplálkozik, de olykor apró csigákat is fogyaszt. A hideg idő beálltával bogyókat, gyümölcsöket is szedeget. Vonuló, a nálunk telelő példányok jelentős része Európa északabbi térségeiből érkezik hozzánk.  Az etetőkön is gyakori.",
+//                List.of(BOGARAK, NOVENYEK),
+//                List.of("Éjszaka vonul, amikor a csillagos égbolt forgástengeléynekhelyzetét hívja segítségül az irány meghatározásához."),
+//                List.of(VAROS, RET, VIZ, SZANTO, ERDO),
+//                "erithacus rubecula",
+//                true,
+//                List.of(ENEKES),
+//                "14 cm",
+//                "20-22 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "fülemüle",
+//                List.of(FEHER, VILAGOSBARNA, BARNA),
+//                HUSZONOT,
+//                "Népi elnevezése alapján sokak által ismert énekesmadarunk. A versekben, népdalokban csalogányként említik, mely változatos és sokszínű énekére utal. Költési időszakban szinte egész éjjel hallhatjuk az éneklő hímek messzehangzó dalolását. Territoriális madár, a hímek a folyamatos énekléssel őrzik revírjüket. Rovarokkal, pókokkal, férgekkel és apró csigákkal táplálkozik, melyeket a talajon kap el. Vonuló, a telet Afrikában tölti. Európa északi részeinek kivételével az egész kontinensen, valamint Észak-Afrikában fészkel. Hazánkban a dunántúli dombvidéki területeken legsűrűbb az állománya. Kedveli az ártereket, bokros sűrűségeket, de parkokban, temetőkben és kertekben is megtelepszik. Budapesten terjedőben van, egyre több helyen lehet hallani tavaszi énekét a városban. Évente egyszer költ, esetenként pótköltése megfigyelhető. A fészket a tojó építi, miközben a hím énekel. Rendszerint bokrok, vagy egyéb sűrű növényzet takarásába, ritkábban a talajra rakja fészkét. Legtöbbször azonban a talajfelszín fölött, de mindig alacsonyan fészkel. 4-6 tojásán a tojó egyedül kotlik.",
+//                List.of(BOGARAK),
+//                List.of("Közismert a népies neve, ami a csalogány."),
+//                List.of(VAROS, VIZ, ERDO),
+//                "luscinia megarhynchos",
+//                true,
+//                List.of(ENEKES),
+//                "16 cm",
+//                "23-26 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "házi rozsdafarkú",
+//                List.of(SZURKE, PIROS, BARNA),
+//                HUSZONOT,
+//                "Hazánkban általánosan elterjedt, gyakori énekesmadarunk. Rovarokkal, pókokkal táplálkozik. Ősszel, a vonulási időszakban a bodzabokrok bogyóit is fogyasztja. Rövidtávú vonuló, a mediterráneumban telel. Kora tavasszal, hóolvadás után rögtön megjelenik a Kárpát-medencében, de enyhébb teleken számos áttelelő példánya megfigyelhető. „C-típusú” odú kihelyezésével elősegíthetjük megtelepedését akár a kertekben is. Szinte egész Európában és Ázsiában megtalálható, de Északnyugat-Afrikában is fészkel. Kedveli a köves, sziklás élőhelyeket, kőbányákat. Nem idegenkedik az ember közelségétől sem, városokban, falvakban, építkezések környékén rendszeres fészkelőnek számít. Fészkét a legkülönfélébb helyekre építi. Elfoglalja a füsti fecskék elhagyott otthonát, de egyéb szokatlan helyen is megtelepedhet: sokszor elég számára egy kis vízszintes lemez, vagy deszka, amely felülről fedett. Évente két, legfeljebb három alkalommal költ. A fészket a tojó építi fűszálakból, gyökérdarabkákból, melyet tollakkal és szőrökkel bélel. Építőanyagként olykor mesterséges anyagokat is felhasznál. Első fészekalja rendszerint 5, második 4 tojásból áll. A fiókákat a két szülő közösen gondozza.",
+//                List.of(BOGARAK),
+//                List.of("Települési környezetben gyakran használja költésre a füstifecskék elhagyott fészkeit is."),
+//                List.of(VAROS, VIZ, ERDO, RET, SZANTO),
+//                "phoenicurus ochruros",
+//                true,
+//                List.of(ENEKES),
+//                "14 cm",
+//                "23-26 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "cigánycsuk",
+//                List.of(FEKETE, FEHER, NARANCS, BARNA),
+//                HUSZONOT,
+//                "A rozsdás csukhoz hasonló megjelenésű madár, de nincs fehér szemsávja és fehér faroktükre. Feje egyöntetű barna, melynek köszönhetően sötétebb habitusú a rozsdás csuknál. Territoriális viselkedésű, a hímek sokat énekelnek a revír kimagasló pontjain. Párba álláskor nászrepülésük is megfigyelhető. Igazi vártamadár: kimagasló pontokról lesi rovarokból, pókokból és más ízeltlábúakból álló zsákmányát. Ritkán apró termetű csigákat is eszik. Télen, állati táplálék hiányában elfogyasztja a magvakat, bogyókat is. A hazai, és a tőlünk északabbra található populációk egyedi vonulók, a telet a mediterráneumban és Észak-Afrikában töltik. Telelőhelyéről igen korán, legtöbbször már március elején visszatérnek első példányai. Nálunk gyakori fészkelőnek számít.",
+//                List.of(BOGARAK, NOVENYEK),
+//                List.of("Nyílt tájakon szívesen ül lágyszárúak, kórók csúcsára, amiről a népies cigány csaláncsúcs elnevezést kapta."),
+//                List.of(RET, SZANTO),
+//                "saxicola rubicola",
+//                true,
+//                List.of(ENEKES),
+//                "12 cm",
+//                "18-21 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "énekes rigó",
+//                List.of(SZURKE, VILAGOSBARNA, BARNA),
+//                HUSZONOT,
+//                "Életmódja és táplálkozása meglehetősen hasonlít a fekete rigóéhoz. Táplálékát elsősorban giliszták és csigák képezik, de hernyókat, lószúnyogokat és egyéb rovarokat is zsákmányol. Ősszel főként gyümölcsöket, bogyókat fogyaszt. Rövidtávú vonuló, a hazai állomány a telet a mediterráneumban, elsősorban Olaszországban tölti, de minden télen találkozhatunk néhány áttelelő példánnyal, melyek sokszor lakott területek közelébe húzódnak, rendszerint más rigófajok társaságában. Eurázsiai elterjedésű faj. Gyakori költőfajunk, parkokban, kertekben egyaránt költhet, de elsősorban a sűrű aljnövényzetű elegyes erdőket kedveli. Hazánkban mindenütt előfordul, de a domb- és hegyvidékeken a leggyakoribb. A fekete rigóhoz hasonlóan betelepítették Ausztráliába és Új-Zélandra is. Évente kétszer költ, de a fiókák nagyarányú pusztulása miatt sok a pótköltés. Leginkább fenyőfákon, vagy sűrű bokrokon fészkel. 3-6 tojását fűszálakból és vékony gallyakból álló, nyállal kevert pudvás fazúzalékkal kitapasztott fészkébe rakja. Tojásai élénk kékeszöld színűek, melyeken semmiféle mintázat nem látható. Ez a bélyeg jól elkülöníti a halvány foltokkal tarkított fekete rigó tojásaitól. Éneke egészen egyedi: változatos strófáit minden esetben kétszer-háromszor megismétli, emiatt kezdő madarászok is könnyen felismerhetik.",
+//                List.of(BOGARAK, NOVENYEK),
+//                List.of("Mellkasán és hasán a pettyek csúcsosak, nyíl alakúak. Ezzel elkülöníthető a léprigótól, aminek kerek pettyei vannak."),
+//                List.of(VAROS, ERDO),
+//                "turdus philomelos",
+//                true,
+//                List.of(ENEKES),
+//                "23 cm",
+//                "33-36 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "fekete rigó (hím)",
+//                List.of(FEKETE),
+//                HUSZONOT,
+//                "Az egyik legközismertebb és leggyakrabban szemünk elé kerülő énekesmadarunk, mely igen jól alkalmazkodott az ember jelenlétéhez. A hímek teljesen feketék, míg a tojók és a fiatalok barnás színezetűek. Költési időben kora hajnaltól, szinte még teljes sötétségben elkezdi hangos énekét. Lószúnyogokkal, gilisztákkal táplálkozik, melyeket főként a talajon kap el. A hidegebb idő beálltával fokozatosan áttér a bogyós termésekre (galagonya, vadrózsa, bodza), de gyümölcsöket is előszeretettel fogyaszt. Télen lágyeleség – gyümölcs, zöldség, sajt, túró – kihelyezésével segíthetjük áttelelését. Eurázsiai elterjedésű faj, de betelepítették Ausztráliába és Új-Zélandra is. Jól alkalmazkodó madár, hazánkban szinte mindenütt megtalálja életfeltételeit. A XX. század közepén a városi parkokban, lakótelepeken, kertekben, fasorokban is megtelepedett. A településeken történő térhódítását a több táplálék és a kevesebb ragadozó idézte elő. Évente kétszer, legfeljebb háromszor költ. Territoriális madár, a hímek már februárban revírt foglalnak, melyet hangos énekükkel jeleznek. A fészket a tojó építi, meglehetősen változatos helyekre. Leggyakrabban bokrokon, fákon, épületeken, ereszcsatornákon, vagy akár a talajon gallyakból, fűszálakból és sárból alakítja ki a fészkét. Meglehetősen elővigyázatlan, emiatt rendszeresen megsemmisülnek fészekaljai. Sok esetben előfordul, hogy a tojásos fészekaljakat elhagyja és máshol kezd költésbe. Rendszerint 4-6 tojást rak. A fiókák még teljes röpképességük előtt kiugrálnak a fészekből, de szüleik még hetekig etetik őket. Ilyenkor gyakran előfordul, hogy jó szándékú emberek a gyámoltalannak és elhagyottnak tűnő fiókákat megfogják, hazaviszik nehogy elpusztuljanak. Erre azonban semmi szükség, ugyanis jelzőhangok alapján az öreg madarak a fészket elhagyó fiatalokat könnyedén megtalálják és teljes kifejlődésükig etetik őket.",
+//                List.of(BOGARAK, NOVENYEK),
+//                List.of("Csak a hím egyedei teljesen feketék. A tojók inkább barnás árnyalatúak."),
+//                List.of(VAROS, ERDO, VIZ, RET, SZANTO),
+//                "turdus merula",
+//                false,
+//                List.of(ENEKES),
+//                "24-25 cm",
+//                "34-38 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "fekete rigó (tojó)",
+//                List.of(BARNA, VILAGOSBARNA),
+//                HUSZONOT,
+//                "Az egyik legközismertebb és leggyakrabban szemünk elé kerülő énekesmadarunk, mely igen jól alkalmazkodott az ember jelenlétéhez. A hímek teljesen feketék, míg a tojók és a fiatalok barnás színezetűek. Költési időben kora hajnaltól, szinte még teljes sötétségben elkezdi hangos énekét. Lószúnyogokkal, gilisztákkal táplálkozik, melyeket főként a talajon kap el. A hidegebb idő beálltával fokozatosan áttér a bogyós termésekre (galagonya, vadrózsa, bodza), de gyümölcsöket is előszeretettel fogyaszt. Télen lágyeleség – gyümölcs, zöldség, sajt, túró – kihelyezésével segíthetjük áttelelését. Eurázsiai elterjedésű faj, de betelepítették Ausztráliába és Új-Zélandra is. Jól alkalmazkodó madár, hazánkban szinte mindenütt megtalálja életfeltételeit. A XX. század közepén a városi parkokban, lakótelepeken, kertekben, fasorokban is megtelepedett. A településeken történő térhódítását a több táplálék és a kevesebb ragadozó idézte elő. Évente kétszer, legfeljebb háromszor költ. Territoriális madár, a hímek már februárban revírt foglalnak, melyet hangos énekükkel jeleznek. A fészket a tojó építi, meglehetősen változatos helyekre. Leggyakrabban bokrokon, fákon, épületeken, ereszcsatornákon, vagy akár a talajon gallyakból, fűszálakból és sárból alakítja ki a fészkét. Meglehetősen elővigyázatlan, emiatt rendszeresen megsemmisülnek fészekaljai. Sok esetben előfordul, hogy a tojásos fészekaljakat elhagyja és máshol kezd költésbe. Rendszerint 4-6 tojást rak. A fiókák még teljes röpképességük előtt kiugrálnak a fészekből, de szüleik még hetekig etetik őket. Ilyenkor gyakran előfordul, hogy jó szándékú emberek a gyámoltalannak és elhagyottnak tűnő fiókákat megfogják, hazaviszik nehogy elpusztuljanak. Erre azonban semmi szükség, ugyanis jelzőhangok alapján az öreg madarak a fészket elhagyó fiatalokat könnyedén megtalálják és teljes kifejlődésükig etetik őket.",
+//                List.of(BOGARAK, NOVENYEK),
+//                List.of("Csak a hím egyedei teljesen feketék. A tojók inkább barnás árnyalatúak."),
+//                List.of(VAROS, ERDO, VIZ, RET, SZANTO),
+//                "turdus merula",
+//                false,
+//                List.of(ENEKES),
+//                "24-25 cm",
+//                "34-38 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "barátposzáta",
+//                List.of(FEKETE, SZURKE, BARNA, VILAGOSBARNA),
+//                HUSZONOT,
+//                "Leggyakoribb poszátafajunk. Könnyedén alkalmazkodik a degradáltabb élőhelyekhez és az ember közelségéhez egyaránt. Régebbi neve barátka, mely kis testméretére és a hím fekete színű sapkájára utal. A tojók és fiatalok fejteteje rozsdabarna. Rövidtávú vonuló, egyes példányai megfelelő táplálék megléte esetén át is telelnek. Rovarokkal, pókokkal, csigákkal táplálkozik, de a hideg idő beálltával gyümölcsöket, bogyókat fogyaszt. Ősszel leggyakrabban a fekete bodza termését fogyasztja. Áttelelését úgynevezett lágyeleséggel – alma, körte, zöldségfélék, túró, sajt – segíthetjük elő. Szinte minden hazai bokros élőhelyen találkozhatunk vele. Eurázsiai elterjedésű faj, de kisebb számban Észak-Afrikában is költ. A sűrű aljnövényzetű bokros, fákkal tarkított élőhelyeket kedveli. Parkokban, kertekben, sík- és dombvidéken egyaránt megtalálható. Évente kétszer költ. A hím kezdetben több fészekkezdeményt is épít, melyek közül a tojó választja ki, melyiket fejezzék be közösen. A fészek általában 1 méternél alacsonyabban épül. 3-7 tojást tojik, melyeken a két szülő felváltva kotlik.",
+//                List.of(BOGARAK, NOVENYEK),
+//                List.of("A hímek fejteteje koromfekete, míg a tojók és fiatalok fejteteje világosbarna színű."),
+//                List.of(VAROS, ERDO),
+//                "sylvia atricapilla",
+//                true,
+//                List.of(ENEKES),
+//                "13 cm",
+//                "20-23 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "mezei poszáta",
+//                List.of(FEHER, SZURKE, BARNA, PIROS),
+//                HUSZONOT,
+//                "A többi hazánkban előforduló poszátától legkönnyebben rozsdás szegélyű szárnytollai alapján különíthetjük el. Táplálékát főként lepkehernyók és pókok alkotják, melyeket gyakran a magas fű között, a talajon keres. Nyár végén a fekete bodza bogyóit is elfogyasztja. Vonuló, Afrika Szaharán túli részén telel. Hazai élőhelyei az utóbbi évtizedekben jelentősen megfogyatkoztak, bokrosok telepítésével teremthetünk számára megfelelő fészkelőhelyeket. Csaknem egész Európában, Ázsiában és Északnyugat-Afrikában fészkel. Megtelepszik a domb- és sík vidékeken, de a zárt erdőket kerüli. Kisebb kiterjedésű bokrosokkal is beéri, sőt, ritkásan benőtt cserjés oldalakban is megtelepszik. Évente egy, legfeljebb két fészekaljat nevel. A hímek néhány nappal a tojók érkezése előtt foglalnak revírt, majd fészekkezdeményt építenek, énekelnek, és gyakran nászrepülnek is. Fészkük alacsonyan helyezkedik el. 4-6 tojást rak, melyeken az első költés alkalmával felváltva kotlanak, míg a második fészekaljon csak a tojó ül, mialatt a hím az első költésből származó fiatalokról gondoskodik.",
+//                List.of(BOGARAK, NOVENYEK),
+//                List.of("Különleges színösszetétele megkülönbözteti a többi, zömmel szürkés-barnás színezetű poszátafajtól."),
+//                List.of(SZANTO, ERDO, RET),
+//                "sylvia communis",
+//                true,
+//                List.of(ENEKES),
+//                "14 cm",
+//                "18-23 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "nádirigó",
+//                List.of(FEHER, BARNA, VILAGOSBARNA),
+//                HUSZONOT,
+//                "A legnagyobb testű, országszetre gyakori nádiposzátánk. Méreténél fogva a számára megfelelő költőhelyekért csak fajtársaival kell versengenie, a többi rokon faj kisebb mérete miatt nem száll harcba vele a fészkelőterületekért. A fészekparazita kakukk egyik leggyakoribb gazdamadara a nádas területeken. Vonuló, afrikai telelőhelyeiről általában áprilisban érkezik vissza, szeptemberben pedig már el is indul déli irányba.",
+//                List.of(BOGARAK, NOVENYEK),
+//                List.of("Vízparti területeken a nádirigó a kakukk leggyakoribb dajkamadara."),
+//                List.of(VIZ),
+//                "acrocephalus arundinaceus",
+//                true,
+//                List.of(ENEKES),
+//                "19-20 cm",
+//                "24-29 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "foltos nádiposzáta",
+//                List.of(SZURKE, BARNA, VILAGOSBARNA),
+//                HUSZONOT,
+//                "Leggyakoribb nádi énekesmadarunk, az egész országban általánosan elterjedt. Territoriális faj. A hím revírjének kimagasló pontjain reszelős éneklésével jelzi területét. Vízhez kötődő pókokkal, rovarokkal, hernyókkal, lárvákkal táplálkozik. Vonuló, a telet Afrikában, a Szaharától délre tölti. Vonuláskor növényi táplálékokat, főleg kisebb bogyós terméseket is fogyaszt. A vizes élőhelyek megőrzésével állománya hosszútávon fenntartható. Eurázsiai elterjedésű faj. Sokféle élőhelyen megtelepszik, de leginkább a fűzfákkal, bokrokkal, tarkított gyékényes nádasokat, mocsarakat kedveli. Évente egy, legfeljebb két alkalommal költ. A felülről takarásban lévő fészkét a tojó építi avas nádszálakra, vagy zsombéksásos gyékényfoltokra. Építőanyagként nádszálat, száraz fűszálakat és gyökérdarabokat használ. Átlagosan 4-5 tojást rak.",
+//                List.of(BOGARAK),
+//                List.of("Énekét egy-egykiálló ág vagy nádszál csúcsáról hallatja, de néha felemelkedikés szüntelen éneklés közben, verdesve ereszkedik vissza."),
+//                List.of(VIZ, RET),
+//                "acrocephalus schoenobaenus",
+//                true,
+//                List.of(ENEKES),
+//                "13 cm",
+//                "17-21 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "csilpcsalpfüzike",
+//                List.of(FEHER, BARNA, VILAGOSBARNA, ZOLD),
+//                HUSZONOT,
+//                "Hazánkban általánosan elterjedt, gyakori füzikefaj. A talajon fészkel, de a táplálékául szolgáló rovarokat, hernyókat, pókokat a fák lombkoronájában, a levelekről szedegeti össze. Rövidtávú vonuló, a Földközi-tenger partvidékére vonul, de egyes példányai enyhébb teleken át is telelhetnek. Nevét jellegzetes, messzehangzó énekéről kapta, mely akkor is elárulja jelenlétét, ha zöldes tollazata miatt nem vesszük észre a lombkoronában.",
+//                List.of(BOGARAK, NOVENYEK),
+//                List.of("Éneke annyira jellegzetes, hogy több európai nyelven is meghatározta a faj névadását. Elnevezése a jellegzetes \"csilpcsalp-csilpcsalp\" strófát jelző, hangutánzó név."),
+//                List.of(VIZ, ERDO, VAROS),
+//                "phylloscopus collybita",
+//                true,
+//                List.of(ENEKES),
+//                "10-11 cm",
+//                "15-21 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "ökörszem",
+//                List.of(BARNA, VILAGOSBARNA),
+//                HUSZONOT,
+//                "Hazánk és Európa egyik legkisebb termetű madara, hossza 9 cm, súlya 6-8 gramm. Kis mérete ellenére hangja igen erőteljes és messze hangzó. Farktollait gyakran merőlegesen felmereszti. Rovarokkal, pókokkal táplálkozik, melyeket a talajon és a talajközeli növényzeteben kap el, télen apró fűmagvakat is fogyaszt. Rövidtávú vonuló, illetve kóborló. Télen a hegyekből alacsonyabban fekvő területekre húzódik. Ilyenkor az ország egész területén, bokros árokpartokon, nádasokban és településeken is gyakori.",
+//                List.of(BOGARAK),
+//                List.of("Rövid farktollait mindig felfelé, a hátvonala fölé tartja, ami jellegzetes testtartást kölcsönöz a madárnak."),
+//                List.of(VIZ, ERDO, VAROS, SZANTO),
+//                "troglodytes troglodytes",
+//                false,
+//                List.of(ENEKES),
+//                "9-10 cm",
+//                "13-17 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "örvös légykapó (hím)",
+//                List.of(FEKETE, FEHER),
+//                HUSZONOT,
+//                "Középhegységi bükk- és gyertyános-tölgyes erdeinkben gyakori fészkelő. Afrikában telel, ahonnan április végén érkezik vissza. Szeptemberben vonul el, ilyenkor az ország bármely részén előfordulhat. Nyílt területre néző ágakról vadászik repülő rovarokra. Fiókaneveléskor a fák és cserjék lombjáról is zsákmányol.",
+//                List.of(BOGARAK),
+//                List.of("Jelenlétével az erdő jó természeti állapotát jelzi."),
+//                List.of(ERDO, VAROS),
+//                "ficedula albicollis",
+//                true,
+//                List.of(ENEKES),
+//                "13 cm",
+//                "22-25 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "örvös légykapó (tojó)",
+//                List.of(FEHER, BARNA, VILAGOSBARNA),
+//                HUSZONOT,
+//                "Középhegységi bükk- és gyertyános-tölgyes erdeinkben gyakori fészkelő. Afrikában telel, ahonnan április végén érkezik vissza. Szeptemberben vonul el, ilyenkor az ország bármely részén előfordulhat. Nyílt területre néző ágakról vadászik repülő rovarokra. Fiókaneveléskor a fák és cserjék lombjáról is zsákmányol.",
+//                List.of(BOGARAK),
+//                List.of("Jelenlétével az erdő jó természeti állapotát jelzi."),
+//                List.of(ERDO, VAROS),
+//                "ficedula albicollis",
+//                true,
+//                List.of(ENEKES),
+//                "13 cm",
+//                "22-25 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "szürke légykapó",
+//                List.of(FEHER, FEKETE, SZURKE),
+//                OTVEN,
+//                "Erdeink elterjedt fészkelője. Afrikai telelőhelyeiről április végén, májusban érkezik meg, augusztus végén, szeptemberben pedig már el is vonul. Főleg repülő rovarokkal táplálkozik, melyeket egy vártául szolgáló ágról fölreppenve kap el. Kertekben, parkokban C-típusú odúval megtelepíthető.",
+//                List.of(BOGARAK, NOVENYEK),
+//                List.of("Nevével ellentétben alkalomszerűen kis bogyús gyümölcsöket is elfogyaszt. Ez különösen a a vonulási időszakra jellemző."),
+//                List.of(ERDO, VAROS),
+//                "muscicapa striata",
+//                true,
+//                List.of(ENEKES),
+//                "14-15 cm",
+//                "23-26 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "kék cinege",
+//                List.of(FEHER, FEKETE, CITROM, KEK),
+//                HUSZONOT,
+//                "Egész Európában elterjedt faj. Kis termete ellenére meglehetősen agresszív más madarakkal szemben. Télen csapatosan keresi fel a sűrű nádasokat, a nád magját fogyasztja. Fiókáit kizárólag állati táplálékkal (hernyók, pókok, lószúnyogok) eteti, és az öreg madarak is rovarokkal táplálkoznak. A hideg idő beálltával térnek át a magokra. A nálunk költő madarak állandóak, míg a tőlünk északabbra költő egyedek nagy számban telelnek hazánkban. Megtelepedését odúk kihelyezésével, áttelelését pedig napraforgómag, szalonna vagy cinkegolyó kihelyezésével segíthetjük.",
+//                List.of(BOGARAK, NOVENYEK),
+//                List.of("Mezőgazdasági szempontból igen haszon madár, hiszen számos kártevő rovart, illetve rovarlárvát elfogyaszt."),
+//                List.of(ERDO, VAROS, VIZ, SZANTO),
+//                "parus caeruleus",
+//                false,
+//                List.of(ENEKES),
+//                "11-12 cm",
+//                "17-20 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "barátcinege",
+//                List.of(FEHER, FEKETE, SZURKE, BARNA),
+//                HUSZONOT,
+//                "A szén- és kékcinege után a harmadik leggyakoribb cinegefaj hazánkban, legnagyobb számban középhegységi erdeinkben fordul elő. Leginkább a jóval ritkább kormosfejű cinegével lehet összetéveszteni. Nagyon területhű, állandó madár. Megtelepedését mesterséges odúval elő lehet segíteni, bár azokat kisebb eséllyel foglalja el, mint két gyakoribb cinegefajunk. Télen a lakott területek közelében is megjelenik, ilyenkor etetéssel segíthetünk rajta. Rovartáplálékát főleg a lombkoronaszintben keresi. Télen magokat is fogyaszt.",
+//                List.of(BOGARAK, NOVENYEK),
+//                List.of("Azon kevés madarak közé tartozik, aminek állománya nem csökken, sőt lassan növekszik is."),
+//                List.of(ERDO, VAROS),
+//                "parus palustris",
+//                false,
+//                List.of(ENEKES),
+//                "11-12 cm",
+//                "18-20 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "széncinege",
+//                List.of(FEHER, FEKETE, CITROM, KEK),
+//                HUSZONOT,
+//                "Európában általánosan elterjedt faj. Az egyik leggyakoribb madarunk. Szinte minden élőhelyen megtelepszik, ahol fészkelésre alkalmas odút, vagy más üreget talál. Fiókáit többnyire hernyókkal és pókokkal eteti, melyet csigahéjjal egészít ki, ami a legfontosabb kálciumforrásuk. Télen magvakkal táplálkozik. A hideg hónapokban gyakori vendég a madáretetőnél. Megtelepedését odúk kihelyezésével, áttelelését pedig napraforgómag, szalonna vagy cinkegolyó kihelyezésével segíthetjük. Territoriális madár, a költőodút fajtársaival, a legnagyobb konkurenciát jelentő kék cinegékkel, és egyéb odúlakó énekesmadarakkal szemben is védelmezi. A hazai állomány állandó, de hidegebb teleken kisebb távolságokra kóborolhat. Városokban, parkokban, kertekben, árterekben, erdőkben, gyümölcsösökben költ. Évente egy vagy két alkalommal fészkel. Természetes vagy mesterséges odúban egyaránt költ, de ezek hiányában máshol is képes megtalálni a költőhelyét. Előfordul, hogy postaládákban, kültéri lámpatestek buráiban, korlátok csövében is nevelhet utódokat. A fészek nagyon hasonló a kék cinege fészkéhez, melyet itt is a tojó épít. A fűszálakra, vékony gyökerekre moha kerül, amit szőrökkel bélel ki. 6-13 tojást rak, melyeken a tojó kotlik.",
+//                List.of(BOGARAK, MADARAK, EMLOSOK, DOGOK, NOVENYEK),
+//                List.of("Közismert \"nyitni-kék\" strófáján kívül legalább húszféle énekhangja ismeretes. Az ének változása egyedenként széles skálán változik."),
+//                List.of(ERDO, VAROS, RET, SZANTO, VIZ),
+//                "parus major",
+//                false,
+//                List.of(ENEKES),
+//                "14 cm",
+//                "22-26 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "függőcinege",
+//                List.of(SZURKE, FEKETE, VILAGOSBARNA, BARNA),
+//                OTVEN,
+//                "Társas madár, sokszor verődik kisebb csapatokba. Mind a tojók, mind a hímek poligámok. Főként rovarevő, de pókokat is fogyaszt, télen pedig a nád és a gyékény magjaival táplálkozik. Rövidtávú vonuló, de áttelelő példányok is bőven akadnak hazánkban. A vizes élőhelyek, nádasok megőrzésével, állománya biztosított.",
+//                List.of(BOGARAK, NOVENYEK),
+//                List.of("Mind a hímekre, mind a tojókra jellemző a poligámia."),
+//                List.of(VIZ),
+//                "remiz pendulinus",
+//                false,
+//                List.of(ENEKES),
+//                "11 cm",
+//                "16-18 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "őszapó",
+//                List.of(FEHER, FEKETE, VILAGOSBARNA),
+//                HUSZONOT,
+//                "Hazánkban mindenütt elterjedt. Társas madár, a fiókák kirepülését követően mindig csapatban mozog. A hím és a tojó hasonló, a kirepülő fiatalok homloka és fejoldala sötét. Tavasztól rovarokkal, pókokkal táplálkozik, ősztől pedig fokozatosan áttér a növényi táplálékra. Állandó madár, télen alkalmilag az etetők közelében is feltűnik. Csaknem egész Európában, valamint Ázsia nagy részén megtalálható. Erdőkben, bokrosokban, árterekben, parkokban, lakott területeken egyaránt találkozhatunk vele. A teljesen fátlan, nagy kiterjedésű pusztákat és mezőgazdasági területeket elkerüli. Évente csak egyszer költ, de annak meghiúsulása esetén pótköltéssel próbálkozik. Fészke teljesen zárt, csak egy kis, tollakkal fedett nyílás vezet a belsejébe. A párok közösen építik a fészket, melyhez mohát, zuzmót, pókfonalat, birkagyapjút, valamint tollakat használnak fel. Ha a költés többször is meghiúsul, akkor a párok besegítenek más, közelben található őszapópár fiókáik felnevelésébe.",
+//                List.of(BOGARAK, NOVENYEK),
+//                List.of("Rendkívül szociális madár. Sikertelen költés esetén besegít a szomszédos párok fiókáinak nevelésében."),
+//                List.of(VAROS, ERDO),
+//                "aegithalos caudatus",
+//                false,
+//                List.of(ENEKES),
+//                "14 cm",
+//                "16-19 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "barkóscinege",
+//                List.of(FEHER, FEKETE, SZURKE, NARANCS),
+//                OTVEN,
+//                "Hazánk nádasaiban elterjedt madárfajnak számít. Társas faj, a többi nádi énekesmadárral ellentétben nem territoriális viselkedésű. Állandó, télen is a nádasokban figyelhető meg, ahol kisebb-nagyobb csapatokban a nád magját fogyasztja. Tavasszal és nyáron rovarokkal, apró csigákkal és pókokkal táplálkozik. A vizes élőhelyek megőrzésével állománya biztosítottnak látszik.",
+//                List.of(BOGARAK, NOVENYEK),
+//                List.of("Nagyon korán, sokszor már pár hetes korában párt választ, aki mellett kitart. Ez a tulajdonság az énekesmadarak között egyedülálló."),
+//                List.of(VIZ),
+//                "panurus biarmicus",
+//                false,
+//                List.of(ENEKES),
+//                "12-13 cm",
+//                "16-18 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "csuszka",
+//                List.of(FEHER, FEKETE, SZURKE, VILAGOSBARNA),
+//                HUSZONOT,
+//                "Állandó madarunk. Városi parkokban és erdőkben egyaránt találkozhatunk vele. Fontos számára az idős fák jelenléte élőhelyén. A fák törzsén, ágain harkályszerűen mozogva, sokszor fejjel lefelé csüngve keresi a kéregrepedésekben megbújó táplálékát. Territoriális viselkedésű, a párok egész évben őrzik revírjüket. Rovarlárvákkal, hernyókkal, kifejlett bogarakkal, pókokkal táplálkozik. Állandó madár, így ősztől bogyókat és magvakat is fogyaszt. Telente az etetőket is szívesen látogatja. Az etetőhelyre általában rakétaszerűen bevágódik, ezzel az összes ott táplálkozó madarat elijeszti. A napraforgómagok közül többet is felcsipeget, az így szerzett zsákmánnyal.",
+//                List.of(BOGARAK, NOVENYEK),
+//                List.of("A csuszka fákon él, nevét is onnan kapta, hogy akár fejjel lefele is haladva mintegy \"csúszkál\" a fatörzseken."),
+//                List.of(VAROS, ERDO),
+//                "sitta europaea",
+//                false,
+//                List.of(ENEKES, HARKALY),
+//                "14 cm",
+//                "22-27 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "hegyi fakusz",
+//                List.of(BARNA, FEHER, SZURKE, VILAGOSBARNA),
+//                HUSZONOT,
+//                "A rövidkarmú fakusztól legkönnyebben énekhangja alapján különíthetjük el, a tollazati különbségek nagyon kicsik és sokszor átfedést mutatnak a két faj között. Szinte kizárólag a fák törzsén mozog. Táplálékát is ott szerzi, ami apró rovarokból – pattanóbogarak, hangyák, levélbogarak, poloskák – és pókokból áll. Faroktollai erősek, melyek a fa törzsén való támaszkodásnál segítik. Északi populációi vonulók, a hazai állandó, de télen lejjebb húzódik költőhelyéről, és ilyenkor az alföldön is találkozhatunk vele. Speciális fakuszodú kihelyezésével segíthetjük megtelepedését. Erdőgazdasági szempontból kifejezetten hasznos madár. A szintén kéregrepedésekben keresgélő csúszkával ügyesen felosztják \"vadászterületüket\": míg a csuszka fentről lefelé haladva nézi végig a törzset, addig a fakusz pont fordítva, lentről felfelé. A magasabban fekvő erdők madara. Észak-keleten az alacsonyabban fekvő fenyvesekben is költ. Évente kétszer fészkel. Szűk fészkét a fák törzsén lévő repedésekbe, vagy a fakéreg alá építi. A fészek általában alacsonyan, 1 méter alatt helyezkedik el. A fészekalj nagysága igen változó lehet, általában 4-10 tojást rak.",
+//                List.of(BOGARAK),
+//                List.of("Harkályokhoz hasonlóan merev farktollakkal rendelkezik, ami segíti a törzsökön való támaszkodást."),
+//                List.of(ERDO),
+//                "certhia familiaris",
+//                false,
+//                List.of(ENEKES),
+//                "12-13 cm",
+//                "17-21 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "tövisszúró gébics",
+//                List.of(BARNA, FEHER, SZURKE, VILAGOSBARNA),
+//                HUSZONOT,
+//                "Jellegzetes és igen dekoratív vártamadár, mely első ránézésre kistermetű ragadozónak tűnik enyhén kampós csőre végett. Zsákmányát gyakran a bokrok töviseire felszúrva raktározza el, innen ered elnevezése is. Termetéhez képest igen erőteljes madár. Főként rovarokkal táplálkozik, de kisebb számban rágcsálókat, madárfiókákat és gyíkokat is fogyaszt. Vonuló, a telet Afrikában, a Szaharán túl tölti.",
+//                List.of(BOGARAK, EMLOSOK, MADARAK),
+//                List.of("Régebben a kakukk dajkamadara volt, de győztesként került ki ebből az evolúciós versenyből, megtanulta felismerni és kilökni fészkéből annak tojásait."),
+//                List.of(ERDO, RET, SZANTO),
+//                "lanius collurio",
+//                true,
+//                List.of(ENEKES),
+//                "17 cm",
+//                "24-27 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "szajkó",
+//                List.of(FEKETE, FEHER, BARNA, KEK),
+//                NULLA,
+//                "Erdei, vagy ahhoz hasonló élőhelyeken országszerte elterjedt, gyakori fészkelő. Hazai állománya növekszik. Hangutánzó képessége közismert, legtöbbször az ölyv vijjogását hallatja. Riasztóhangjára az erdő legtöbb állata felfigyel. Hazánkban nem védett, augusztus és február között vadászható faj. A hazai állomány nem vonul, de időnként északi és keleti madarak jelennek meg nálunk, elsősorban a téli hónapokban. Fészekrabló szokásai miatt természetvédelmi és vadgazdálkodási megítélése ellentmondásos.",
+//                List.of(BOGARAK, EMLOSOK, KETELTUEK, NOVENYEK, MADARAK),
+//                List.of("Híresen jó hangutánzó képességű, előszeretettel utánozza többek között az egerészölyv kiáltását."),
+//                List.of(VAROS, ERDO),
+//                "garrulus glandarius",
+//                false,
+//                List.of(GALAMB, VARJU),
+//                "34-35 cm",
+//                "52-58 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "szarka",
+//                List.of(FEKETE, FEHER),
+//                NULLA,
+//                "A zárt erdők kivételével szinte mindenhol előfordul hazánkban. Az utóbbi évtizedekben urbanizálódott, egyre több egyedét lehet megfigyelni városi környezetben, ahol hangja és fészekrabló szokásai miatt a lakosság nagy része nem kedveli jelenlétét. Nyílt, mezőgazdasági területeken általánosan elterjedt, országos állománya lassú ütemben növekszik. A vadgazdálkodók többek közt a szarkát tartják felelősnek az apróvadállomány csökkenéséért. Elhagyott fészkét vércsék, kabasólymok és erdei fülesbaglyok is használják. Július 1. és február utolsó napja között vadászható. Állandó madár, de télen nagyobb csapatokat alkot és kóborol.",
+//                List.of(BOGARAK, NOVENYEK, MADARAK, DOGOK),
+//                List.of("Elhagyott fészkei vércsék, sólymok és baglyok számára egyes helyeken az egyetlen fészkelési lehetőséget biztosítják."),
+//                List.of(VAROS, ERDO, VIZ, RET, SZANTO),
+//                "pica pica",
+//                false,
+//                List.of(VARJU),
+//                "44-46 cm",
+//                "52-60 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "holló",
+//                List.of(FEKETE),
+//                OTVEN,
+//                "A legnagyobb európai varjúféle. A múlt század elején nagyon lecsökkent a hazai költőpárok száma, de mostanra állománya stabilizálódott, sőt növekszik. A vadászok részéről felmerült az igény állományának szabályozására feltételezett károkozása miatt, de mivel még mindig viszonylag kis számban fészkel hazánkban, ezt a természetvédelem még nem látja indokoltnak. Hazai nagy kiterjedésű erdeinkben megfelelő feltételeket talál, már nincs szükség jelentősebb védelmi intézkedésekre.",
+//                List.of(BOGARAK, NOVENYEK, MADARAK, DOGOK, EMLOSOK, KETELTUEK),
+//                List.of("Számos nép mitológiájában és mondavilágában pozitív szerepben tűnik fel."),
+//                List.of(ERDO, RET, SZANTO),
+//                "corvus corax",
+//                false,
+//                List.of(VARJU),
+//                "64 cm",
+//                "120-150 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "vetési varjú",
+//                List.of(FEKETE),
+//                OTVEN,
+//                "Hazai állománya a korábbi évtizedek vadászata és élőhelyeinek beszűkülése miatt nagyon lecsökkent. A folyamatos üldöztetés elől az állomány jelentős része lakott területekre települt. Itt nem kell tartaniuk a vadászattól és könnyen jutnak táplálékhoz is a parkok gyepén és a szeméttelepeken. Nem válogatós, növényi és állati eredetű táplálékot, magvakat, rovarokat, apróbb rágcsálókat, sáskákat, gyíkokat, puhatestűeket, madárfiókákat és dögöt egyaránt fogyaszt. A hazai populáció állandó, egész évben költőhelyén marad, de északról jelentős állomány érkezik a Kárpát-medencébe telelni.",
+//                List.of(BOGARAK, NOVENYEK, KETELTUEK, EMLOSOK, MADARAK, DOGOK),
+//                List.of("Védelme a fkozottan védett kékvércse érdekében is kiemelten fontos, mert telepesen költ, de saját fészket nem épít, a vetési varjú fészkeit foglalja el."),
+//                List.of(ERDO, RET, SZANTO, VAROS),
+//                "corvus frugilegus",
+//                false,
+//                List.of(VARJU),
+//                "44-46 cm",
+//                "81-99 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "seregély",
+//                List.of(FEKETE),
+//                HUSZONOT,
+//                "Hazánkban gyakori, a veréb- és cinegefajok után egyes területeken a leggyakoribb fészkelőnk. Főleg bogyókkal táplálkozik, a városok közelében előszeretettel fogyasztja a dísznövények termését. Tél végén a fagy elmúltával a szántásokon, nedves réteken csapatosan keresgél táplálék után, elfogyasztja a földben élő lárvákat, poloskákat, bogarakat is. Rövidtávú vonuló, a telet a mediterráneumban tölti, de kisebb csapatai enyhébb teleken áttelelhetnek. Sokszor több ezres csapatokban vonul. Ebben az időszakban gyakran keveredik más fajokkal (bíbic, pajzsoscankó, kis póling, nagy póling, nagy goda, fenyőrigó), melyek vonulási ideje, útvonala és táplálkozási területei egybeesnek a seregélyével. A vetési varjúhoz hasonlóan ellentmondásos gazdasági megítélésű madár, hiszen károsítja többek között a szőlőt, ellenben ízeltlábú, különösen talajban élő rovarlárva fogyasztása révén kifejezetten hasznos gazdálkodási szempontból. Gyérítése, risztása - mivel Európai Közösségben természetvédelmi szempontból jelentős állatfajnak minősül - kizárólag a 13/2001 KöM rendeletben foglaltak szerint lehetséges. Azok a csapatok, melyek ősszel nagy számban szállják meg a szőlőket, nem az itteni, hanem a tőlünk északabbra költő populációk egyedei.",
+//                List.of(BOGARAK, NOVENYEK),
+//                List.of("A szőlőkben kért okozó csapatok többnyire az északról vonuló madarak, nem a hazai költőállomány, így utóbbiak károsítása felesleges és jogszabályba ütköző cselekedet."),
+//                List.of(ERDO, RET, SZANTO, VAROS, VIZ),
+//                "sturnus vulgaris",
+//                true,
+//                List.of(ENEKES),
+//                "21-22 cm",
+//                "37-42 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "sárgarigó",
+//                List.of(FEKETE, FEHER, CITROM),
+//                HUSZONOT,
+//                "Szűkebb rokonságának egyetlen Európában is előforduló faja, semmilyen más madárral nem téveszthető össze, hangja is jellegzetes. Hazánkban gyakori fészkelő. Az ember által átalakított élőhelyekhez jól alkalmazkodott, állománya egész Európában stabil. Hurokvonuló: tavasszal nyugatabbi útvonalon érkezik vissza afrikai telelőhelyéről, mint ahol ősszel elvonult. Nagyon rövid ideig tartózkodik hazánkban, csak április-májusban érkezik meg, augusztusban pedig a madarak nagy része el is vonul./2001 KöM rendeletben foglaltak szerint lehetséges. Azok a csapatok, melyek ősszel nagy számban szállják meg a szőlőket, nem az itteni, hanem a tőlünk északabbra költő populációk egyedei.",
+//                List.of(BOGARAK, NOVENYEK),
+//                List.of("A hímek gyakori énekstrófája a \"huncut a bíró\", vagy \"kell-e dió, fiú?\" népi fordulatokkal írható le. A tojó hangja leginkább macskanyávogáshoz hasonlítható."),
+//                List.of(ERDO, SZANTO, VAROS, VIZ),
+//                "oriolus oriolus",
+//                true,
+//                List.of(ENEKES),
+//                "24 cm",
+//                "44-47 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "mezei veréb",
+//                List.of(FEKETE, FEHER, SZURKE, BARNA),
+//                HUSZONOT,
+//                "A házi verébtől legjobban sötét pofafoltja különíti el. Közeli rokonától eltérően a tojók és a hímek közt nincs számunkra látható ivari dimorfizmus. Társas madár, sokszor több százas csapataival is találkozhatunk. Nyáron rovarevő, fiókáit is kizárólag apró ízeltlábúakkal táplálja, ősztől viszont többnyire magvakat fogyaszt. Állandó madarunk, de télen kóborolhat. Odúk kihelyezésével növelhető az állománya.",
+//                List.of(BOGARAK, NOVENYEK),
+//                List.of("Jellegzetes színösszetétele miatt viszonylag könnyen megkülönböztethető a házi verébtől."),
+//                List.of(ERDO, SZANTO, VAROS, VIZ, RET),
+//                "passer montanus",
+//                false,
+//                List.of(ENEKES),
+//                "14 cm",
+//                "20-22 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "házi veréb",
+//                List.of(FEKETE, SZURKE, BARNA),
+//                HUSZONOT,
+//                "Egyik leggyakoribb madarunk, mely a szövőmadarak közeli rokona. Nyugat-Európában jelentősen megfogyatkozott az állománya, egyes területekről már el is tűnt. Kedveli az ember közelségét. Hazánkban még általánosan elterjedt. Táplálkozása változatos. A fiókák több állati eredetű élelmet, főleg rovarokat fogyasztanak, míg az öreg madaraknál a növényi táplálékok vannak túlsúlyban. Állandó madár.",
+//                List.of(BOGARAK, NOVENYEK),
+//                List.of("A hímek mellén található fekete folt mérete \"rangjelzésként\" szerepel, jól jelzi az adott egyed rangsorban elfoglalt helyzetét a csapaton belül."),
+//                List.of(ERDO, SZANTO, VAROS, VIZ, RET),
+//                "passer domesticus",
+//                false,
+//                List.of(ENEKES),
+//                "14-15 cm",
+//                "21-26 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "meggyvágó",
+//                List.of(FEKETE, FEHER, BARNA, PIROS),
+//                HUSZONOT,
+//                "Gyakori költőfajunk. Városi parkokban, fás-bokros élőhelyeken gyakran találkozhatunk vele. Télen feltűnik a madáretetőknél is. Csőre olyan erős, hogy akár a meggy magját is szét tudja roppantani. Bokrok, fák magvaival táplálkozik, de fiókáit főleg hernyókkal eteti. Részben vonuló, illetve kóborló, az északi populációk egy része hazánkban tölti a telet. Egyik legtermetesebb hazai pintyfajunk. Eurázsiai elterjedésű faj. Hazánkban szinte mindenütt jelen van, de állománya a gyümölcsösökben, városi parkokban, elegyes erdőkben, ligeterdőkben a legsűrűbb. Évente egy vagy két alkalommal költ. Fészkét különböző növényi részekből építi a fák lombkoronájának belsejébe. A fészekalj 3-6 tojásból áll, melyeken a tojó kotlik, miközben a hím párja etetéséről gondoskodik. Télen – a párok feloszlása után – nagyobb, tiszta vagy vegyes pintycsapatokba verődik.",
+//                List.of(BOGARAK, NOVENYEK),
+//                List.of("Magevő mivolta miatt nagy a vízigénye, így gyakran találkozni vele itatók, vizek közelében.", "Csőre olyan erős, hogy képes akár a meggy magját is szétroppantani."),
+//                List.of(ERDO, VAROS),
+//                "coccothraustes coccothraustes",
+//                false,
+//                List.of(ENEKES),
+//                "18 cm",
+//                "29-33 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "zöldike",
+//                List.of(SZURKE, CITROM, ZOLD),
+//                HUSZONOT,
+//                "Az egyik leggyakoribb pintyfélénk. Többnyire állandó, de télen kóborolhat. Ilyenkor gyakran keresi fel a madáretetőket más pintyfélékkel és magevő madarakkal vegyes csapatokban. Az északi populációkból sok egyed hazánkban tölti a telet. A kifejlett madarak gyommagvakkal, olajos termésekkel táplálkoznak. A fiókák tápláléka változatosabb, a magvak mellett hernyókat, ormányosbogarakat is fogyasztanak.",
+//                List.of(BOGARAK, NOVENYEK),
+//                List.of("Hazai állománya lassú növekedést mutat. Egyedszámát jelenleg körülbelül 600 000 párra becsülik."),
+//                List.of(ERDO, VAROS, RET, VIZ, SZANTO),
+//                "carduelis chloris",
+//                false,
+//                List.of(ENEKES),
+//                "15 cm",
+//                "24-28 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "erdei pinty",
+//                List.of(SZURKE, FEKETE, PIROS, BARNA),
+//                HUSZONOT,
+//                "Európában általánosan elterjedt. Hazánkban mindenütt gyakori, városokban is rendszeresen költ. Elsősorban növényi táplálékot fogyaszt, gyümölcsöket, magokat, melyeket a talajon szedeget össze, de kisebb arányban rovarokkal is táplálkozik. Fiókáit állati eredetű táplálékkal táplálja. Vonuló, az északkelet-európai állomány egy része hazánkban tölti a telet, míg az itteni állomány a mediterrán térség nyugati részén telel. Territoriális madár, tavasszal és nyár elején a hím gyakran hallatja rendkívül erőteljes énekét.",
+//                List.of(BOGARAK, NOVENYEK),
+//                List.of("Kiváló énektudása miatt még a második világháborút követő években is gyakran tartották fogságban. A válogatott énektudású madaraknak különböző versenyeket rendeztek."),
+//                List.of(ERDO, VAROS),
+//                "fringilla coelebs",
+//                true,
+//                List.of(ENEKES),
+//                "14-15 cm",
+//                "24-29 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "tengelic",
+//                List.of(FEHER, VILAGOSBARNA, CITROM, PIROS),
+//                HUSZONOT,
+//                "Egyik legszínesebb és leggyakoribb pintyfélénk. Szinte kizárólag csapatosan látni. A hideg idő beálltával gyakran találkozhatunk vele a madáretetőkön. Apró gyommagvakkal táplálkozik, de fiókái étrendjét bogarakkal és hernyókkal egészíti ki. Nagyrészt állandó, de télen észak-déli irányú kóborlása is megfigyelhető. Régebben dekoratív külseje miatt kalitkamadárnak tartották, de már régóta védett faj. Sík- és dombvidéki fészkelő. Kedveli a településeket. Kertekben, temetőkben, parkokban, fasorokban, erdőszéleken fészkel, a zárt erdőket viszont elkerüli. Fészkét a fák lombkoronájának szélére építi. Évente két-három fészekaljat nevel. A többi pintyféléhez hasonlóan fészkét vékony növényi szálakból építi, melyet szőrökkel és a nyárfa puha termésével bélel. 4-5 tojást rak, melyeket a tojó egymaga költi ki, míg a hím a táplálékszerzésben segíti.",
+//                List.of(BOGARAK, NOVENYEK),
+//                List.of("A már kirepült fiatal madarak az első vedlésükig nem viselik szüleik határozott, meggypiros álarcát. Ilyenkor a fejük még egyöntetű sárga."),
+//                List.of(ERDO, VAROS, RET, SZANTO),
+//                "carduelis carduelis",
+//                false,
+//                List.of(ENEKES),
+//                "12 cm",
+//                "21-26 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "csicsörke",
+//                List.of(FEKETE, VILAGOSBARNA, CITROM, SZURKE),
+//                HUSZONOT,
+//                "Eredetileg észak-afrikai, dél-európai elterjedésű madár, de mára az északi területek kivételével Európa nagy részét meghódította. A hazai állomány rövidtávú vonuló, a telet a mediterráneumban tölti, de egyes példányok enyhe teleken nálunk próbálják meg átvészelni a zord hónapokat. A tél végi enyhülés után hamar visszatérnek költőhelyükre. A hímek kora tavasszal elkezdik rendkívül kitartó éneklésüket, Nászidőszakban folyamatosan a tojó közelében maradnak és szárnyuk jellegzetes csapkodásával, valamint hullámzó röptükkel hívják fel magukra a figyelmet. Főként növényi táplálékot fogyaszt, melyben az apró magvak szerepelnek legnagyobb százalékban.",
+//                List.of(NOVENYEK),
+//                List.of("Megjelenésében hasonlít a kanári vad típusára. Erről kapta a tudományos elnevezését is, a \"serinus\" franciául kanárit jelent."),
+//                List.of(ERDO, VAROS),
+//                "serinus serinus",
+//                true,
+//                List.of(ENEKES),
+//                "11-12 cm",
+//                "20-23 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "süvöltő",
+//                List.of(FEKETE, VILAGOSBARNA, NARANCS, SZURKE),
+//                HUSZONOT,
+//                "Impozáns külsejű madár, melyet korábban kalitkamadárként is tartottak. Hangja jellegzetes, melyről nevét is kapta. Nagyrészt növényi táplálékot fogyaszt. Sok gyommagvat, rügyet és különböző bogyókat eszik. Vonuló, de telelő egyedei is megfigyelhetők hazánkban. Legnagyobb eséllyel a különféle kőrisfák környezetében figyelhetjük meg, ugyanis Magyarországon ez az egyik legkedveltebb tápláléka. Rendkívül ritka fészkelő nálunk.",
+//                List.of(NOVENYEK),
+//                List.of("Gyakran bizalmas, nem túl óvatos madár, ezért az együgyű, becsapható embert és a süvöltőt régen ugyanazzal a névvel illették: gimpli."),
+//                List.of(ERDO, VAROS),
+//                "pyrrhula pyrrhula",
+//                true,
+//                List.of(ENEKES),
+//                "14-17 cm",
+//                "22-29 cm"
+//        );
+//
+//        madar_feltoltese(
+//                "citromsármány",
+//                List.of(BARNA, VILAGOSBARNA, CITROM, SZURKE),
+//                HUSZONOT,
+//                "Hazánkban a leggyakoribb sármányfaj. A kifejlett madarak főleg gyommagvakkal táplálkoznak, de a fiókákat rovarokkal és pókokkal etetik. Télen sokszor feltűnnek istállók, állattartó telepek környékén, ahol az összegyűlt trágyarakásokon keresnek táplálékot. A hazai állomány nem vonul, de télen kóborolhat és ilyenkor nagyobb csapatokba verődhet, míg az északi populációk délebbre húzódnak, így télen megnő a hazai állományuk.",
+//                List.of(NOVENYEK, BOGARAK),
+//                List.of("A sármányok alsó csőrkávája szűkített, míg a felsőn egy bütyök található. Ez a forma ideális a keményebb magvak szétmorzsolására."),
+//                List.of(ERDO, SZANTO, RET),
+//                "emberiza citrinella",
+//                false,
+//                List.of(ENEKES),
+//                "16-17 cm",
+//                "23-30 cm"
+//        );
+    }
+
+    private static void madar_feltoltese(
+            String birdName,
+            List<String> colors,
+            String conservationValue,
+            String description,
+            List<String> diets,
+            List<String> facts,
+            List<String> habitats,
+            String latinName,
+            boolean migratory,
+            List<String> shapes,
+            String size,
+            String wing_span) {
+
+//        Log.d("UPLOAD", birdName +
+//                colors +
+//                conservationValue +
+//                description +
+//                diets +
+//                facts +
+//                habitats +
+//                latinName +
+//                migratory +
+//                shapes +
+//                size +
+//                wing_span);
+
+        String mainPictureId = "todo";
+        List<String> pictureIds = new ArrayList<>();
+        pictureIds.add("todo");
+
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+
+        Map<String, Object> feltoltendo_madar = new HashMap<>();
+        feltoltendo_madar.put("birdName", birdName);
+        feltoltendo_madar.put("colors", colors.stream()
+                .map(mFirestore::document)
+                .collect(Collectors.toList()));
+        feltoltendo_madar.put("conservationValue", mFirestore.document(conservationValue));
+        feltoltendo_madar.put("description", description);
+        feltoltendo_madar.put("diets", diets.stream()
+                .map(mFirestore::document)
+                .collect(Collectors.toList()));
+        feltoltendo_madar.put("facts", facts);
+        feltoltendo_madar.put("habitats", habitats.stream()
+                .map(mFirestore::document)
+                .collect(Collectors.toList()));
+        feltoltendo_madar.put("latinName", latinName);
+        feltoltendo_madar.put("mainPictureId", mainPictureId);
+        feltoltendo_madar.put("migratory", migratory);
+        feltoltendo_madar.put("pictureIds", pictureIds);
+        feltoltendo_madar.put("shapes", shapes.stream()
+                .map(mFirestore::document)
+                .collect(Collectors.toList()));
+        feltoltendo_madar.put("size", size);
+        feltoltendo_madar.put("wingSpan", wing_span);
+
+        Executors.newSingleThreadExecutor().execute(() -> {
+            CollectionReference mCollection = mFirestore.collection("birds");
+            mCollection.add(feltoltendo_madar)
+                    .addOnSuccessListener(documentReference ->
+                            System.out.println("Sikeres feltöltés! Dokumentum ID: " + documentReference.getId()))
+                    .addOnFailureListener(e ->
+                            System.err.println("Hiba történt a feltöltés során: " + e.getMessage()));
+        });
+    }

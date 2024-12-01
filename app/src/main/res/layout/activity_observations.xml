@@ -8,17 +8,59 @@
     tools:context=".ui.ObservationsActivity">
 
     <LinearLayout
+        android:id="@+id/llUserTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:background="@color/darkgrey_highlighted"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/textViewUserSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Be vagy jelentkezve."
+            android:textColor="@color/orange"
+            android:textSize="24sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/textViewOffline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Jelenleg offline vagy. Csatlakozz hálózathoz!"
+            android:textColor="@color/red"
+            android:textSize="24sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/textViewNotLoggedIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nem vagy bejelentkezve, a megfigyeléseid nem mentődnek! Kattints ide a bejelentkezéshez!"
+            android:textColor="@color/red"
+            android:textSize="24sp"
+            android:visibility="visible" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/contentObservations"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
         android:paddingStart="10dp"
-        android:paddingTop="10dp"
+        android:paddingTop="5dp"
         android:paddingEnd="10dp"
+        android:paddingBottom="5dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/llUserTopBar">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewObservations"

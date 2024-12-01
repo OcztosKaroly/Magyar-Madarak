@@ -7,114 +7,128 @@
     android:layout_height="match_parent"
     tools:context=".ui.LoginActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/contentLogin"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
 
-        <TextView
-            android:id="@+id/twLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login"
-            android:textSize="48sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.08" />
-
-        <EditText
-            android:id="@+id/etLoginEmailAddress"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/contentLogin"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints="emailAddress"
-            android:layout_marginHorizontal="30dp"
-            android:hint="@string/email_address"
-            android:inputType="textEmailAddress"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/twLogin"
-            app:layout_constraintVertical_bias="0.13" />
+            android:layout_height="0dp"
+            android:paddingBottom="5dp" >
 
-        <EditText
-            android:id="@+id/etLoginPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints="password"
-            android:layout_marginHorizontal="30dp"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etLoginEmailAddress"
-            app:layout_constraintVertical_bias="0.1" />
+            <TextView
+                android:id="@+id/twLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login"
+                android:textSize="48sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.08" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingHorizontal="25sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etLoginPassword"
-            app:layout_constraintVertical_bias="0.2">
-
-            <Button
-                android:id="@+id/btnLogin"
+            <EditText
+                android:id="@+id/etLoginEmailAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/loginBtn"
+                android:autofillHints="emailAddress"
+                android:layout_marginHorizontal="30dp"
+                android:hint="@string/email_address"
+                android:inputType="textEmailAddress"
                 android:textSize="24sp"
-                android:textColor="@color/black"
-                android:backgroundTint="@color/orange"
-                android:layout_marginBottom="@dimen/small_bottom_margin"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/twLogin"
+                app:layout_constraintVertical_bias="0.13" />
 
-            <Button
-                android:id="@+id/btnLoginWithGoogle"
+            <EditText
+                android:id="@+id/etLoginPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/loginGoogleBtn"
+                android:autofillHints="password"
+                android:layout_marginHorizontal="30dp"
+                android:hint="@string/password"
+                android:inputType="textPassword"
                 android:textSize="24sp"
-                android:textColor="@color/black"
-                android:backgroundTint="@color/red"
-                android:layout_marginBottom="@dimen/small_bottom_margin"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etLoginEmailAddress"
+                app:layout_constraintVertical_bias="0.1" />
 
-            <Button
-                android:id="@+id/btnLoginToRegister"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/registerBtn"
-                android:textSize="24sp"
-                android:textColor="@color/black"
-                android:backgroundTint="@color/secondary_button"
-                android:layout_marginBottom="@dimen/small_bottom_margin"
-                android:layout_marginTop="@dimen/small_bottom_margin"/>
-        </LinearLayout>
+                android:orientation="vertical"
+                android:paddingHorizontal="25sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etLoginPassword"
+                app:layout_constraintVertical_bias="0.2">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <Button
+                    android:id="@+id/btnLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/loginBtn"
+                    android:textSize="24sp"
+                    android:textColor="@color/black"
+                    android:backgroundTint="@color/orange"
+                    android:layout_marginBottom="@dimen/small_bottom_margin"/>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:itemTextColor="@color/orange"
-        app:itemIconTint="@color/orange"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_navigation_menu" />
+                <Button
+                    android:id="@+id/btnLoginWithGoogle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/loginGoogleBtn"
+                    android:textSize="24sp"
+                    android:textColor="@color/black"
+                    android:backgroundTint="@color/red"
+                    android:layout_marginBottom="@dimen/small_bottom_margin"/>
+
+                <Button
+                    android:id="@+id/btnLoginToRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/registerBtn"
+                    android:textSize="24sp"
+                    android:textColor="@color/black"
+                    android:backgroundTint="@color/secondary_button"
+                    android:layout_marginBottom="@dimen/small_bottom_margin"
+                    android:layout_marginTop="@dimen/small_bottom_margin"/>
+
+                <Button
+                    android:id="@+id/buttonCancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:backgroundTint="@color/orange"
+                    android:text="Mégse" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/bottomNavigationView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:itemTextColor="@color/orange"-->
+<!--        app:itemIconTint="@color/orange"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:menu="@menu/bottom_navigation_menu" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

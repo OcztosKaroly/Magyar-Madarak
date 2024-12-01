@@ -4,6 +4,7 @@
     <color name="white">#FFFFFF</color>
     <color name="orange">#FF9800</color>
     <color name="darkgrey">#2B2B2B</color>
+    <color name="darkgrey_highlighted">#3C3C3C</color>
     <color name="secondary_button">#9443FA</color>
     <color name="red">#FF4141</color>
 </resources>
