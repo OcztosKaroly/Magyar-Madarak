@@ -1,5 +1,7 @@
 package com.example.magyar_madarak.data.viewModel;
 
+import static com.example.magyar_madarak.utils.AuthUtils.getCurrentUser;
+
 import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
@@ -7,7 +9,6 @@ import androidx.lifecycle.LiveData;
 
 import com.example.magyar_madarak.data.model.observation.Observation;
 import com.example.magyar_madarak.data.repository.ObservationRepository;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Date;
 import java.util.List;
@@ -15,18 +16,16 @@ import java.util.Objects;
 
 public class ObservationViewModel extends AndroidViewModel {
     private ObservationRepository observationRepository;
-    private FirebaseAuth mAuth;
 
     public ObservationViewModel(Application application) {
         super(application);
 
         observationRepository = new ObservationRepository(application);
-        mAuth = FirebaseAuth.getInstance();
     }
 
     public void createObservation(String observationName, Date observationDate, String description) {
         observationRepository.createObservation(
-                Objects.requireNonNull(mAuth.getUid()),
+                getCurrentUser() != null ? getCurrentUser().getUid() : "local",
                 observationName,
                 observationDate,
                 description
@@ -46,12 +45,8 @@ public class ObservationViewModel extends AndroidViewModel {
         return observationRepository.getObservationById(observationId);
     }
 
-    public LiveData<List<Observation>> getAllObservationsByUserId(String userId) {
-        return observationRepository.getAllObservationByUserId(userId);
-    }
-
     public LiveData<List<Observation>> getAllObservations() {
-        return observationRepository.getAllObservationByUserId(mAuth.getUid());
+        return observationRepository.getAllObservation();
     }
 
     public void updateObservation(Observation observation) {
@@ -69,5 +64,9 @@ public class ObservationViewModel extends AndroidViewModel {
 
     public void deleteAllObservationsByUserId(String userId) {
         observationRepository.deleteAllObservationsByUserId(userId);
+    }
+
+    public void deleteAllObservationsFromFirestoreByUserId(String userId) {
+        observationRepository.deleteAllObservationsFromFirestoreByUserId(userId);
     }
 }

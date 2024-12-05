@@ -17,8 +17,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.magyar_madarak.R;
+import com.example.magyar_madarak.data.viewModel.ObservationViewModel;
 import com.example.magyar_madarak.utils.AuthUtils;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -103,6 +105,7 @@ public class LoginActivity extends AppCompatActivity {
                 Log.i(LOG_TAG, "--Login successful.--");
                 Toast.makeText(LoginActivity.this, "Sikeres bejelentkezés.", Toast.LENGTH_LONG).show();
                 Log.d(LOG_TAG, "--Bejelentkezési adatok: " + FirebaseAuth.getInstance().getCurrentUser());
+                syncObservations();
                 finish();
             } else {
                 Log.e(LOG_TAG, "--Login error.--");
@@ -131,6 +134,10 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    private void syncObservations() {
+        ObservationViewModel observationViewModel = new ViewModelProvider(this).get(ObservationViewModel.class);
     }
 
     @Override

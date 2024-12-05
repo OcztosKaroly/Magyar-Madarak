@@ -51,6 +51,12 @@ public class Observation {
         return userId;
     }
 
+    public void setUserId(@NonNull String userId) {
+        if (this.userId.equals("local")) {
+            this.userId = userId;
+        }
+    }
+
     @NonNull
     public String getName() {
         return name;

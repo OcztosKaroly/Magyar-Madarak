@@ -11,13 +11,12 @@ import androidx.lifecycle.LiveData;
 import com.example.magyar_madarak.data.dao.observation.ObservationDAO;
 import com.example.magyar_madarak.data.database.HunBirdsRoomDatabase;
 import com.example.magyar_madarak.data.model.observation.Observation;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -70,8 +69,8 @@ public class ObservationRepository {
         return observationDAO.getById(observationId);
     }
 
-    public LiveData<List<Observation>> getAllObservationByUserId(String userId) {
-        return observationDAO.getAllByUserId(userId);
+    public LiveData<List<Observation>> getAllObservation() {
+        return observationDAO.getAll();
     }
 
     public void updateObservation(Observation observation) {
@@ -83,26 +82,27 @@ public class ObservationRepository {
 
     // create, update
     private void setFirestoreObservation(Observation observation) {
-        if (isUserAuthenticated()) {
-            // create Firestore object; bc the observationId stored in Observation object too, but we store in Firestore as document id
-            Map<String, Object> firestoreObservation = new HashMap<>();
-            firestoreObservation.put("userId", observation.getUserId());
-            firestoreObservation.put("creationDate", observation.getCreationDate());
-            firestoreObservation.put("lastModificationDate", observation.getLastModificationDate());
-            firestoreObservation.put("name", observation.getName());
-            firestoreObservation.put("observationDate", observation.getObservationDate());
-            firestoreObservation.put("description", observation.getDescription());
-
-            mObservationsCollection.document(observation.getObservationId())
-                    .set(firestoreObservation)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            Log.i(LOG_TAG, "--Observation (" + observation.getName() + ") successfully created.--");
-                        } else {
-                            Log.e(LOG_TAG, "--Error occurred when creating observation (" + observation.getName() + ").--", task.getException());
-                        }
-            });
+        if (!isUserAuthenticated()) {
+            return;
         }
+        // create Firestore object; bc the observationId stored in Observation object too, but we store in Firestore as document id
+        Map<String, Object> firestoreObservation = new HashMap<>();
+        firestoreObservation.put("userId", observation.getUserId());
+        firestoreObservation.put("creationDate", observation.getCreationDate());
+        firestoreObservation.put("lastModificationDate", observation.getLastModificationDate());
+        firestoreObservation.put("name", observation.getName());
+        firestoreObservation.put("observationDate", observation.getObservationDate());
+        firestoreObservation.put("description", observation.getDescription());
+
+        mObservationsCollection.document(observation.getObservationId())
+                .set(firestoreObservation)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.i(LOG_TAG, "--Observation (" + observation.getName() + ") successfully created.--");
+                    } else {
+                        Log.e(LOG_TAG, "--Error occurred when creating observation (" + observation.getName() + ").--", task.getException());
+                    }
+        });
     }
 
     public void deleteObservationById(String observationId) {
@@ -126,42 +126,86 @@ public class ObservationRepository {
 
     public void deleteAllObservationsByUserId(String userId) {
         executorService.execute(() -> {
-            observationDAO.deleteAllByUserId(userId);
-            if (isUserAuthenticated()) {
-                mObservationsCollection.whereEqualTo("userId", userId).get().addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot observation: task.getResult()) {
-                            mObservationsCollection.document(observation.getId()).delete();
-                        }
-                    } else {
-                        Log.e(LOG_TAG, "--FireBase query (delete all observations of user) failed.--", task.getException());
-                    }
-                });
+            observationDAO.deleteAll();
+            deleteAllObservationsFromFirestoreByUserId(userId);
+        });
+    }
+
+    public void deleteAllObservationsFromFirestoreByUserId(String userId) {
+        if (!isUserAuthenticated()) {
+            return;
+        }
+        mObservationsCollection.whereEqualTo("userId", userId).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot observation: task.getResult()) {
+                    mObservationsCollection.document(observation.getId()).delete();
+                }
+            } else {
+                Log.e(LOG_TAG, "--FireBase query (delete all observations of user) failed.--", task.getException());
             }
         });
     }
 
     private void syncObservationsWithFirestore() {
-        if (isUserAuthenticated()) {
-            mObservationsCollection.whereEqualTo("userId", getCurrentUser().getUid()).get().addOnSuccessListener(querySnapshot -> {
-                for (DocumentSnapshot document : querySnapshot.getDocuments()) {
-                    executorService.execute(() -> {
-                        Observation observation = new Observation(
-                                document.getId(),
-                                Objects.requireNonNull(document.getString("userId")),
-                                Objects.requireNonNull(document.getDate("creationDate")),
-                                Objects.requireNonNull(document.getDate("lastModificationDate")),
-                                Objects.requireNonNull(document.getString("name")),
-                                document.getDate("observationDate"),
-                                document.getString("description")
-                        );
-                        observationDAO.insert(observation);
-                        Log.d(LOG_TAG, "--Firestore observation got: " + observation + ".--");
-                    });
-                }
-            }).addOnFailureListener(e -> {
-                Log.e(LOG_TAG, "--Firestore observation query error: --", e);
-            });
+        if (!isUserAuthenticated()) {
+            return;
         }
+
+        String currentUserId = getCurrentUser().getUid();
+
+        mObservationsCollection.whereEqualTo("userId", currentUserId).get().addOnSuccessListener(querySnapshot -> {
+            List<Observation> firestoreObservations = new ArrayList<>();
+            for (DocumentSnapshot document : querySnapshot.getDocuments()) {
+                Observation observation = new Observation(
+                        document.getId(),
+                        Objects.requireNonNull(document.getString("userId")),
+                        Objects.requireNonNull(document.getDate("creationDate")),
+                        Objects.requireNonNull(document.getDate("lastModificationDate")),
+                        Objects.requireNonNull(document.getString("name")),
+                        document.getDate("observationDate"),
+                        document.getString("description")
+                );
+                firestoreObservations.add(observation);
+            }
+
+            executorService.execute(() -> {
+                List<Observation> localObservations = observationDAO.getAllForSync();
+                List<Observation> observationsToRemove = new ArrayList<>();
+
+                for (Observation observation : localObservations) {
+                    if (!observation.getUserId().equals("local") && !observation.getUserId().equals(currentUserId)) {
+                        observationsToRemove.add(observation);
+                    }
+                }
+
+                for (Observation observation : observationsToRemove) {
+                    localObservations.remove(observation);
+                    observationDAO.deleteById(observation.getObservationId());
+                }
+
+                for (Observation firestoreObservation: firestoreObservations) {
+                    Observation localObservation = observationDAO.findById(firestoreObservation.getObservationId());
+
+                    if (localObservation == null || firestoreObservation.getLastModificationDate().after(localObservation.getLastModificationDate())) {
+                        observationDAO.insert(firestoreObservation);
+                        Log.d(LOG_TAG, "--Firestore observation got: " + firestoreObservation + ".--");
+                    }
+                }
+
+                for (Observation localObservation: localObservations) {
+                    Observation firestoreObservation = firestoreObservations.stream().filter(observation ->
+                            observation.getObservationId().equals(localObservation.getObservationId())
+                    ).findFirst().orElse(null);
+
+                    if (firestoreObservation == null || localObservation.getLastModificationDate().after(firestoreObservation.getLastModificationDate())) {
+                        localObservation.setUserId(currentUserId);
+                        updateObservation(localObservation);
+                        Log.d(LOG_TAG, "--Firestore observation set: " + localObservation + ".--");
+                    }
+                }
+            });
+        }).addOnFailureListener(e -> {
+            Log.e(LOG_TAG, "--Firestore observation query error: --", e);
+        });
     }
 }

@@ -24,7 +24,7 @@ public class HunBirdApplication extends Application {
         appContext = getApplicationContext();
 
         // TODO: !!!!!!!!!! Törölni az adatbázistörlőt későbbiekben !!!!!!!!!!
-        this.deleteDatabase("hun_birds_database");
+//        this.deleteDatabase("hun_birds_database");
         HunBirdsRoomDatabase db = HunBirdsRoomDatabase.getInstance(this);
 
 //        WorkManager.getInstance(this).cancelAllWork();
@@ -32,8 +32,8 @@ public class HunBirdApplication extends Application {
         if (!isRunningNotificationByTag(this, "daily_notification")) {
             PeriodicWorkRequest dailyWorkRequest = new PeriodicWorkRequest.Builder(
                     NotificationWorker.class,
-                    15,
-                    TimeUnit.MINUTES).addTag("daily_notification").build();
+                    24,
+                    TimeUnit.HOURS).addTag("daily_notification").build();
             WorkManager.getInstance(this).enqueue(dailyWorkRequest);
         }
     }

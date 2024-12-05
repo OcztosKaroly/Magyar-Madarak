@@ -23,12 +23,15 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.magyar_madarak.R;
+import com.example.magyar_madarak.data.viewModel.ObservationViewModel;
 import com.example.magyar_madarak.utils.NavigationUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.ktx.Firebase;
 
 public class SettingsActivity extends AppCompatActivity {
     private static final String LOG_TAG = "SETTINGS";
@@ -131,7 +134,7 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             });
             logoutBtn.setOnClickListener(l -> {
-                logout();
+                logout(this);
                 reload();
             });
             deleteProfileBtn.setOnClickListener(l -> deleteProfile());
@@ -217,9 +220,12 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void delete() {
+        String userId = mUser.getUid();
         mUser.delete().addOnCompleteListener(deleteTask -> {
             if (deleteTask.isSuccessful()) {
                 Toast.makeText(this, "Felhasználó sikeresen törölve.", Toast.LENGTH_SHORT).show();
+                ObservationViewModel observationViewModel = new ViewModelProvider(this).get(ObservationViewModel.class);
+                observationViewModel.deleteAllObservationsFromFirestoreByUserId(userId);
                 reload();
             } else {
                 Toast.makeText(this, "Valami hiba történt!", Toast.LENGTH_SHORT).show();

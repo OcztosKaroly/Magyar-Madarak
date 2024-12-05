@@ -19,8 +19,14 @@ public interface ObservationDAO {
     @Query("SELECT * FROM Observations WHERE observationId = :observationId")
     LiveData<Observation> getById(String observationId);
 
-    @Query("SELECT * FROM observations WHERE userId = :userId")
-    LiveData<List<Observation>> getAllByUserId(String userId);
+    @Query("SELECT * FROM Observations WHERE observationId = :observationId")
+    Observation findById(String observationId);
+
+    @Query("SELECT * FROM observations")
+    LiveData<List<Observation>> getAll();
+
+    @Query("SELECT * FROM observations")
+    List<Observation> getAllForSync();
 
     @Update
     void update(Observation observation);
@@ -28,6 +34,6 @@ public interface ObservationDAO {
     @Query("DELETE FROM observations WHERE observationId = :observationId")
     void deleteById(String observationId);
 
-    @Query("DELETE FROM observations WHERE userId = :userId")
-    void deleteAllByUserId(String userId);
+    @Query("DELETE FROM observations")
+    void deleteAll();
 }

@@ -120,7 +120,6 @@ public class ObservationPageActivity extends AppCompatActivity {
         if (selectedObservation != null) {
             mObservationViewModel.deleteObservation(selectedObservation);
             Toast.makeText(this.getApplication(), "Megfigyelés törlése folyamatban.", Toast.LENGTH_SHORT).show();
-            selectedObservation = null;
         }
         finish();
     }
@@ -147,10 +146,16 @@ public class ObservationPageActivity extends AppCompatActivity {
                 selectedObservation.setObservationDate(observationDate);
                 selectedObservation.setDescription(description);
                 mObservationViewModel.updateObservation(selectedObservation);
-                selectedObservation = null;
             }
 
             finish();
         }
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+
+        selectedObservation = null;
     }
 }
