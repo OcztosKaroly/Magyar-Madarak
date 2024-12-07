@@ -24,6 +24,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 
 public class RegisterActivity extends AppCompatActivity {
     private static final String LOG_TAG = RegisterActivity.class.getName();
@@ -119,7 +120,11 @@ public class RegisterActivity extends AppCompatActivity {
                         });
                     } else {
                         Log.e(LOG_TAG, "--Registration error.--");
-                        Toast.makeText(RegisterActivity.this, "Hiba a regisztráció során!", Toast.LENGTH_LONG).show();
+                        if(task.getException() instanceof FirebaseAuthUserCollisionException) {
+                            Toast.makeText(this, "Ez az email cím már foglalt!", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(RegisterActivity.this, "Ismeretlen hiba a regisztráció során!", Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
     }
