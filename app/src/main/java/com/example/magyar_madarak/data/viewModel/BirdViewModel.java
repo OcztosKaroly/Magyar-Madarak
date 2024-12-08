@@ -4,6 +4,7 @@ import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.Transformations;
 
 import com.example.magyar_madarak.data.model.bird.Bird;
@@ -47,7 +48,7 @@ public class BirdViewModel extends AndroidViewModel {
 
     public LiveData<List<Color>> getAllColorsByNames(List<String> colorNames) {
         if (colorNames == null || colorNames.isEmpty()) {
-            return getAllColors();
+            return new MediatorLiveData<>();
         }
 
         return Transformations.map(getAllColors(), colors -> {
@@ -67,7 +68,7 @@ public class BirdViewModel extends AndroidViewModel {
 
     public LiveData<List<Shape>> getAllShapesByNames(List<String> shapeNames) {
         if (shapeNames == null || shapeNames.isEmpty()) {
-            return getAllShapes();
+            return new MediatorLiveData<>();
         }
 
         return Transformations.map(getAllShapes(), shapes -> {
@@ -87,7 +88,7 @@ public class BirdViewModel extends AndroidViewModel {
 
     public LiveData<List<Habitat>> getAllHabitatsByNames(List<String> habitatNames) {
         if (habitatNames == null || habitatNames.isEmpty()) {
-            return getAllHabitats();
+            return new MediatorLiveData<>();
         }
 
         return Transformations.map(getAllHabitats(), habitats -> {

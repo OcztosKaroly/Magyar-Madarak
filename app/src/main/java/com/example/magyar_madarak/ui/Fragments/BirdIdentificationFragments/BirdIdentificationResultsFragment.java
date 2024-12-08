@@ -76,10 +76,10 @@ public class BirdIdentificationResultsFragment extends Fragment {
         ArrayList<String> selectedHabitatNames = new ArrayList<>(mSharedPreferences.getStringSet("selectedHabitats", new HashSet<>()));
         selectedHabitats = mBirdViewModel.getAllHabitatsByNames(selectedHabitatNames);
 
-        Log.d("RESULTS", "--All birds: " + loadBirds().getValue() + ".--");
-        Log.d("RESULTS", "--Selected colors: " + selectedColorNames + ".--");
-        Log.d("RESULTS", "--Selected shape: " + selectedShapeNames + ".--");
-        Log.d("RESULTS", "--Selected habitat: " + selectedHabitatNames + ".--");
+//        Log.d("RESULTS", "--All birds: " + loadBirds().getValue() + ".--");
+//        Log.d("RESULTS", "--Selected colors: " + selectedColorNames + ".--");
+//        Log.d("RESULTS", "--Selected shape: " + selectedShapeNames + ".--");
+//        Log.d("RESULTS", "--Selected habitat: " + selectedHabitatNames + ".--");
 
         birdIdentificationResults = new MediatorLiveData<>();
 
@@ -89,7 +89,7 @@ public class BirdIdentificationResultsFragment extends Fragment {
         birdIdentificationResults.addSource(selectedHabitats, habitats -> updateFilteredResults(getCurrentBirds()));
 
 
-        Log.d("RESULTS", "--Bird results: " + birdIdentificationResults.getValue() + ".--");
+//        Log.d("RESULTS", "--Bird results: " + birdIdentificationResults.getValue() + ".--");
 
         initializeListeners();
     }
@@ -103,11 +103,28 @@ public class BirdIdentificationResultsFragment extends Fragment {
     }
 
     private void updateFilteredResults(List<Bird> allBirds) {
-        List<Bird> filteredBirds = allBirds.stream()
-                .filter(bird -> new HashSet<>(getCurrentColors()).containsAll(bird.getColors()) &&
-                        new HashSet<>(getCurrentShapes()).containsAll(bird.getShapes()) &&
-                        new HashSet<>(getCurrentHabitats()).containsAll(bird.getHabitats()))
-                .collect(Collectors.toList());
+        List<Bird> filteredBirds = new ArrayList<>(allBirds);
+
+        List<Color> currentColors = getCurrentColors();
+        if (!currentColors.isEmpty()) {
+            filteredBirds = filteredBirds.stream()
+                    .filter(bird -> new HashSet<>(bird.getColors()).containsAll(currentColors))
+                    .collect(Collectors.toList());
+        }
+
+        List<Shape> currentShapes = getCurrentShapes();
+        if (!currentShapes.isEmpty()) {
+            filteredBirds = filteredBirds.stream()
+                    .filter(bird -> new HashSet<>(bird.getShapes()).containsAll(currentShapes))
+                    .collect(Collectors.toList());
+        }
+
+        List<Habitat> currentHabitats = getCurrentHabitats();
+        if (!currentHabitats.isEmpty()) {
+            filteredBirds = filteredBirds.stream()
+                    .filter(bird -> new HashSet<>(bird.getHabitats()).containsAll(currentHabitats))
+                    .collect(Collectors.toList());
+        }
 
         birdIdentificationResults.setValue(filteredBirds);
     }
