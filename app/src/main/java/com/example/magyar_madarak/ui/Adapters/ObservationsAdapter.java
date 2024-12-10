@@ -18,7 +18,6 @@ import com.example.magyar_madarak.ui.Pages.ObservationPageActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -104,7 +103,7 @@ public class ObservationsAdapter extends RecyclerView.Adapter<ObservationsAdapte
 
         public void bindTo(Observation observation) {
             Calendar calendar = Calendar.getInstance();
-            calendar.setTime(observation.getLastModificationDate());
+            calendar.setTime(observation.getCreationDate());
 
             String date = calendar.get(Calendar.YEAR) + ". " + (calendar.get(Calendar.MONTH) + 1) +
                     ". " + calendar.get(Calendar.DAY_OF_MONTH) + ".";
