@@ -3,6 +3,7 @@ package com.example.magyar_madarak.ui;
 import static com.example.magyar_madarak.utils.AuthUtils.getCurrentUser;
 import static com.example.magyar_madarak.utils.AuthUtils.isUserAuthenticated;
 import static com.example.magyar_madarak.utils.AuthUtils.logout;
+import static com.example.magyar_madarak.utils.AuthUtils.logoutFromGoogle;
 import static com.example.magyar_madarak.utils.NavigationUtils.navigationBarRedirection;
 
 import android.content.Context;
@@ -226,6 +227,7 @@ public class SettingsActivity extends AppCompatActivity {
                 Toast.makeText(this, "Felhasználó sikeresen törölve.", Toast.LENGTH_SHORT).show();
                 ObservationViewModel observationViewModel = new ViewModelProvider(this).get(ObservationViewModel.class);
                 observationViewModel.deleteAllObservationsFromFirestoreByUserId(userId);
+                logoutFromGoogle(this);
                 reload();
             } else {
                 Toast.makeText(this, "Valami hiba történt!", Toast.LENGTH_SHORT).show();

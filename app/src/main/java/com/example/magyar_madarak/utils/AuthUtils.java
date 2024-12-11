@@ -68,16 +68,20 @@ public class AuthUtils {
 //            clearAllUserData();
             mAuth.signOut();
 
-            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestEmail()
-                    .build();
-            GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(activity, gso);
-
-            googleSignInClient.signOut().addOnCompleteListener(task -> {
-                Log.i(LOG_TAG, "--Google Sign-In logout successful.--");
-                Toast.makeText(activity, "Sikeres kijelentkezés.", Toast.LENGTH_SHORT).show();
-            });
+            logoutFromGoogle(activity);
         }
+    }
+
+    public static void logoutFromGoogle(Activity activity) {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(activity, gso);
+
+        googleSignInClient.signOut().addOnCompleteListener(task -> {
+            Log.i(LOG_TAG, "--Google Sign-In logout successful.--");
+            Toast.makeText(activity, "Sikeres kijelentkezés.", Toast.LENGTH_SHORT).show();
+        });
     }
 
 //    // possibly used for log out data deletion
