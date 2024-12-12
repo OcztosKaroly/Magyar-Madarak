@@ -1,5 +1,5 @@
 # Magyar-Madarak
-Magyar Madarak mobil alkalmazás szakdolgozat
+Magyarországi Madarak mobil alkalmazás szakdolgozat
 
 Projekt kezdete: 2024.09.04.<br>
 Alkalmazás nyelve: Magyar <br>
@@ -7,7 +7,7 @@ Készítő: Ocztos <ins>Károly</ins> Levente<br>
 Neptun kód: F7ICEE<br>
 Email cím: ocztos.karoly03@gmail.com<br>
 Alkalmazás karbantartói email címe: magyarmadarak@gmail.com // Alkalmazással kapcsolatos hibák jelentéséért ezen az email címen keressen<br><br>
-Jelenlegi verzió: 0.1.4
+Jelenlegi verzió: 1.0.0
 
 
 ## Alkalmazás leírása
