@@ -2,7 +2,7 @@ package com.example.magyar_madarak.ui;
 
 import static com.example.magyar_madarak.utils.AuthUtils.isUserAuthenticated;
 import static com.example.magyar_madarak.utils.NavigationUtils.navigationBarRedirection;
-import static com.example.magyar_madarak.utils.ResourceAvailabilityUtils.isWifiConnected;
+import static com.example.magyar_madarak.utils.ResourceAvailabilityUtils.isInternetAvailable;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -105,7 +105,7 @@ public class ObservationsActivity extends AppCompatActivity {
         offlineTW.setVisibility(View.GONE);
         userSettingsTW.setVisibility(View.GONE);
 
-        if (isWifiConnected(this)) {
+        if (isInternetAvailable(this)) {
             if (isUserAuthenticated()) {
                 userSettingsTW.setVisibility(View.VISIBLE);
                 String userSettingText = "Be vagy jelentkezve (" + Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail() + ").";

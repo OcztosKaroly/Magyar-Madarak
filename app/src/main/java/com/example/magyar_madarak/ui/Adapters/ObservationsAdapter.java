@@ -55,8 +55,6 @@ public class ObservationsAdapter extends RecyclerView.Adapter<ObservationsAdapte
 
         mObservations.sort(Comparator.comparing(Observation::getLastModificationDate).reversed());
         notifyDataSetChanged();
-        // TODO: Ha csak a törlésnél és beszúrásnál jelzek, van valami duplikációs bug
-        //  de ez lehet csak a nem megfelelő adatbázis törlések és beszúrások miatt van.
     }
 
     @Override

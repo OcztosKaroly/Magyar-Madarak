@@ -23,7 +23,6 @@ public class HunBirdApplication extends Application {
 
         appContext = getApplicationContext();
 
-        // TODO: !!!!!!!!!! Törölni az adatbázistörlőt későbbiekben !!!!!!!!!!
 //        this.deleteDatabase("hun_birds_database");
         HunBirdsRoomDatabase db = HunBirdsRoomDatabase.getInstance(this);
 

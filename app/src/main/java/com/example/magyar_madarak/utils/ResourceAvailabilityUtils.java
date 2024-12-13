@@ -23,13 +23,11 @@ public class ResourceAvailabilityUtils {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
         if (activeNetwork != null) {
-//            if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
-//                Log.i(LOG_TAG, "--Wifi available.--");
-//                return true;
-//            }
-            Log.i(LOG_TAG, "--Wifi available.--");
-            return true;
-//            Log.w(LOG_TAG, "--Wifi unavailable. Internet available.--");
+            if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
+                Log.i(LOG_TAG, "--Wifi available.--");
+                return true;
+            }
+            Log.w(LOG_TAG, "--Wifi unavailable. Only Internet available.--");
         }
         Log.w(LOG_TAG, "--Wifi unavailable. Internet unavailable.--");
         return false;

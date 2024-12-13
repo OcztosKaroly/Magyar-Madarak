@@ -40,7 +40,7 @@ public class UserRepository {
         mAuth = FirebaseAuth.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
         mUsersSettingsCollection = mFirestore.collection("users_settings");
-//        syncUserWithFirestore(application); // TODO: syncUserWithFirestore
+//        syncUserWithFirestore(application);
     }
 
     public void insertUser(User user) {

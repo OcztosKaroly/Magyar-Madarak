@@ -108,7 +108,6 @@ public class RegisterActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         Log.i(LOG_TAG, "--Registration successful.--");
-                        // TODO: Átirányítás a regisztrációról.
                         Toast.makeText(RegisterActivity.this, "Sikeres regisztráció.", Toast.LENGTH_LONG).show();
                         mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(this, emailSenderTask -> {
                             if (emailSenderTask.isSuccessful()) {
@@ -130,14 +129,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean isRegistrationDataValid(String email, String password, String rePassword) {
-        // TODO: Foglalt-e már az email-cím az adatbázisban.
-        //  Erre és a többire is lehet nincs szükség a FireStore Auth beépített beállításai miatt.
-        //if (email cím már foglalt) {
-        //    Log.e(LOG_TAG, "This email address already registered.");
-        //    Toast.makeText(RegisterActivity.this, "Ez az email cím már foglalt!", Toast.LENGTH_LONG).show();
-        //    return false;
-        //}
-
         // nem email lett megadva emailnek
         if (email == null || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             Log.e(LOG_TAG, "--Incorrect email address.--");
@@ -154,7 +145,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         // túl rövid a jelszó
         if (password.length() < 12) {
-            //TODO: Jelszóbonyolultság ellenőrzést felvenni, szóközök létét átgondolni és kezelni.
+            // TODO: Jelszóbonyolultság ellenőrzést felvenni
             Log.e(LOG_TAG, "--Password too short.--");
             Toast.makeText(this, "A jelszónak legalább 12 karakteresnek kell lennie!", Toast.LENGTH_LONG).show();
             return false;

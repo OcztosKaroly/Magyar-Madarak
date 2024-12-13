@@ -61,7 +61,9 @@ public class ObservationRepository {
             );
 
             observationDAO.insert(observation);
-            setFirestoreObservation(observation);
+            if (!userId.equals("local")) {
+                setFirestoreObservation(observation);
+            }
         });
     }
 
