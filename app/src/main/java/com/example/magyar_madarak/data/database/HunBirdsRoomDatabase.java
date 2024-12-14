@@ -10,6 +10,7 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.magyar_madarak.HunBirdApplication;
 import com.example.magyar_madarak.data.dao.observation.ObservationDAO;
 import com.example.magyar_madarak.data.dao.user.UserDAO;
 import com.example.magyar_madarak.data.dao.bird.BirdDAO;
@@ -33,7 +34,12 @@ import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -201,7 +207,7 @@ public abstract class HunBirdsRoomDatabase extends RoomDatabase {
                 });
     }
 
-    private static void syncFirestoreBirds() {
+    public static void syncFirestoreBirds() {
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
         firestore.collection("birds")
@@ -269,6 +275,8 @@ public abstract class HunBirdsRoomDatabase extends RoomDatabase {
 
                                 Executors.newSingleThreadExecutor().execute(() -> {
                                     instance.birdDAO().insert(bird);
+//                                    syncBirdImage(bird.getMainPictureId());
+                                    syncBirdImage(bird.getBirdName());
                                     Log.d("DATA", "--Firestore bird got: " + bird.getBirdName() + ".--");
                                 });
                             });
@@ -294,5 +302,27 @@ public abstract class HunBirdsRoomDatabase extends RoomDatabase {
             tasks.add(firestore.collection(collectionName).document(id).get());
         }
         return tasks;
+    }
+
+    private static void syncBirdImage(String mainPictureId) {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference pictureRef = storage.getReference().child("main_bird_images").child(mainPictureId.toLowerCase() + ".jpg");
+
+        pictureRef.getBytes(512 * 512).addOnSuccessListener(bytes -> {
+            try {
+                File directory = new File(HunBirdApplication.getAppContext().getFilesDir(), "main_bird_images");
+                directory.mkdirs();
+
+                File file = new File(directory, mainPictureId + ".jpg");
+                FileOutputStream fos = new FileOutputStream(file);
+                fos.write(bytes);
+                fos.close();
+            } catch (IOException e) {
+                Log.e("DATA", "--Failed to save image.--", e);
+            }
+        }).addOnFailureListener(e -> {
+            Log.e("DATA", "--Failed to download image: " + mainPictureId + ".--", e);
+            Log.e("DATA", "PictureRef: " + pictureRef);
+        });
     }
 }

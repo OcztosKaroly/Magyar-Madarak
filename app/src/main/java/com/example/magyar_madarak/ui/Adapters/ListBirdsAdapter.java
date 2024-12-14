@@ -16,10 +16,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.example.magyar_madarak.HunBirdApplication;
 import com.example.magyar_madarak.R;
 import com.example.magyar_madarak.data.model.bird.Bird;
 import com.example.magyar_madarak.ui.Pages.BirdPageActivity;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -145,7 +150,14 @@ public class ListBirdsAdapter extends RecyclerView.Adapter<ListBirdsAdapter.Bird
         }
 
         public void bindTo(Bird bird) {
-//            birdPicture;
+            Glide.with(itemView.getContext())
+                    .load(new File(new File(HunBirdApplication.getAppContext().getFilesDir(), "main_bird_images/" + bird.getBirdName() + ".jpg").getAbsolutePath()))
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .placeholder(R.drawable.ic_placeholder_image)
+                    .error(R.drawable.ic_placeholder_image)
+                    .transform(new RoundedCorners(15))
+                    .into(birdPicture);
+
             birdName.setText(capitalizeFirstLetter(bird.getBirdName()));
         }
     }

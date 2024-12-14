@@ -59,12 +59,15 @@ dependencies {
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
     androidTestImplementation platform(libs.compose.bom)
+    implementation libs.glide
+    annotationProcessor libs.compiler
 
     // FireBase and FireStore
     implementation platform(libs.firebase.bom)
     implementation libs.firebase.analytics
     implementation libs.firebase.auth
     implementation libs.firebase.firestore
+    implementation libs.firebase.storage
     implementation libs.multidex
     implementation libs.play.services.auth
 

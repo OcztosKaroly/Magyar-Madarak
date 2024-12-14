@@ -50,8 +50,10 @@
                 android:id="@+id/imageBird"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:contentDescription="@string/bird_image"
-                android:layout_marginVertical="5dp"/>
+                android:adjustViewBounds="true"
+                android:layout_marginVertical="15dp"/>
             <!-- TODO: Ha lesz több kép, akkor valahogy megoldani, hogy lehessen görgetni a többi kép között is. (Image slider?) -->
 
             <LinearLayout

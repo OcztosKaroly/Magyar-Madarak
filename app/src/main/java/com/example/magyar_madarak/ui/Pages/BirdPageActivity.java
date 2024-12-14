@@ -18,6 +18,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.example.magyar_madarak.HunBirdApplication;
 import com.example.magyar_madarak.R;
 import com.example.magyar_madarak.data.model.bird.Bird;
 import com.example.magyar_madarak.data.model.constants.Color;
@@ -26,6 +30,7 @@ import com.example.magyar_madarak.data.model.constants.Habitat;
 import com.example.magyar_madarak.data.model.constants.Shape;
 import com.google.android.material.appbar.MaterialToolbar;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -67,6 +72,14 @@ public class BirdPageActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbarBirdPage);
 
         imageBird = findViewById(R.id.imageBird);
+        Glide.with(this)
+                .load(new File(new File(HunBirdApplication.getAppContext().getFilesDir(), "main_bird_images/" + mBird.getBirdName() + ".jpg").getAbsolutePath()))
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .placeholder(R.drawable.ic_placeholder_image)
+                .error(R.drawable.ic_placeholder_image)
+                .transform(new RoundedCorners(15))
+                .into(imageBird);
+
         tBirdName = findViewById(R.id.tBirdName);
         tBirdLatinName = findViewById(R.id.tBirdLatinName);
         tBirdMigratory = findViewById(R.id.tBirdMigratory);

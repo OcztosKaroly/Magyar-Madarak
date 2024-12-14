@@ -1,5 +1,7 @@
 package com.example.magyar_madarak.data.repository;
 
+import static com.example.magyar_madarak.utils.ResourceAvailabilityUtils.isInternetAvailable;
+
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
@@ -43,7 +45,7 @@ public class BirdRepository {
 
         mFirestore = FirebaseFirestore.getInstance();
         mBirdsCollection = mFirestore.collection("birds");
-//        syncBirdsWithFirestore(application);
+        syncBirdsWithFirestore(application);
     }
 
     public void insertBird(Bird bird) {
@@ -78,23 +80,9 @@ public class BirdRepository {
         return habitatDAO.getAll();
     }
 
-//    private void syncBirdsWithFirestore(Application application) {
-//        if (isWifiConnected(application)) {
-//            mBirdsCollection.get()
-//                    .addOnSuccessListener(querySnapshot -> {
-//                        for (DocumentSnapshot document : querySnapshot.getDocuments()) {
-//                            Bird bird = document.toObject(Bird.class);
-//
-//                            if (bird != null) {
-//                                bird.setBirdId(document.getId());
-//                                insertBird(bird);
-//                            } else {
-//                                Log.e("DATA", "--Firestore birds conversion error.--");
-//                            }
-//                        }
-//                    }).addOnFailureListener(e -> {
-//                        Log.e("DATA", "--Firestore birds query error: --", e);
-//                    });
-//        }
-//    }
+    private void syncBirdsWithFirestore(Application application) {
+        if (isInternetAvailable(application)) {
+            HunBirdsRoomDatabase.syncFirestoreBirds();
+        }
+    }
 }
