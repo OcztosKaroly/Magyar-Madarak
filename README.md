@@ -1,4 +1,4 @@
-# Magyar-Madarak
+# Magyarországi Madarak mobilalkalmazás
 Magyarországi Madarak mobil alkalmazás szakdolgozat
 
 Projekt kezdete: 2024.09.04.<br>
